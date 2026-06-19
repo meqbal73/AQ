@@ -609,17 +609,27 @@ if(aboutEn && !aboutAr){
    finalAboutAr = await translateText(aboutEn,"ar");
 }
   
-  profile={nameAr:G('f-name-ar'),nameEn:G('f-name-en'),titleAr:G('f-title-ar'),titleEn:G('f-title-en'),
-    uni:G('f-uni'),major:G('f-major'),gpa:G('f-gpa'),grad:G('f-grad'),exp:G('f-exp'),
-    tagAr:G('f-tag-ar'),tagEn:G('f-tag-en'),
-           
-          bioAr:finalBioAr,
-bioEn:finalBioEn,
+ profile = {
+  nameAr:G('f-name-ar'),
+  nameEn:G('f-name-en'),
+  titleAr:G('f-title-ar'),
+  titleEn:G('f-title-en'),
+  uni:G('f-uni'),
+  major:G('f-major'),
+  gpa:G('f-gpa'),
+  grad:G('f-grad'),
+  exp:G('f-exp'),
+  tagAr:G('f-tag-ar'),
+  tagEn:G('f-tag-en'),
+  bioAr:finalBioAr,
+  bioEn:finalBioEn,
+  aboutAr:finalAboutAr,
+  aboutEn:finalAboutEn
+};
 
-aboutAr:finalAboutAr,
-aboutEn:finalAboutEn,
-  LS.set('cv_profile',profile);renderAll();showToast('✓ تم حفظ الملف الشخصي');
-}
+LS.set('cv_profile', profile);
+renderAll();
+showToast('✓ تم حفظ الملف الشخصي');}
 
 function addCert(){
   const name=document.getElementById('c-name').value.trim();
