@@ -133,8 +133,9 @@ body.edit-mode .edit-only { display: inline-flex !important; }
 .modal-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text); }
 .form-group { margin-bottom: 1rem; }
 .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; }
-.form-group input, .form-group textarea { width: 100%; padding: 0.7rem; background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s; }
-.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.7rem; background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s; }
+.form-group select { cursor: pointer; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
 .form-group textarea { min-height: 100px; resize: vertical; }
 .modal-actions { display: flex; gap: 1rem; margin-top: 2rem; }
 .btn-cancel { flex: 1; background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.7rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
@@ -158,6 +159,7 @@ body.edit-mode .edit-only { display: inline-flex !important; }
 
 <div class="toast" id="toast"></div>
 
+<!-- Dynamic Modal Container -->
 <div class="modal-overlay" id="dynamic-modal">
   <div class="modal-content">
     <div class="modal-title" id="modal-title">Edit</div>
@@ -175,12 +177,13 @@ body.edit-mode .edit-only { display: inline-flex !important; }
     <li><a href="#about">About</a></li>
     <li><a href="#certs">Certificates</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#languages">Languages</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-controls">
     <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
-    <button class="ctrl-btn" id="edit-mode-btn" onclick="toggleEditMode()" style="display: none;">✏️ Edit Mode</button>
+    <button class="ctrl-btn" id="edit-mode-btn" onclick="toggleEditMode()" style="display:none">✏️ Edit Mode</button>
   </div>
 </nav>
 
@@ -237,6 +240,14 @@ body.edit-mode .edit-only { display: inline-flex !important; }
   <div class="skills-grid" id="skills-grid"></div>
 </section>
 
+<section id="languages">
+  <div class="section-header">
+    <div class="section-label"><h2>Languages <span class="dot">•</span></h2></div>
+    <button class="btn-add edit-only" onclick="addLang()">+ Add Language</button>
+  </div>
+  <div class="skills-grid" id="langs-grid"></div>
+</section>
+
 <section id="experience">
   <div class="section-header">
     <div class="section-label"><h2>Experience <span class="dot">•</span></h2></div>
@@ -285,6 +296,10 @@ const SEED = {
     {name: 'Time Management', pct: 90}, {name: 'Problem Solving', pct: 85},
     {name: 'Client Communication', pct: 82}, {name: 'Teamwork', pct: 92}
   ],
+  langs: [
+    {name: 'Arabic', val: 4, level: 'Native / Mother Tongue'},
+    {name: 'English', val: 3, level: 'Advanced'}
+  ],
   exps: [
     {title: 'Logistics & Operations Associate', org: 'MARN Platform (Amazon) — Jeddah', from: 'May 2025', to: 'Mar 2026',
      desc: 'Utilized smart devices, scanning apps, and barcode technology to sort and track products. Applied "5S" methodologies. Managed shipment packing, loading, and unloading. Received a certificate of excellence for outstanding work performance.'},
@@ -306,11 +321,12 @@ const LS = {
 };
 
 function initData() {
-  if(!localStorage.getItem('cv_v3_seeded')) {
+  if(!localStorage.getItem('cv_v4_seeded')) {
     LS.set('cv_profile', SEED.profile); LS.set('cv_certs', SEED.certs);
-    LS.set('cv_skills', SEED.skills);   LS.set('cv_exps', SEED.exps);
-    LS.set('cv_contacts', SEED.contacts); LS.set('cv_settings', SEED.settings);
-    localStorage.setItem('cv_v3_seeded', '1');
+    LS.set('cv_skills', SEED.skills);   LS.set('cv_langs', SEED.langs);
+    LS.set('cv_exps', SEED.exps);       LS.set('cv_contacts', SEED.contacts); 
+    LS.set('cv_settings', SEED.settings);
+    localStorage.setItem('cv_v4_seeded', '1');
   }
 }
 initData();
@@ -318,11 +334,26 @@ initData();
 let profile  = LS.get('cv_profile', SEED.profile);
 let certs    = LS.get('cv_certs', SEED.certs);
 let skills   = LS.get('cv_skills', SEED.skills);
+let langs    = LS.get('cv_langs', SEED.langs);
 let exps     = LS.get('cv_exps', SEED.exps);
 let contacts = LS.get('cv_contacts', SEED.contacts);
 let settings = LS.get('cv_settings', SEED.settings);
 
 let isEditMode = false;
+
+// --- SECRET ADMIN ACCESS ---
+function checkSecretAccess() {
+  if (location.hash === "#admin") {
+    const pass = prompt("Enter Admin Password:");
+    if (pass === "1234") { 
+      document.getElementById("edit-mode-btn").style.display = "inline-block";
+      showToast("Admin access granted");
+    } else {
+      alert("Access Denied");
+      history.replaceState(null, null, ' '); 
+    }
+  }
+}
 
 function applyTheme(t) {
   settings.theme = t;
@@ -348,7 +379,7 @@ function toggleEditMode() {
 }
 
 function renderAll() {
-  renderProfile(); renderCerts(); renderSkills(); renderExps(); renderContacts();
+  renderProfile(); renderCerts(); renderSkills(); renderLangs(); renderExps(); renderContacts();
 }
 
 function renderProfile() {
@@ -403,6 +434,20 @@ function renderSkills() {
     </div>`).join('');
 }
 
+function renderLangs() {
+  const g = document.getElementById('langs-grid');
+  if(!langs.length) { g.innerHTML = '<div class="empty-state">No languages added yet</div>'; return; }
+  g.innerHTML = langs.map((l, i) => `
+    <div class="skill-item">
+      <div class="skill-header"><span class="skill-name">${l.name}</span><span class="skill-pct" style="color:var(--text); font-size:0.75rem">${l.level}</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:${(l.val / 4) * 100}%"></div></div>
+      <div class="action-btns edit-only" style="margin-top: 0.8rem">
+        <button class="btn-sm btn-edit" onclick="editLang(${i})">Edit</button>
+        <button class="btn-sm btn-del" onclick="delLang(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
 function renderExps() {
   const tl = document.getElementById('timeline');
   if(!exps.length) { tl.innerHTML = '<div class="empty-state">No experience added yet</div>'; return; }
@@ -452,6 +497,9 @@ function openModal(title, fields, onSave) {
   fields.forEach(f => {
     if (f.type === 'textarea') {
       html += `<div class="form-group"><label>${f.label}</label><textarea id="m_${f.key}">${f.value || ''}</textarea></div>`;
+    } else if (f.type === 'select') {
+      let opts = f.options.map(o => `<option value="${o.val}" ${o.val == (f.value||1) ? 'selected' : ''}>${o.label}</option>`).join('');
+      html += `<div class="form-group"><label>${f.label}</label><select id="m_${f.key}">${opts}</select></div>`;
     } else {
       html += `<div class="form-group"><label>${f.label}</label><input type="${f.type || 'text'}" id="m_${f.key}" value="${f.value || ''}"></div>`;
     }
@@ -550,6 +598,39 @@ function delSkill(i) {
   if(confirm('Delete this skill?')) { skills.splice(i, 1); LS.set('cv_skills', skills); renderSkills(); showToast('Deleted'); }
 }
 
+// Languages
+const LANG_LEVELS = [
+  { val: 1, label: 'Beginner' },
+  { val: 2, label: 'Intermediate' },
+  { val: 3, label: 'Advanced' },
+  { val: 4, label: 'Native / Mother Tongue' }
+];
+
+function editLang(i) {
+  const l = langs[i];
+  openModal('Edit Language', [
+    {key: 'name', label: 'Language Name', value: l.name},
+    {key: 'val', label: 'Proficiency Level', type: 'select', options: LANG_LEVELS, value: l.val}
+  ], (data) => { 
+    let lvlObj = LANG_LEVELS.find(x => x.val == data.val);
+    langs[i] = { name: data.name, val: parseInt(data.val), level: lvlObj.label };
+    LS.set('cv_langs', langs); renderLangs(); 
+  });
+}
+function addLang() {
+  openModal('Add Language', [
+    {key: 'name', label: 'Language Name'},
+    {key: 'val', label: 'Proficiency Level', type: 'select', options: LANG_LEVELS, value: 1}
+  ], (data) => { 
+    let lvlObj = LANG_LEVELS.find(x => x.val == data.val);
+    langs.push({ name: data.name, val: parseInt(data.val), level: lvlObj.label });
+    LS.set('cv_langs', langs); renderLangs(); 
+  });
+}
+function delLang(i) {
+  if(confirm('Delete this language?')) { langs.splice(i, 1); LS.set('cv_langs', langs); renderLangs(); showToast('Deleted'); }
+}
+
 // Experience
 function editExp(i) {
   const e = exps[i];
@@ -606,37 +687,16 @@ function resetAll() {
   if(!confirm('Are you sure you want to reset all data back to default?')) return;
   localStorage.clear(); initData();
   profile = LS.get('cv_profile', SEED.profile); certs = LS.get('cv_certs', SEED.certs);
-  skills = LS.get('cv_skills', SEED.skills);    exps = LS.get('cv_exps', SEED.exps);
-  contacts = LS.get('cv_contacts', SEED.contacts); settings = LS.get('cv_settings', SEED.settings);
+  skills = LS.get('cv_skills', SEED.skills);    langs = LS.get('cv_langs', SEED.langs);
+  exps = LS.get('cv_exps', SEED.exps);          contacts = LS.get('cv_contacts', SEED.contacts); 
+  settings = LS.get('cv_settings', SEED.settings);
   applyTheme(settings.theme);
   renderAll(); showToast('Data Reset Successfully');
 }
 
-// --- SECRET ADMIN ACCESS ---
-function checkSecretAccess() {
-  const SECRET_PATH = "#admin"; // You can change this to whatever you want
-  
-  if (location.hash === SECRET_PATH) {
-    // Optional: Keep the password prompt
-    const pass = prompt("Enter Admin Password:");
-    if (pass === "1234") { // Change "1234" to your preferred password
-      document.getElementById("edit-mode-btn").style.display = "inline-block";
-      showToast("Admin access granted");
-    } else {
-      alert("Access Denied");
-      // Remove the hash so they can't try again by just refreshing
-      history.replaceState(null, null, ' '); 
-    }
-  }
-}
-
-// Run the check when the page loads
+// Init Check and Render
 checkSecretAccess();
-
-// Also check if they add the hash while already on the page
 window.addEventListener('hashchange', checkSecretAccess);
-
-// Init
 applyTheme(settings.theme || 'dark');
 renderAll();
 </script>
