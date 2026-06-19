@@ -359,7 +359,7 @@ function applyTheme(t) {
   settings.theme = t;
   LS.set('cv_settings', settings);
   document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('theme-btn').textContent = t === 'dark' ? '☀️' : '🌙';
+  document.getElementById('theme-btn').textContent = t === 'dark' ? 'L' : 'D';
 }
 function toggleTheme() { applyTheme(settings.theme === 'dark' ? 'light' : 'dark'); }
 
