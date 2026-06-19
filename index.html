@@ -180,7 +180,7 @@ body.edit-mode .edit-only { display: inline-flex !important; }
   </ul>
   <div class="nav-controls">
     <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
-    <button class="ctrl-btn" id="edit-mode-btn" onclick="toggleEditMode()">✏️ Edit Mode</button>
+    <button class="ctrl-btn" id="edit-mode-btn" onclick="toggleEditMode()" style="display: none;">✏️ Edit Mode</button>
   </div>
 </nav>
 
@@ -611,6 +611,30 @@ function resetAll() {
   applyTheme(settings.theme);
   renderAll(); showToast('Data Reset Successfully');
 }
+
+// --- SECRET ADMIN ACCESS ---
+function checkSecretAccess() {
+  const SECRET_PATH = "#admin"; // You can change this to whatever you want
+  
+  if (location.hash === SECRET_PATH) {
+    // Optional: Keep the password prompt
+    const pass = prompt("Enter Admin Password:");
+    if (pass === "1234") { // Change "1234" to your preferred password
+      document.getElementById("edit-mode-btn").style.display = "inline-block";
+      showToast("Admin access granted");
+    } else {
+      alert("Access Denied");
+      // Remove the hash so they can't try again by just refreshing
+      history.replaceState(null, null, ' '); 
+    }
+  }
+}
+
+// Run the check when the page loads
+checkSecretAccess();
+
+// Also check if they add the hash while already on the page
+window.addEventListener('hashchange', checkSecretAccess);
 
 // Init
 applyTheme(settings.theme || 'dark');
