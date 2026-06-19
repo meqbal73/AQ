@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بورتفوليو احترافي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070C18;
+    --surface: #0D1526;
+    --surface2: #131D35;
+    --accent: #2D6CDF;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --text: #E8EDF8;
+    --muted: #7A8BAD;
+    --border: rgba(45,108,223,0.18);
+    --glow: rgba(45,108,223,0.35);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(7,12,24,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-weight:900; font-size:1.3rem; color:var(--gold); letter-spacing:1px; }
+  .nav-links { display:flex; gap:1.5rem; list-style:none; }
+  .nav-links a {
+    color:var(--muted); text-decoration:none; font-size:.9rem;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color:var(--text); }
+  .nav-admin-btn {
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--gold); padding:.45rem 1.1rem; border-radius:8px;
+    font-family:'Cairo',sans-serif; font-size:.85rem; cursor:pointer;
+    transition: all .2s;
+  }
+  .nav-admin-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items:center; justify-content:center;
+    position: relative; overflow:hidden;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(45,108,223,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 70%, rgba(201,168,76,0.07) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position:absolute; inset:0; opacity:.04;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-content { position:relative; text-align:center; max-width:750px; }
+  .hero-tag {
+    display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.3);
+    color:var(--gold); padding:.35rem 1rem; border-radius:50px; font-size:.82rem;
+    margin-bottom:1.5rem; letter-spacing:1px;
+  }
+  #hero-name {
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight:900; line-height:1.1;
+    background: linear-gradient(135deg, #fff 30%, var(--gold-light));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text;
+    margin-bottom:.6rem;
+  }
+  #hero-title {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--accent); font-weight:600; margin-bottom:1.2rem;
+  }
+  #hero-bio {
+    color:var(--muted); line-height:1.8; font-size:.97rem;
+    max-width:580px; margin:0 auto 2rem;
+  }
+  .hero-stats {
+    display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;
+    margin-bottom:2.5rem;
+  }
+  .stat-box {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:1rem 1.6rem; text-align:center;
+    min-width:120px;
+  }
+  .stat-num { font-size:1.8rem; font-weight:900; color:var(--gold); }
+  .stat-label { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
+  .hero-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #1a4fa0);
+    color:#fff; padding:.75rem 2rem; border-radius:10px;
+    text-decoration:none; font-weight:700; font-size:.95rem;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(45,108,223,0.4);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(45,108,223,0.5); }
+  .btn-outline {
+    background:transparent; color:var(--text); padding:.75rem 2rem;
+    border:1px solid var(--border); border-radius:10px;
+    text-decoration:none; font-weight:600; font-size:.95rem;
+    transition: all .2s;
+  }
+  .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 5rem 2rem; max-width:1100px; margin:0 auto; }
+  .section-label {
+    display:flex; align-items:center; gap:.75rem;
+    margin-bottom:3rem;
+  }
+  .section-label::before {
+    content:''; display:block; width:3px; height:2rem;
+    background:linear-gradient(to bottom, var(--accent), var(--gold));
+    border-radius:2px;
+  }
+  .section-label h2 { font-size:1.8rem; font-weight:900; }
+  .section-label span { color:var(--gold); }
+
+  /* ─── CERTS GRID ─── */
+  .certs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.2rem; }
+  .cert-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:16px; padding:1.5rem;
+    position:relative; overflow:hidden;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+    cursor:default;
+  }
+  .cert-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    transform:scaleX(0); transform-origin:left;
+    transition: transform .35s;
+  }
+  .cert-card:hover { transform:translateY(-4px); border-color:var(--accent); box-shadow:0 8px 32px var(--glow); }
+  .cert-card:hover::before { transform:scaleX(1); }
+  .cert-icon {
+    width:44px; height:44px; border-radius:10px;
+    background:rgba(45,108,223,0.15); display:flex; align-items:center;
+    justify-content:center; font-size:1.4rem; margin-bottom:1rem;
+  }
+  .cert-name { font-weight:700; font-size:1rem; margin-bottom:.3rem; }
+  .cert-org { color:var(--accent); font-size:.85rem; margin-bottom:.6rem; }
+  .cert-meta { display:flex; gap:1rem; flex-wrap:wrap; }
+  .cert-badge {
+    background:var(--surface2); border:1px solid var(--border);
+    color:var(--muted); padding:.2rem .7rem; border-radius:20px; font-size:.75rem;
+  }
+  .cert-badge.gold { border-color:rgba(201,168,76,0.3); color:var(--gold); background:rgba(201,168,76,0.08); }
+
+  /* ─── SKILLS ─── */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:1rem; }
+  .skill-item {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:12px; padding:1rem 1.2rem;
+  }
+  .skill-header { display:flex; justify-content:space-between; margin-bottom:.6rem; }
+  .skill-name { font-weight:600; font-size:.9rem; }
+  .skill-pct { color:var(--gold); font-size:.85rem; font-weight:700; }
+  .skill-bar { height:4px; background:var(--surface2); border-radius:2px; overflow:hidden; }
+  .skill-fill {
+    height:100%; border-radius:2px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    transition: width 1s ease;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .timeline { position:relative; padding-right:2rem; }
+  .timeline::before {
+    content:''; position:absolute; right:0; top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .tl-item { position:relative; margin-bottom:2.5rem; }
+  .tl-dot {
+    position:absolute; right:-2.45rem; top:.3rem;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--accent); border:2px solid var(--bg);
+    box-shadow:0 0 0 3px rgba(45,108,223,0.25);
+  }
+  .tl-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:1.4rem;
+  }
+  .tl-title { font-weight:700; font-size:1rem; }
+  .tl-org { color:var(--accent); font-size:.85rem; margin:.3rem 0 .6rem; }
+  .tl-date { color:var(--muted); font-size:.78rem; margin-bottom:.6rem; }
+  .tl-desc { color:var(--muted); font-size:.88rem; line-height:1.7; }
+
+  /* ─── CONTACT ─── */
+  .contact-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; }
+  .contact-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:1.2rem 1.4rem;
+    display:flex; align-items:center; gap:1rem;
+    text-decoration:none; color:var(--text);
+    transition: all .2s;
+  }
+  .contact-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .contact-icon { font-size:1.4rem; }
+  .contact-label { font-size:.75rem; color:var(--muted); }
+  .contact-val { font-weight:600; font-size:.9rem; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align:center; padding:2rem;
+    color:var(--muted); font-size:.8rem;
+    border-top:1px solid var(--border);
+  }
+
+  /* ─── ADMIN PANEL ─── */
+  #admin-panel {
+    display:none; position:fixed; inset:0; z-index:200;
+    background: rgba(0,0,0,0.92); backdrop-filter:blur(10px);
+    overflow-y:auto; padding:2rem 1rem;
+  }
+  .admin-inner {
+    max-width:860px; margin:0 auto;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:20px; padding:2.5rem;
+  }
+  .admin-header {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:2rem; padding-bottom:1.2rem; border-bottom:1px solid var(--border);
+  }
+  .admin-header h2 { font-size:1.5rem; font-weight:900; color:var(--gold); }
+  .admin-close {
+    background:var(--surface2); border:1px solid var(--border);
+    color:var(--text); width:36px; height:36px; border-radius:50%;
+    font-size:1.1rem; cursor:pointer; transition:all .2s;
+  }
+  .admin-close:hover { background:red; border-color:red; }
+  .admin-tabs {
+    display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:2rem;
+  }
+  .tab-btn {
+    background:var(--surface2); border:1px solid var(--border);
+    color:var(--muted); padding:.5rem 1.2rem; border-radius:8px;
+    font-family:'Cairo',sans-serif; font-size:.85rem; cursor:pointer;
+    transition:all .2s;
+  }
+  .tab-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
+
+  /* forms */
+  .form-group { margin-bottom:1.2rem; }
+  .form-group label { display:block; font-size:.82rem; color:var(--muted); margin-bottom:.4rem; }
+  .form-group input, .form-group textarea, .form-group select {
+    width:100%; background:var(--surface2); border:1px solid var(--border);
+    color:var(--text); padding:.7rem 1rem; border-radius:10px;
+    font-family:'Cairo',sans-serif; font-size:.9rem;
+    transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    outline:none; border-color:var(--accent);
+  }
+  .form-group textarea { min-height:90px; resize:vertical; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .save-btn {
+    background:linear-gradient(135deg,var(--accent),#1a4fa0);
+    color:#fff; border:none; padding:.7rem 1.8rem;
+    border-radius:10px; font-family:'Cairo',sans-serif;
+    font-weight:700; cursor:pointer; font-size:.9rem;
+    transition: all .2s;
+  }
+  .save-btn:hover { opacity:.9; transform:translateY(-1px); }
+  .del-btn {
+    background:rgba(220,50,50,.15); border:1px solid rgba(220,50,50,.3);
+    color:#e57373; padding:.4rem .9rem; border-radius:7px;
+    font-size:.78rem; cursor:pointer; font-family:'Cairo',sans-serif;
+  }
+  .del-btn:hover { background:rgba(220,50,50,.3); }
+  .item-list { display:flex; flex-direction:column; gap:.7rem; margin-bottom:1.5rem; }
+  .item-row {
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--surface2); border:1px solid var(--border);
+    border-radius:10px; padding:.75rem 1rem;
+  }
+  .item-row-info { font-size:.88rem; }
+  .item-row-info strong { display:block; font-weight:600; }
+  .item-row-info small { color:var(--muted); }
+  .divider {
+    border:none; border-top:1px solid var(--border);
+    margin: 1.5rem 0;
+  }
+  .success-toast {
+    position:fixed; bottom:2rem; right:50%; transform:translateX(50%);
+    background:var(--accent); color:#fff; padding:.7rem 1.5rem;
+    border-radius:10px; font-size:.88rem; z-index:999;
+    opacity:0; transition:opacity .3s; pointer-events:none;
+  }
+  .success-toast.show { opacity:1; }
+
+  /* range slider */
+  input[type=range] {
+    -webkit-appearance:none; height:4px;
+    background:var(--surface2); border-radius:2px; cursor:pointer;
+    padding:0;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance:none; width:16px; height:16px;
+    background:var(--accent); border-radius:50%;
+    border:2px solid var(--bg);
+  }
+
+  @media(max-width:600px){
+    nav { padding:1rem; }
+    .form-row { grid-template-columns:1fr; }
+    .hero-stats { gap:1rem; }
+    .stat-box { min-width:90px; padding:.75rem 1rem; }
+    .stat-num { font-size:1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="success-toast" id="toast">✓ تم الحفظ بنجاح</div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo" id="nav-name-label">Portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#about">عني</a></li>
+    <li><a href="#certs">الشهادات</a></li>
+    <li><a href="#skills">المهارات</a></li>
+    <li><a href="#experience">الخبرات</a></li>
+    <li><a href="#contact">التواصل</a></li>
+  </ul>
+  <button class="nav-admin-btn" onclick="openAdmin()">⚙ تعديل</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag" id="hero-tag">متاح للعمل</div>
+    <h1 id="hero-name">اسمك الكامل</h1>
+    <p id="hero-title">المسمى الوظيفي | التخصص</p>
+    <p id="hero-bio">مرحباً بك في بورتفوليوي. أضف سيرتك الذاتية من لوحة التحكم.</p>
+    <div class="hero-stats">
+      <div class="stat-box">
+        <div class="stat-num" id="stat-gpa">0.00</div>
+        <div class="stat-label">المعدل التراكمي</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-grad">----</div>
+        <div class="stat-label">سنة التخرج</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-certs">0</div>
+        <div class="stat-label">شهادة</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-exp">0</div>
+        <div class="stat-label">سنوات الخبرة</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#certs" class="btn-primary">استعرض الشهادات</a>
+      <a href="#contact" class="btn-outline">تواصل معي</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label"><h2>عني <span>•</span></h2></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+    <div>
+      <p id="about-text" style="color:var(--muted);line-height:2;font-size:.95rem;"></p>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;">
+      <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--gold);">بيانات أكاديمية</h3>
+      <div style="display:flex;flex-direction:column;gap:.8rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
+          <span style="color:var(--muted);font-size:.85rem;">التخصص</span>
+          <span id="info-major" style="font-weight:600;font-size:.9rem;">—</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
+          <span style="color:var(--muted);font-size:.85rem;">الجامعة</span>
+          <span id="info-uni" style="font-weight:600;font-size:.9rem;">—</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
+          <span style="color:var(--muted);font-size:.85rem;">سنة التخرج</span>
+          <span id="info-grad2" style="font-weight:600;font-size:.9rem;">—</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
+          <span style="color:var(--muted);font-size:.85rem;">المعدل التراكمي</span>
+          <span id="info-gpa2" style="font-weight:700;font-size:1rem;color:var(--gold);">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-label"><h2>الشهادات <span>•</span></h2></div>
+  <div class="certs-grid" id="certs-grid">
+    <div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:3rem;border:1px dashed var(--border);border-radius:16px;">
+      لم تُضَف شهادات بعد — افتح لوحة التحكم لإضافتها
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label"><h2>المهارات <span>•</span></h2></div>
+  <div class="skills-grid" id="skills-grid">
+    <div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">
+      لم تُضَف مهارات بعد
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label"><h2>الخبرات <span>•</span></h2></div>
+  <div class="timeline" id="timeline">
+    <div style="text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">
+      لم تُضَف خبرات بعد
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label"><h2>التواصل <span>•</span></h2></div>
+  <div class="contact-grid" id="contact-grid">
+    <div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">
+      لم تُضَف معلومات تواصل بعد
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>صُنع بـ ❤ · <span id="footer-name"></span></p>
+</footer>
+
+<!-- ═══════════ ADMIN PANEL ═══════════ -->
+<div id="admin-panel">
+  <div class="admin-inner">
+    <div class="admin-header">
+      <h2>⚙ لوحة التحكم</h2>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="tab-btn active" onclick="switchTab('profile')">الملف الشخصي</button>
+      <button class="tab-btn" onclick="switchTab('certs')">الشهادات</button>
+      <button class="tab-btn" onclick="switchTab('skills')">المهارات</button>
+      <button class="tab-btn" onclick="switchTab('experience')">الخبرات</button>
+      <button class="tab-btn" onclick="switchTab('contact')">التواصل</button>
+    </div>
+
+    <!-- PROFILE TAB -->
+    <div class="tab-content active" id="tab-profile">
+      <div class="form-row">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" id="f-name" placeholder="محمد عبدالله الغامدي">
+        </div>
+        <div class="form-group">
+          <label>المسمى الوظيفي / التخصص</label>
+          <input type="text" id="f-title" placeholder="مطوّر برمجيات | هندسة حاسب">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>الجامعة</label>
+          <input type="text" id="f-uni" placeholder="جامعة الملك عبدالعزيز">
+        </div>
+        <div class="form-group">
+          <label>التخصص الأكاديمي</label>
+          <input type="text" id="f-major" placeholder="هندسة الحاسب والمعلومات">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>المعدل التراكمي (GPA)</label>
+          <input type="number" id="f-gpa" step="0.01" min="0" max="5" placeholder="4.75">
+        </div>
+        <div class="form-group">
+          <label>سنة التخرج</label>
+          <input type="text" id="f-grad" placeholder="2024">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>سنوات الخبرة</label>
+          <input type="number" id="f-exp" min="0" placeholder="3">
+        </div>
+        <div class="form-group">
+          <label>الوسم (مثل: متاح للعمل)</label>
+          <input type="text" id="f-tag" placeholder="متاح للعمل">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>نبذة مختصرة (الهيرو)</label>
+        <textarea id="f-bio" placeholder="اكتب نبذة مختصرة عنك تظهر في الصفحة الرئيسية..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>عني (تفصيلي)</label>
+        <textarea id="f-about" placeholder="اكتب عن نفسك بشكل أكثر تفصيلاً..."></textarea>
+      </div>
+      <button class="save-btn" onclick="saveProfile()">حفظ الملف الشخصي</button>
+    </div>
+
+    <!-- CERTS TAB -->
+    <div class="tab-content" id="tab-certs">
+      <div class="item-list" id="cert-list"></div>
+      <hr class="divider">
+      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة شهادة جديدة</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>اسم الشهادة</label>
+          <input type="text" id="c-name" placeholder="AWS Solutions Architect">
+        </div>
+        <div class="form-group">
+          <label>الجهة المانحة</label>
+          <input type="text" id="c-org" placeholder="Amazon Web Services">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>التاريخ</label>
+          <input type="text" id="c-date" placeholder="يناير 2024">
+        </div>
+        <div class="form-group">
+          <label>أيقونة (إيموجي)</label>
+          <input type="text" id="c-icon" placeholder="☁️">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>رابط الشهادة (اختياري)</label>
+        <input type="text" id="c-link" placeholder="https://...">
+      </div>
+      <button class="save-btn" onclick="addCert()">إضافة الشهادة</button>
+    </div>
+
+    <!-- SKILLS TAB -->
+    <div class="tab-content" id="tab-skills">
+      <div class="item-list" id="skill-list"></div>
+      <hr class="divider">
+      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة مهارة</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>اسم المهارة</label>
+          <input type="text" id="s-name" placeholder="Python">
+        </div>
+        <div class="form-group">
+          <label>المستوى: <span id="s-pct-label">80</span>%</label>
+          <input type="range" id="s-pct" min="10" max="100" value="80"
+            oninput="document.getElementById('s-pct-label').textContent=this.value">
+        </div>
+      </div>
+      <button class="save-btn" onclick="addSkill()">إضافة المهارة</button>
+    </div>
+
+    <!-- EXPERIENCE TAB -->
+    <div class="tab-content" id="tab-experience">
+      <div class="item-list" id="exp-list"></div>
+      <hr class="divider">
+      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة خبرة</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>المسمى الوظيفي</label>
+          <input type="text" id="e-title" placeholder="مهندس برمجيات">
+        </div>
+        <div class="form-group">
+          <label>الشركة / الجهة</label>
+          <input type="text" id="e-org" placeholder="شركة أرامكو">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>من</label>
+          <input type="text" id="e-from" placeholder="يناير 2022">
+        </div>
+        <div class="form-group">
+          <label>إلى</label>
+          <input type="text" id="e-to" placeholder="حتى الآن">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>وصف المهام</label>
+        <textarea id="e-desc" placeholder="اكتب وصفاً مختصراً لمهامك وإنجازاتك..."></textarea>
+      </div>
+      <button class="save-btn" onclick="addExp()">إضافة الخبرة</button>
+    </div>
+
+    <!-- CONTACT TAB -->
+    <div class="tab-content" id="tab-contact">
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;">أضف وسائل التواصل التي تريد إظهارها</p>
+      <div class="item-list" id="contact-list"></div>
+      <hr class="divider">
+      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة وسيلة تواصل</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>النوع</label>
+          <select id="ct-type">
+            <option value="email">📧 البريد الإلكتروني</option>
+            <option value="phone">📱 الجوال</option>
+            <option value="linkedin">💼 LinkedIn</option>
+            <option value="github">💻 GitHub</option>
+            <option value="twitter">🐦 X (تويتر)</option>
+            <option value="other">🔗 أخرى</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>أيقونة (إيموجي)</label>
+          <input type="text" id="ct-icon" placeholder="📧">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>التسمية</label>
+          <input type="text" id="ct-label" placeholder="البريد الإلكتروني">
+        </div>
+        <div class="form-group">
+          <label>القيمة / الرابط</label>
+          <input type="text" id="ct-val" placeholder="name@email.com">
+        </div>
+      </div>
+      <button class="save-btn" onclick="addContact()">إضافة</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ─── DATA STORE ───
+const ICONS = { email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:'🐦', other:'🔗' };
+const ICON_LABELS = { email:'البريد الإلكتروني', phone:'الجوال', linkedin:'LinkedIn', github:'GitHub', twitter:'X (تويتر)', other:'أخرى' };
+
+function load(key, def) {
+  try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
+}
+function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+let profile = load('cv_profile', {
+  name:'', title:'', bio:'', about:'', uni:'', major:'', gpa:'', grad:'', exp:'', tag:'متاح للعمل'
+});
+let certs    = load('cv_certs', []);
+let skills   = load('cv_skills', []);
+let exps     = load('cv_exps', []);
+let contacts = load('cv_contacts', []);
+
+// ─── RENDER PUBLIC ───
+function renderAll() {
+  renderProfile();
+  renderCerts();
+  renderSkills();
+  renderExps();
+  renderContacts();
+}
+
+function renderProfile() {
+  const p = profile;
+  document.getElementById('hero-name').textContent    = p.name  || 'اسمك الكامل';
+  document.getElementById('hero-title').textContent   = p.title || 'المسمى الوظيفي | التخصص';
+  document.getElementById('hero-bio').textContent     = p.bio   || 'أضف سيرتك الذاتية من لوحة التحكم.';
+  document.getElementById('hero-tag').textContent     = p.tag   || 'متاح للعمل';
+  document.getElementById('nav-name-label').textContent = p.name || 'Portfolio';
+  document.getElementById('footer-name').textContent  = p.name  || '';
+  document.getElementById('stat-gpa').textContent     = p.gpa   || '0.00';
+  document.getElementById('stat-grad').textContent    = p.grad  || '----';
+  document.getElementById('stat-certs').textContent   = certs.length;
+  document.getElementById('stat-exp').textContent     = p.exp   || '0';
+  document.getElementById('about-text').textContent   = p.about || '';
+  document.getElementById('info-major').textContent   = p.major || '—';
+  document.getElementById('info-uni').textContent     = p.uni   || '—';
+  document.getElementById('info-grad2').textContent   = p.grad  || '—';
+  document.getElementById('info-gpa2').textContent    = p.gpa   || '—';
+}
+
+function renderCerts() {
+  const g = document.getElementById('certs-grid');
+  if (!certs.length) {
+    g.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:3rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف شهادات بعد — افتح لوحة التحكم لإضافتها</div>`;
+    return;
+  }
+  g.innerHTML = certs.map((c,i) => `
+    <div class="cert-card" ${c.link ? `onclick="window.open('${c.link}','_blank')" style="cursor:pointer"` : ''}>
+      <div class="cert-icon">${c.icon || '🏆'}</div>
+      <div class="cert-name">${c.name}</div>
+      <div class="cert-org">${c.org}</div>
+      <div class="cert-meta">
+        <span class="cert-badge gold">${c.date}</span>
+        ${c.link ? '<span class="cert-badge">🔗 رابط</span>' : ''}
+      </div>
+    </div>`).join('');
+  document.getElementById('stat-certs').textContent = certs.length;
+}
+
+function renderSkills() {
+  const g = document.getElementById('skills-grid');
+  if (!skills.length) {
+    g.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف مهارات بعد</div>`;
+    return;
+  }
+  g.innerHTML = skills.map(s => `
+    <div class="skill-item">
+      <div class="skill-header">
+        <span class="skill-name">${s.name}</span>
+        <span class="skill-pct">${s.pct}%</span>
+      </div>
+      <div class="skill-bar"><div class="skill-fill" style="width:${s.pct}%"></div></div>
+    </div>`).join('');
+}
+
+function renderExps() {
+  const t = document.getElementById('timeline');
+  if (!exps.length) {
+    t.innerHTML = `<div style="text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف خبرات بعد</div>`;
+    return;
+  }
+  t.innerHTML = exps.map(e => `
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-title">${e.title}</div>
+        <div class="tl-org">${e.org}</div>
+        <div class="tl-date">📅 ${e.from} — ${e.to}</div>
+        <div class="tl-desc">${e.desc}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderContacts() {
+  const g = document.getElementById('contact-grid');
+  if (!contacts.length) {
+    g.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف معلومات تواصل بعد</div>`;
+    return;
+  }
+  g.innerHTML = contacts.map(c => {
+    const href = c.type === 'email' ? `mailto:${c.val}` :
+                 c.type === 'phone' ? `tel:${c.val}` : c.val;
+    return `<a class="contact-card" href="${href}" target="_blank" rel="noopener">
+      <span class="contact-icon">${c.icon || ICONS[c.type] || '🔗'}</span>
+      <div>
+        <div class="contact-label">${c.label || ICON_LABELS[c.type]}</div>
+        <div class="contact-val">${c.val}</div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+// ─── ADMIN LISTS ───
+function renderAdminLists() {
+  // Certs
+  const cl = document.getElementById('cert-list');
+  cl.innerHTML = certs.length ? certs.map((c,i) => `
+    <div class="item-row">
+      <div class="item-row-info">
+        <strong>${c.icon || '🏆'} ${c.name}</strong>
+        <small>${c.org} · ${c.date}</small>
+      </div>
+      <button class="del-btn" onclick="delCert(${i})">حذف</button>
+    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد شهادات</p>';
+
+  // Skills
+  const sl = document.getElementById('skill-list');
+  sl.innerHTML = skills.length ? skills.map((s,i) => `
+    <div class="item-row">
+      <div class="item-row-info">
+        <strong>${s.name}</strong><small>${s.pct}%</small>
+      </div>
+      <button class="del-btn" onclick="delSkill(${i})">حذف</button>
+    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد مهارات</p>';
+
+  // Exp
+  const el = document.getElementById('exp-list');
+  el.innerHTML = exps.length ? exps.map((e,i) => `
+    <div class="item-row">
+      <div class="item-row-info">
+        <strong>${e.title}</strong><small>${e.org} · ${e.from} — ${e.to}</small>
+      </div>
+      <button class="del-btn" onclick="delExp(${i})">حذف</button>
+    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد خبرات</p>';
+
+  // Contact
+  const ctl = document.getElementById('contact-list');
+  ctl.innerHTML = contacts.length ? contacts.map((c,i) => `
+    <div class="item-row">
+      <div class="item-row-info">
+        <strong>${c.icon || ICONS[c.type]} ${c.label || ICON_LABELS[c.type]}</strong>
+        <small>${c.val}</small>
+      </div>
+      <button class="del-btn" onclick="delContact(${i})">حذف</button>
+    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد معلومات</p>';
+}
+
+// ─── PROFILE FORM FILL ───
+function fillProfileForm() {
+  document.getElementById('f-name').value  = profile.name  || '';
+  document.getElementById('f-title').value = profile.title || '';
+  document.getElementById('f-bio').value   = profile.bio   || '';
+  document.getElementById('f-about').value = profile.about || '';
+  document.getElementById('f-uni').value   = profile.uni   || '';
+  document.getElementById('f-major').value = profile.major || '';
+  document.getElementById('f-gpa').value   = profile.gpa   || '';
+  document.getElementById('f-grad').value  = profile.grad  || '';
+  document.getElementById('f-exp').value   = profile.exp   || '';
+  document.getElementById('f-tag').value   = profile.tag   || '';
+}
+
+// ─── SAVE ACTIONS ───
+function saveProfile() {
+  profile = {
+    name:  document.getElementById('f-name').value.trim(),
+    title: document.getElementById('f-title').value.trim(),
+    bio:   document.getElementById('f-bio').value.trim(),
+    about: document.getElementById('f-about').value.trim(),
+    uni:   document.getElementById('f-uni').value.trim(),
+    major: document.getElementById('f-major').value.trim(),
+    gpa:   document.getElementById('f-gpa').value.trim(),
+    grad:  document.getElementById('f-grad').value.trim(),
+    exp:   document.getElementById('f-exp').value.trim(),
+    tag:   document.getElementById('f-tag').value.trim(),
+  };
+  save('cv_profile', profile);
+  renderProfile();
+  toast();
+}
+
+function addCert() {
+  const name = document.getElementById('c-name').value.trim();
+  const org  = document.getElementById('c-org').value.trim();
+  if (!name || !org) return alert('يرجى إدخال اسم الشهادة والجهة المانحة');
+  certs.push({
+    name, org,
+    date: document.getElementById('c-date').value.trim() || '—',
+    icon: document.getElementById('c-icon').value.trim() || '🏆',
+    link: document.getElementById('c-link').value.trim(),
+  });
+  save('cv_certs', certs);
+  ['c-name','c-org','c-date','c-icon','c-link'].forEach(id => document.getElementById(id).value='');
+  renderCerts(); renderAdminLists(); toast();
+}
+
+function addSkill() {
+  const name = document.getElementById('s-name').value.trim();
+  if (!name) return alert('أدخل اسم المهارة');
+  skills.push({ name, pct: document.getElementById('s-pct').value });
+  save('cv_skills', skills);
+  document.getElementById('s-name').value = '';
+  document.getElementById('s-pct').value = 80;
+  document.getElementById('s-pct-label').textContent = '80';
+  renderSkills(); renderAdminLists(); toast();
+}
+
+function addExp() {
+  const title = document.getElementById('e-title').value.trim();
+  const org   = document.getElementById('e-org').value.trim();
+  if (!title || !org) return alert('أدخل المسمى والجهة');
+  exps.unshift({
+    title, org,
+    from: document.getElementById('e-from').value.trim() || '—',
+    to:   document.getElementById('e-to').value.trim()   || '—',
+    desc: document.getElementById('e-desc').value.trim(),
+  });
+  save('cv_exps', exps);
+  ['e-title','e-org','e-from','e-to','e-desc'].forEach(id => document.getElementById(id).value='');
+  renderExps(); renderAdminLists(); toast();
+}
+
+function addContact() {
+  const type  = document.getElementById('ct-type').value;
+  const val   = document.getElementById('ct-val').value.trim();
+  if (!val) return alert('أدخل القيمة');
+  contacts.push({
+    type,
+    icon:  document.getElementById('ct-icon').value.trim()  || ICONS[type],
+    label: document.getElementById('ct-label').value.trim() || ICON_LABELS[type],
+    val,
+  });
+  save('cv_contacts', contacts);
+  ['ct-icon','ct-label','ct-val'].forEach(id => document.getElementById(id).value='');
+  renderContacts(); renderAdminLists(); toast();
+}
+
+function delCert(i)    { certs.splice(i,1);    save('cv_certs',certs);    renderCerts();    renderAdminLists(); toast('تم الحذف'); }
+function delSkill(i)   { skills.splice(i,1);   save('cv_skills',skills);  renderSkills();   renderAdminLists(); toast('تم الحذف'); }
+function delExp(i)     { exps.splice(i,1);     save('cv_exps',exps);      renderExps();     renderAdminLists(); toast('تم الحذف'); }
+function delContact(i) { contacts.splice(i,1); save('cv_contacts',contacts); renderContacts(); renderAdminLists(); toast('تم الحذف'); }
+
+// ─── UI ───
+function openAdmin() {
+  fillProfileForm();
+  renderAdminLists();
+  document.getElementById('admin-panel').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeAdmin() {
+  document.getElementById('admin-panel').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+function toast(msg='✓ تم الحفظ بنجاح') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// close admin on backdrop click
+document.getElementById('admin-panel').addEventListener('click', function(e){
+  if(e.target === this) closeAdmin();
+});
+
+// ESC key
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeAdmin(); });
+
+// init
+renderAll();
+</script>
+</body>
+</html>
