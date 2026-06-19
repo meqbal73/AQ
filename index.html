@@ -178,7 +178,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   <div class="nav-controls">
     <button class="ctrl-btn" id="lang-btn"  onclick="toggleLang()">EN</button>
     <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
-    <button class="ctrl-btn gold"           onclick="openAdmin()">⚙ <span class="i18n" data-ar="تعديل" data-en="Edit">تعديل</span></button>
+    <button class="ctrl-btn gold" id="adminBtn" onclick="openAdmin()" style="display:none">⚙ <span class="i18n" data-ar="تعديل" data-en="Edit">تعديل</span></button>
   </div>
 </nav>
 
@@ -579,12 +579,46 @@ function fillProfileForm(){
   F('f-about-ar',p.aboutAr);F('f-about-en',p.aboutEn);
 }
 
-function saveProfile(){
+async function saveProfile(){
   const G=id=>document.getElementById(id).value.trim();
+
+  const bioAr = document.getElementById('f-bio-ar').value.trim();
+const bioEn = document.getElementById('f-bio-en').value.trim();
+
+const aboutAr = document.getElementById('f-about-ar').value.trim();
+const aboutEn = document.getElementById('f-about-en').value.trim();
+
+let finalBioAr = bioAr;
+let finalBioEn = bioEn;
+
+let finalAboutAr = aboutAr;
+let finalAboutEn = aboutEn;
+
+if(bioAr && !bioEn){
+   finalBioEn = await translateText(bioAr,"en");
+}
+
+if(bioEn && !bioAr){
+   finalBioAr = await translateText(bioEn,"ar");
+}
+
+if(aboutAr && !aboutEn){
+   finalAboutEn = await translateText(aboutAr,"en");
+}
+
+if(aboutEn && !aboutAr){
+   finalAboutAr = await translateText(aboutEn,"ar");
+}
+  
   profile={nameAr:G('f-name-ar'),nameEn:G('f-name-en'),titleAr:G('f-title-ar'),titleEn:G('f-title-en'),
     uni:G('f-uni'),major:G('f-major'),gpa:G('f-gpa'),grad:G('f-grad'),exp:G('f-exp'),
-    tagAr:G('f-tag-ar'),tagEn:G('f-tag-en'),bioAr:G('f-bio-ar'),bioEn:G('f-bio-en'),
-    aboutAr:G('f-about-ar'),aboutEn:G('f-about-en')};
+    tagAr:G('f-tag-ar'),tagEn:G('f-tag-en'),
+           
+          bioAr:finalBioAr,
+bioEn:finalBioEn,
+
+aboutAr:finalAboutAr,
+aboutEn:finalAboutEn,
   LS.set('cv_profile',profile);renderAll();showToast('✓ تم حفظ الملف الشخصي');
 }
 
@@ -655,12 +689,24 @@ function resetAll(){
 }
 
 function openAdmin(){
-  fillProfileForm();renderAdminLists();
+
+  const pass = prompt("Access Password");
+
+  if(pass !== "AM2026!Moqbail"){
+      alert("Access Denied");
+      return;
+  }
+
+  fillProfileForm();
+  renderAdminLists();
+
   document.getElementById('set-theme').value=settings.theme||'dark';
   document.getElementById('set-lang').value=settings.lang||'ar';
+
   document.getElementById('admin-panel').style.display='block';
   document.body.style.overflow='hidden';
 }
+  
 function closeAdmin(){
   document.getElementById('admin-panel').style.display='none';
   document.body.style.overflow='';
@@ -675,6 +721,29 @@ function showToast(msg){
   const el=document.getElementById('toast');
   el.textContent=msg;el.classList.add('show');
   clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2400);
+}
+
+async function translateText(text,target){
+
+  try{
+
+    const res = await fetch(
+      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${target}&dt=t&q=${encodeURIComponent(text)}`
+    );
+
+    const data = await res.json();
+
+    return data[0].map(x=>x[0]).join('');
+
+  }catch{
+    return text;
+  }
+}
+
+const SECRET_PATH = "#am-admin-7x93k2";
+
+if(location.hash === SECRET_PATH){
+    document.getElementById("adminBtn").style.display = "inline-block";
 }
 
 document.getElementById('admin-panel').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
