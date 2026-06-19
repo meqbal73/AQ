@@ -757,12 +757,6 @@ async function translateText(text,target){
   }
 }
 
-const SECRET_PATH = "#am-admin-7x93k2";
-
-if(location.hash === SECRET_PATH){
-    document.getElementById("adminBtn").style.display = "inline-block";
-}
-
 document.getElementById('admin-panel').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin();});
 
