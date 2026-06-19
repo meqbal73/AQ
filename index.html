@@ -1,743 +1,526 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>بورتفوليو احترافي</title>
+<title>Abdullelah Moqbail — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #070C18;
-    --surface: #0D1526;
-    --surface2: #131D35;
-    --accent: #2D6CDF;
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --text: #E8EDF8;
-    --muted: #7A8BAD;
-    --border: rgba(45,108,223,0.18);
-    --glow: rgba(45,108,223,0.35);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Cairo', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+:root { --transition-theme: background .3s, color .3s, border-color .3s; }
+[data-theme="dark"] {
+  --bg:#070C18; --surface:#0D1526; --surface2:#131D35;
+  --accent:#2D6CDF; --gold:#C9A84C; --gold-lt:#E8C96A;
+  --text:#E8EDF8; --muted:#7A8BAD;
+  --border:rgba(45,108,223,0.18); --glow:rgba(45,108,223,0.35);
+  --nav-bg:rgba(7,12,24,0.88);
+}
+[data-theme="light"] {
+  --bg:#F2F5FC; --surface:#FFFFFF; --surface2:#E8EDF8;
+  --accent:#1A56C4; --gold:#A07820; --gold-lt:#C49A30;
+  --text:#0F1828; --muted:#5A6A85;
+  --border:rgba(26,86,196,0.15); --glow:rgba(26,86,196,0.2);
+  --nav-bg:rgba(242,245,252,0.92);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:var(--transition-theme);}
+[data-lang="en"] body,[data-lang="en"] input,[data-lang="en"] textarea,[data-lang="en"] select,[data-lang="en"] button{font-family:'Inter',sans-serif;}
 
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top:0; left:0; right:0; z-index:100;
-    display: flex; align-items:center; justify-content:space-between;
-    padding: 1rem 2.5rem;
-    background: rgba(7,12,24,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo { font-weight:900; font-size:1.3rem; color:var(--gold); letter-spacing:1px; }
-  .nav-links { display:flex; gap:1.5rem; list-style:none; }
-  .nav-links a {
-    color:var(--muted); text-decoration:none; font-size:.9rem;
-    transition: color .2s;
-  }
-  .nav-links a:hover { color:var(--text); }
-  .nav-admin-btn {
-    background: var(--surface2); border: 1px solid var(--border);
-    color: var(--gold); padding:.45rem 1.1rem; border-radius:8px;
-    font-family:'Cairo',sans-serif; font-size:.85rem; cursor:pointer;
-    transition: all .2s;
-  }
-  .nav-admin-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2rem;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);gap:.8rem;transition:var(--transition-theme);}
+.nav-logo{font-weight:900;font-size:1.2rem;color:var(--gold);white-space:nowrap;}
+.nav-links{display:flex;gap:1.2rem;list-style:none;flex-wrap:wrap;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-controls{display:flex;gap:.45rem;align-items:center;flex-shrink:0;}
+.ctrl-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.38rem .8rem;border-radius:8px;font-size:.82rem;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;}
+.ctrl-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.ctrl-btn.gold{color:var(--gold);}
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items:center; justify-content:center;
-    position: relative; overflow:hidden;
-    padding: 6rem 2rem 4rem;
-  }
-  .hero-bg {
-    position:absolute; inset:0;
-    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(45,108,223,0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 80% 70%, rgba(201,168,76,0.07) 0%, transparent 60%);
-  }
-  .hero-grid {
-    position:absolute; inset:0; opacity:.04;
-    background-image: linear-gradient(var(--border) 1px, transparent 1px),
-                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-  .hero-content { position:relative; text-align:center; max-width:750px; }
-  .hero-tag {
-    display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.3);
-    color:var(--gold); padding:.35rem 1rem; border-radius:50px; font-size:.82rem;
-    margin-bottom:1.5rem; letter-spacing:1px;
-  }
-  #hero-name {
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    font-weight:900; line-height:1.1;
-    background: linear-gradient(135deg, #fff 30%, var(--gold-light));
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    background-clip:text;
-    margin-bottom:.6rem;
-  }
-  #hero-title {
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    color: var(--accent); font-weight:600; margin-bottom:1.2rem;
-  }
-  #hero-bio {
-    color:var(--muted); line-height:1.8; font-size:.97rem;
-    max-width:580px; margin:0 auto 2rem;
-  }
-  .hero-stats {
-    display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;
-    margin-bottom:2.5rem;
-  }
-  .stat-box {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:14px; padding:1rem 1.6rem; text-align:center;
-    min-width:120px;
-  }
-  .stat-num { font-size:1.8rem; font-weight:900; color:var(--gold); }
-  .stat-label { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
-  .hero-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #1a4fa0);
-    color:#fff; padding:.75rem 2rem; border-radius:10px;
-    text-decoration:none; font-weight:700; font-size:.95rem;
-    transition: transform .2s, box-shadow .2s;
-    box-shadow: 0 4px 20px rgba(45,108,223,0.4);
-  }
-  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(45,108,223,0.5); }
-  .btn-outline {
-    background:transparent; color:var(--text); padding:.75rem 2rem;
-    border:1px solid var(--border); border-radius:10px;
-    text-decoration:none; font-weight:600; font-size:.95rem;
-    transition: all .2s;
-  }
-  .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 2rem 4rem;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(45,108,223,0.12) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(201,168,76,0.07) 0%,transparent 60%);}
+[data-theme="light"] .hero-bg{background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(26,86,196,0.06) 0%,transparent 70%);}
+.hero-grid{position:absolute;inset:0;opacity:.04;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;}
+.hero-content{position:relative;text-align:center;max-width:780px;}
+.hero-tag{display:inline-block;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:.32rem 1rem;border-radius:50px;font-size:.78rem;margin-bottom:1.4rem;letter-spacing:1px;}
+#hero-name{font-size:clamp(2rem,6vw,4rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--text) 30%,var(--gold-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem;}
+#hero-title{font-size:clamp(.9rem,2.5vw,1.25rem);color:var(--accent);font-weight:600;margin-bottom:1rem;}
+#hero-bio{color:var(--muted);line-height:1.9;font-size:.93rem;max-width:580px;margin:0 auto 2rem;}
+.hero-stats{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.2rem;}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1.4rem;text-align:center;min-width:105px;transition:var(--transition-theme);}
+.stat-num{font-size:1.65rem;font-weight:900;color:var(--gold);}
+.stat-label{font-size:.7rem;color:var(--muted);margin-top:.18rem;}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#1a4fa0);color:#fff;padding:.68rem 1.7rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(45,108,223,0.4);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,108,223,0.5);}
+.btn-outline{background:transparent;color:var(--text);padding:.68rem 1.7rem;border:1px solid var(--border);border-radius:10px;text-decoration:none;font-weight:600;font-size:.88rem;transition:all .2s;}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
 
-  /* ─── SECTIONS ─── */
-  section { padding: 5rem 2rem; max-width:1100px; margin:0 auto; }
-  .section-label {
-    display:flex; align-items:center; gap:.75rem;
-    margin-bottom:3rem;
-  }
-  .section-label::before {
-    content:''; display:block; width:3px; height:2rem;
-    background:linear-gradient(to bottom, var(--accent), var(--gold));
-    border-radius:2px;
-  }
-  .section-label h2 { font-size:1.8rem; font-weight:900; }
-  .section-label span { color:var(--gold); }
+section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.section-label{display:flex;align-items:center;gap:.75rem;margin-bottom:2.6rem;}
+.section-label::before{content:'';display:block;width:3px;height:2rem;background:linear-gradient(to bottom,var(--accent),var(--gold));border-radius:2px;}
+.section-label h2{font-size:1.65rem;font-weight:900;}
+.section-label span.dot{color:var(--gold);}
 
-  /* ─── CERTS GRID ─── */
-  .certs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.2rem; }
-  .cert-card {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:16px; padding:1.5rem;
-    position:relative; overflow:hidden;
-    transition: transform .25s, border-color .25s, box-shadow .25s;
-    cursor:default;
-  }
-  .cert-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background: linear-gradient(90deg, var(--accent), var(--gold));
-    transform:scaleX(0); transform-origin:left;
-    transition: transform .35s;
-  }
-  .cert-card:hover { transform:translateY(-4px); border-color:var(--accent); box-shadow:0 8px 32px var(--glow); }
-  .cert-card:hover::before { transform:scaleX(1); }
-  .cert-icon {
-    width:44px; height:44px; border-radius:10px;
-    background:rgba(45,108,223,0.15); display:flex; align-items:center;
-    justify-content:center; font-size:1.4rem; margin-bottom:1rem;
-  }
-  .cert-name { font-weight:700; font-size:1rem; margin-bottom:.3rem; }
-  .cert-org { color:var(--accent); font-size:.85rem; margin-bottom:.6rem; }
-  .cert-meta { display:flex; gap:1rem; flex-wrap:wrap; }
-  .cert-badge {
-    background:var(--surface2); border:1px solid var(--border);
-    color:var(--muted); padding:.2rem .7rem; border-radius:20px; font-size:.75rem;
-  }
-  .cert-badge.gold { border-color:rgba(201,168,76,0.3); color:var(--gold); background:rgba(201,168,76,0.08); }
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+@media(max-width:640px){.about-grid{grid-template-columns:1fr;}}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem;transition:var(--transition-theme);}
+.about-card h3{font-size:.9rem;margin-bottom:.9rem;color:var(--gold);}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem .65rem;background:var(--surface2);border-radius:8px;margin-bottom:.55rem;transition:var(--transition-theme);}
+.info-row:last-child{margin-bottom:0;}
+.info-lbl{color:var(--muted);font-size:.8rem;}
+.info-val{font-weight:600;font-size:.85rem;}
+.info-val.gold{color:var(--gold);font-size:.95rem;}
 
-  /* ─── SKILLS ─── */
-  .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:1rem; }
-  .skill-item {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:12px; padding:1rem 1.2rem;
-  }
-  .skill-header { display:flex; justify-content:space-between; margin-bottom:.6rem; }
-  .skill-name { font-weight:600; font-size:.9rem; }
-  .skill-pct { color:var(--gold); font-size:.85rem; font-weight:700; }
-  .skill-bar { height:4px; background:var(--surface2); border-radius:2px; overflow:hidden; }
-  .skill-fill {
-    height:100%; border-radius:2px;
-    background: linear-gradient(90deg, var(--accent), var(--gold));
-    transition: width 1s ease;
-  }
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.1rem;}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.3rem;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s,background .3s;}
+.cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.cert-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 32px var(--glow);}
+.cert-card:hover::before{transform:scaleX(1);}
+.cert-icon{width:42px;height:42px;border-radius:10px;background:rgba(45,108,223,0.15);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:.85rem;}
+.cert-name{font-weight:700;font-size:.93rem;margin-bottom:.28rem;}
+.cert-org{color:var(--accent);font-size:.8rem;margin-bottom:.55rem;}
+.cert-meta{display:flex;gap:.55rem;flex-wrap:wrap;}
+.cert-badge{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:.16rem .6rem;border-radius:20px;font-size:.7rem;}
+.cert-badge.gold{border-color:rgba(201,168,76,0.3);color:var(--gold);background:rgba(201,168,76,0.08);}
 
-  /* ─── EXPERIENCE ─── */
-  .timeline { position:relative; padding-right:2rem; }
-  .timeline::before {
-    content:''; position:absolute; right:0; top:0; bottom:0; width:2px;
-    background:linear-gradient(to bottom, var(--accent), transparent);
-  }
-  .tl-item { position:relative; margin-bottom:2.5rem; }
-  .tl-dot {
-    position:absolute; right:-2.45rem; top:.3rem;
-    width:12px; height:12px; border-radius:50%;
-    background:var(--accent); border:2px solid var(--bg);
-    box-shadow:0 0 0 3px rgba(45,108,223,0.25);
-  }
-  .tl-card {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:14px; padding:1.4rem;
-  }
-  .tl-title { font-weight:700; font-size:1rem; }
-  .tl-org { color:var(--accent); font-size:.85rem; margin:.3rem 0 .6rem; }
-  .tl-date { color:var(--muted); font-size:.78rem; margin-bottom:.6rem; }
-  .tl-desc { color:var(--muted); font-size:.88rem; line-height:1.7; }
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:.95rem;}
+.skill-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.15rem;transition:var(--transition-theme);}
+.skill-header{display:flex;justify-content:space-between;margin-bottom:.5rem;}
+.skill-name{font-weight:600;font-size:.85rem;}
+.skill-pct{color:var(--gold);font-size:.8rem;font-weight:700;}
+.skill-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.skill-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width 1.2s ease;}
 
-  /* ─── CONTACT ─── */
-  .contact-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; }
-  .contact-card {
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:14px; padding:1.2rem 1.4rem;
-    display:flex; align-items:center; gap:1rem;
-    text-decoration:none; color:var(--text);
-    transition: all .2s;
-  }
-  .contact-card:hover { border-color:var(--accent); transform:translateY(-2px); }
-  .contact-icon { font-size:1.4rem; }
-  .contact-label { font-size:.75rem; color:var(--muted); }
-  .contact-val { font-weight:600; font-size:.9rem; }
+.timeline{position:relative;padding-right:2rem;}
+.timeline::before{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),transparent);}
+[data-lang="en"] .timeline{padding-right:0;padding-left:2rem;}
+[data-lang="en"] .timeline::before{right:auto;left:0;}
+.tl-item{position:relative;margin-bottom:2.4rem;}
+.tl-dot{position:absolute;right:-2.45rem;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(45,108,223,0.25);}
+[data-lang="en"] .tl-dot{right:auto;left:-2.45rem;}
+.tl-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem;transition:var(--transition-theme);}
+.tl-title{font-weight:700;font-size:.96rem;}
+.tl-org{color:var(--accent);font-size:.81rem;margin:.28rem 0 .45rem;}
+.tl-date{color:var(--muted);font-size:.74rem;margin-bottom:.5rem;}
+.tl-desc{color:var(--muted);font-size:.84rem;line-height:1.78;}
 
-  /* ─── FOOTER ─── */
-  footer {
-    text-align:center; padding:2rem;
-    color:var(--muted); font-size:.8rem;
-    border-top:1px solid var(--border);
-  }
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:.95rem;}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.05rem 1.25rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;color:var(--text);transition:all .2s;}
+.contact-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.contact-icon{font-size:1.35rem;}
+.contact-label{font-size:.7rem;color:var(--muted);}
+.contact-val{font-weight:600;font-size:.85rem;}
 
-  /* ─── ADMIN PANEL ─── */
-  #admin-panel {
-    display:none; position:fixed; inset:0; z-index:200;
-    background: rgba(0,0,0,0.92); backdrop-filter:blur(10px);
-    overflow-y:auto; padding:2rem 1rem;
-  }
-  .admin-inner {
-    max-width:860px; margin:0 auto;
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:20px; padding:2.5rem;
-  }
-  .admin-header {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-bottom:2rem; padding-bottom:1.2rem; border-bottom:1px solid var(--border);
-  }
-  .admin-header h2 { font-size:1.5rem; font-weight:900; color:var(--gold); }
-  .admin-close {
-    background:var(--surface2); border:1px solid var(--border);
-    color:var(--text); width:36px; height:36px; border-radius:50%;
-    font-size:1.1rem; cursor:pointer; transition:all .2s;
-  }
-  .admin-close:hover { background:red; border-color:red; }
-  .admin-tabs {
-    display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:2rem;
-  }
-  .tab-btn {
-    background:var(--surface2); border:1px solid var(--border);
-    color:var(--muted); padding:.5rem 1.2rem; border-radius:8px;
-    font-family:'Cairo',sans-serif; font-size:.85rem; cursor:pointer;
-    transition:all .2s;
-  }
-  .tab-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
-  .tab-content { display:none; }
-  .tab-content.active { display:block; }
+footer{text-align:center;padding:2rem;color:var(--muted);font-size:.76rem;border-top:1px solid var(--border);}
+.empty-state{text-align:center;color:var(--muted);padding:2.5rem;border:1px dashed var(--border);border-radius:16px;grid-column:1/-1;}
 
-  /* forms */
-  .form-group { margin-bottom:1.2rem; }
-  .form-group label { display:block; font-size:.82rem; color:var(--muted); margin-bottom:.4rem; }
-  .form-group input, .form-group textarea, .form-group select {
-    width:100%; background:var(--surface2); border:1px solid var(--border);
-    color:var(--text); padding:.7rem 1rem; border-radius:10px;
-    font-family:'Cairo',sans-serif; font-size:.9rem;
-    transition: border-color .2s;
-  }
-  .form-group input:focus, .form-group textarea:focus {
-    outline:none; border-color:var(--accent);
-  }
-  .form-group textarea { min-height:90px; resize:vertical; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-  .save-btn {
-    background:linear-gradient(135deg,var(--accent),#1a4fa0);
-    color:#fff; border:none; padding:.7rem 1.8rem;
-    border-radius:10px; font-family:'Cairo',sans-serif;
-    font-weight:700; cursor:pointer; font-size:.9rem;
-    transition: all .2s;
-  }
-  .save-btn:hover { opacity:.9; transform:translateY(-1px); }
-  .del-btn {
-    background:rgba(220,50,50,.15); border:1px solid rgba(220,50,50,.3);
-    color:#e57373; padding:.4rem .9rem; border-radius:7px;
-    font-size:.78rem; cursor:pointer; font-family:'Cairo',sans-serif;
-  }
-  .del-btn:hover { background:rgba(220,50,50,.3); }
-  .item-list { display:flex; flex-direction:column; gap:.7rem; margin-bottom:1.5rem; }
-  .item-row {
-    display:flex; align-items:center; justify-content:space-between;
-    background:var(--surface2); border:1px solid var(--border);
-    border-radius:10px; padding:.75rem 1rem;
-  }
-  .item-row-info { font-size:.88rem; }
-  .item-row-info strong { display:block; font-weight:600; }
-  .item-row-info small { color:var(--muted); }
-  .divider {
-    border:none; border-top:1px solid var(--border);
-    margin: 1.5rem 0;
-  }
-  .success-toast {
-    position:fixed; bottom:2rem; right:50%; transform:translateX(50%);
-    background:var(--accent); color:#fff; padding:.7rem 1.5rem;
-    border-radius:10px; font-size:.88rem; z-index:999;
-    opacity:0; transition:opacity .3s; pointer-events:none;
-  }
-  .success-toast.show { opacity:1; }
+#admin-panel{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);overflow-y:auto;padding:2rem 1rem;}
+.admin-inner{max-width:880px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;transition:var(--transition-theme);}
+.admin-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.1rem;border-bottom:1px solid var(--border);}
+.admin-header h2{font-size:1.35rem;font-weight:900;color:var(--gold);}
+.admin-close{background:var(--surface2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;transition:all .2s;}
+.admin-close:hover{background:#c0392b;border-color:#c0392b;color:#fff;}
+.admin-tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tab-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:.42rem 1rem;border-radius:8px;font-family:inherit;font-size:.81rem;cursor:pointer;transition:all .2s;}
+.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.form-group{margin-bottom:1.05rem;}
+.form-group label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.32rem;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.62rem .9rem;border-radius:10px;font-family:inherit;font-size:.86rem;transition:border-color .2s,background .3s,color .3s;}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--accent);}
+.form-group textarea{min-height:85px;resize:vertical;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+@media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+.save-btn{background:linear-gradient(135deg,var(--accent),#1a4fa0);color:#fff;border:none;padding:.62rem 1.5rem;border-radius:10px;font-family:inherit;font-weight:700;cursor:pointer;font-size:.86rem;transition:all .2s;}
+.save-btn:hover{opacity:.9;transform:translateY(-1px);}
+.del-btn{background:rgba(220,50,50,.12);border:1px solid rgba(220,50,50,.25);color:#e57373;padding:.32rem .8rem;border-radius:7px;font-size:.74rem;cursor:pointer;font-family:inherit;transition:all .2s;}
+.del-btn:hover{background:rgba(220,50,50,.28);}
+.item-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.3rem;}
+.item-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:.65rem .9rem;transition:var(--transition-theme);}
+.item-row-info strong{display:block;font-weight:600;font-size:.84rem;}
+.item-row-info small{color:var(--muted);font-size:.74rem;}
+.divider{border:none;border-top:1px solid var(--border);margin:1.3rem 0;}
+.reset-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;background:rgba(220,50,50,.06);border:1px solid rgba(220,50,50,.15);border-radius:10px;flex-wrap:wrap;}
+.reset-row p{font-size:.8rem;color:var(--muted);}
+.reset-btn{background:#c0392b;color:#fff;border:none;padding:.42rem .95rem;border-radius:7px;font-family:inherit;font-size:.78rem;cursor:pointer;white-space:nowrap;}
 
-  /* range slider */
-  input[type=range] {
-    -webkit-appearance:none; height:4px;
-    background:var(--surface2); border-radius:2px; cursor:pointer;
-    padding:0;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance:none; width:16px; height:16px;
-    background:var(--accent); border-radius:50%;
-    border:2px solid var(--bg);
-  }
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:.62rem 1.35rem;border-radius:10px;font-size:.84rem;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;}
 
-  @media(max-width:600px){
-    nav { padding:1rem; }
-    .form-row { grid-template-columns:1fr; }
-    .hero-stats { gap:1rem; }
-    .stat-box { min-width:90px; padding:.75rem 1rem; }
-    .stat-num { font-size:1.4rem; }
-  }
+input[type=range]{-webkit-appearance:none;height:4px;background:var(--surface2);border-radius:2px;cursor:pointer;padding:0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--accent);border-radius:50%;border:2px solid var(--bg);}
+
+@media(max-width:600px){
+  nav{padding:.75rem .9rem;}
+  .nav-links{display:none;}
+  .hero-stats{gap:.7rem;}
+  .stat-box{min-width:80px;padding:.65rem .85rem;}
+  .stat-num{font-size:1.35rem;}
+  .admin-inner{padding:1.4rem;}
+}
 </style>
 </head>
 <body>
 
-<!-- TOAST -->
-<div class="success-toast" id="toast">✓ تم الحفظ بنجاح</div>
+<div class="toast" id="toast"></div>
 
-<!-- NAV -->
 <nav>
-  <span class="nav-logo" id="nav-name-label">Portfolio</span>
+  <span class="nav-logo">AM</span>
   <ul class="nav-links">
-    <li><a href="#about">عني</a></li>
-    <li><a href="#certs">الشهادات</a></li>
-    <li><a href="#skills">المهارات</a></li>
-    <li><a href="#experience">الخبرات</a></li>
-    <li><a href="#contact">التواصل</a></li>
+    <li><a href="#about"      class="nav-lnk" data-ar="عني"       data-en="About">عني</a></li>
+    <li><a href="#certs"      class="nav-lnk" data-ar="الشهادات"  data-en="Certs">الشهادات</a></li>
+    <li><a href="#skills"     class="nav-lnk" data-ar="المهارات"  data-en="Skills">المهارات</a></li>
+    <li><a href="#experience" class="nav-lnk" data-ar="الخبرات"   data-en="Experience">الخبرات</a></li>
+    <li><a href="#contact"    class="nav-lnk" data-ar="التواصل"   data-en="Contact">التواصل</a></li>
   </ul>
-  <button class="ctrl-btn gold" id="adminBtn" onclick="openAdmin()" style="display:none">
+  <div class="nav-controls">
+    <button class="ctrl-btn" id="lang-btn"  onclick="toggleLang()">EN</button>
+    <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    <button class="ctrl-btn gold" id="adminBtn" onclick="openAdmin()" style="display:none">⚙ <span class="i18n" data-ar="تعديل" data-en="Edit">تعديل</span></button>
+  </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-bg"></div><div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-tag" id="hero-tag">متاح للعمل</div>
-    <h1 id="hero-name">اسمك الكامل</h1>
-    <p id="hero-title">المسمى الوظيفي | التخصص</p>
-    <p id="hero-bio">مرحباً بك في بورتفوليوي. أضف سيرتك الذاتية من لوحة التحكم.</p>
+    <h1 id="hero-name">Abdullelah Mohammed Moqbail</h1>
+    <p id="hero-title">IT Student | King Abdulaziz University</p>
+    <p id="hero-bio"></p>
     <div class="hero-stats">
-      <div class="stat-box">
-        <div class="stat-num" id="stat-gpa">0.00</div>
-        <div class="stat-label">المعدل التراكمي</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="stat-grad">----</div>
-        <div class="stat-label">سنة التخرج</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="stat-certs">0</div>
-        <div class="stat-label">شهادة</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="stat-exp">0</div>
-        <div class="stat-label">سنوات الخبرة</div>
-      </div>
+      <div class="stat-box"><div class="stat-num" id="stat-gpa">—</div><div class="stat-label i18n" data-ar="المعدل التراكمي" data-en="GPA">المعدل التراكمي</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-grad">2026</div><div class="stat-label i18n" data-ar="سنة التخرج" data-en="Grad Year">سنة التخرج</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-certs">5</div><div class="stat-label i18n" data-ar="شهادة" data-en="Certs">شهادة</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-exp">3</div><div class="stat-label i18n" data-ar="سنوات خبرة" data-en="Yrs Exp">سنوات خبرة</div></div>
     </div>
     <div class="hero-actions">
-      <a href="#certs" class="btn-primary">استعرض الشهادات</a>
-      <a href="#contact" class="btn-outline">تواصل معي</a>
+      <a href="#certs"   class="btn-primary i18n" data-ar="استعرض الشهادات" data-en="View Certificates">استعرض الشهادات</a>
+      <a href="#contact" class="btn-outline i18n"  data-ar="تواصل معي"       data-en="Contact Me">تواصل معي</a>
     </div>
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
-  <div class="section-label"><h2>عني <span>•</span></h2></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
-    <div>
-      <p id="about-text" style="color:var(--muted);line-height:2;font-size:.95rem;"></p>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;">
-      <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--gold);">بيانات أكاديمية</h3>
-      <div style="display:flex;flex-direction:column;gap:.8rem;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
-          <span style="color:var(--muted);font-size:.85rem;">التخصص</span>
-          <span id="info-major" style="font-weight:600;font-size:.9rem;">—</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
-          <span style="color:var(--muted);font-size:.85rem;">الجامعة</span>
-          <span id="info-uni" style="font-weight:600;font-size:.9rem;">—</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
-          <span style="color:var(--muted);font-size:.85rem;">سنة التخرج</span>
-          <span id="info-grad2" style="font-weight:600;font-size:.9rem;">—</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem;background:var(--surface2);border-radius:8px;">
-          <span style="color:var(--muted);font-size:.85rem;">المعدل التراكمي</span>
-          <span id="info-gpa2" style="font-weight:700;font-size:1rem;color:var(--gold);">—</span>
-        </div>
-      </div>
+  <div class="section-label"><h2 class="i18n" data-ar="عني •" data-en="About Me •">عني <span class="dot">•</span></h2></div>
+  <div class="about-grid">
+    <div><p id="about-text" style="color:var(--muted);line-height:2;font-size:.91rem;"></p></div>
+    <div class="about-card">
+      <h3 class="i18n" data-ar="البيانات الأكاديمية" data-en="Academic Info">البيانات الأكاديمية</h3>
+      <div class="info-row"><span class="info-lbl i18n" data-ar="التخصص" data-en="Major">التخصص</span><span class="info-val" id="info-major">—</span></div>
+      <div class="info-row"><span class="info-lbl i18n" data-ar="الجامعة" data-en="University">الجامعة</span><span class="info-val" id="info-uni">—</span></div>
+      <div class="info-row"><span class="info-lbl i18n" data-ar="سنة التخرج" data-en="Grad Year">سنة التخرج</span><span class="info-val" id="info-grad2">—</span></div>
+      <div class="info-row"><span class="info-lbl i18n" data-ar="المعدل التراكمي" data-en="GPA">المعدل التراكمي</span><span class="info-val gold" id="info-gpa2">—</span></div>
     </div>
   </div>
 </section>
 
-<!-- CERTS -->
 <section id="certs">
-  <div class="section-label"><h2>الشهادات <span>•</span></h2></div>
-  <div class="certs-grid" id="certs-grid">
-    <div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:3rem;border:1px dashed var(--border);border-radius:16px;">
-      لم تُضَف شهادات بعد — افتح لوحة التحكم لإضافتها
-    </div>
-  </div>
+  <div class="section-label"><h2 class="i18n" data-ar="الشهادات •" data-en="Certificates •">الشهادات <span class="dot">•</span></h2></div>
+  <div class="certs-grid" id="certs-grid"></div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
-  <div class="section-label"><h2>المهارات <span>•</span></h2></div>
-  <div class="skills-grid" id="skills-grid">
-    <div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">
-      لم تُضَف مهارات بعد
-    </div>
-  </div>
+  <div class="section-label"><h2 class="i18n" data-ar="المهارات •" data-en="Skills •">المهارات <span class="dot">•</span></h2></div>
+  <div class="skills-grid" id="skills-grid"></div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-label"><h2>الخبرات <span>•</span></h2></div>
-  <div class="timeline" id="timeline">
-    <div style="text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">
-      لم تُضَف خبرات بعد
-    </div>
-  </div>
+  <div class="section-label"><h2 class="i18n" data-ar="الخبرات •" data-en="Experience •">الخبرات <span class="dot">•</span></h2></div>
+  <div class="timeline" id="timeline"></div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="section-label"><h2>التواصل <span>•</span></h2></div>
-  <div class="contact-grid" id="contact-grid">
-    <div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">
-      لم تُضَف معلومات تواصل بعد
-    </div>
-  </div>
+  <div class="section-label"><h2 class="i18n" data-ar="التواصل •" data-en="Contact •">التواصل <span class="dot">•</span></h2></div>
+  <div class="contact-grid" id="contact-grid"></div>
 </section>
 
-<footer>
-  <p>صُنع بـ ❤ · <span id="footer-name"></span></p>
-</footer>
+<footer><p>صُنع بـ ❤ &nbsp;·&nbsp; <span id="footer-name">Abdullelah Moqbail</span></p></footer>
 
-<!-- ═══════════ ADMIN PANEL ═══════════ -->
+<!-- ADMIN -->
 <div id="admin-panel">
-  <div class="admin-inner">
-    <div class="admin-header">
-      <h2>⚙ لوحة التحكم</h2>
-      <button class="admin-close" onclick="closeAdmin()">✕</button>
-    </div>
-
-    <div class="admin-tabs">
-      <button class="tab-btn active" onclick="switchTab('profile')">الملف الشخصي</button>
-      <button class="tab-btn" onclick="switchTab('certs')">الشهادات</button>
-      <button class="tab-btn" onclick="switchTab('skills')">المهارات</button>
-      <button class="tab-btn" onclick="switchTab('experience')">الخبرات</button>
-      <button class="tab-btn" onclick="switchTab('contact')">التواصل</button>
-    </div>
-
-    <!-- PROFILE TAB -->
-    <div class="tab-content active" id="tab-profile">
-      <div class="form-row">
-        <div class="form-group">
-          <label>الاسم الكامل</label>
-          <input type="text" id="f-name" placeholder="محمد عبدالله الغامدي">
-        </div>
-        <div class="form-group">
-          <label>المسمى الوظيفي / التخصص</label>
-          <input type="text" id="f-title" placeholder="مطوّر برمجيات | هندسة حاسب">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>الجامعة</label>
-          <input type="text" id="f-uni" placeholder="جامعة الملك عبدالعزيز">
-        </div>
-        <div class="form-group">
-          <label>التخصص الأكاديمي</label>
-          <input type="text" id="f-major" placeholder="هندسة الحاسب والمعلومات">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>المعدل التراكمي (GPA)</label>
-          <input type="number" id="f-gpa" step="0.01" min="0" max="5" placeholder="4.75">
-        </div>
-        <div class="form-group">
-          <label>سنة التخرج</label>
-          <input type="text" id="f-grad" placeholder="2024">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>سنوات الخبرة</label>
-          <input type="number" id="f-exp" min="0" placeholder="3">
-        </div>
-        <div class="form-group">
-          <label>الوسم (مثل: متاح للعمل)</label>
-          <input type="text" id="f-tag" placeholder="متاح للعمل">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>نبذة مختصرة (الهيرو)</label>
-        <textarea id="f-bio" placeholder="اكتب نبذة مختصرة عنك تظهر في الصفحة الرئيسية..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>عني (تفصيلي)</label>
-        <textarea id="f-about" placeholder="اكتب عن نفسك بشكل أكثر تفصيلاً..."></textarea>
-      </div>
-      <button class="save-btn" onclick="saveProfile()">حفظ الملف الشخصي</button>
-    </div>
-
-    <!-- CERTS TAB -->
-    <div class="tab-content" id="tab-certs">
-      <div class="item-list" id="cert-list"></div>
-      <hr class="divider">
-      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة شهادة جديدة</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>اسم الشهادة</label>
-          <input type="text" id="c-name" placeholder="AWS Solutions Architect">
-        </div>
-        <div class="form-group">
-          <label>الجهة المانحة</label>
-          <input type="text" id="c-org" placeholder="Amazon Web Services">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>التاريخ</label>
-          <input type="text" id="c-date" placeholder="يناير 2024">
-        </div>
-        <div class="form-group">
-          <label>أيقونة (إيموجي)</label>
-          <input type="text" id="c-icon" placeholder="☁️">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>رابط الشهادة (اختياري)</label>
-        <input type="text" id="c-link" placeholder="https://...">
-      </div>
-      <button class="save-btn" onclick="addCert()">إضافة الشهادة</button>
-    </div>
-
-    <!-- SKILLS TAB -->
-    <div class="tab-content" id="tab-skills">
-      <div class="item-list" id="skill-list"></div>
-      <hr class="divider">
-      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة مهارة</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>اسم المهارة</label>
-          <input type="text" id="s-name" placeholder="Python">
-        </div>
-        <div class="form-group">
-          <label>المستوى: <span id="s-pct-label">80</span>%</label>
-          <input type="range" id="s-pct" min="10" max="100" value="80"
-            oninput="document.getElementById('s-pct-label').textContent=this.value">
-        </div>
-      </div>
-      <button class="save-btn" onclick="addSkill()">إضافة المهارة</button>
-    </div>
-
-    <!-- EXPERIENCE TAB -->
-    <div class="tab-content" id="tab-experience">
-      <div class="item-list" id="exp-list"></div>
-      <hr class="divider">
-      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة خبرة</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>المسمى الوظيفي</label>
-          <input type="text" id="e-title" placeholder="مهندس برمجيات">
-        </div>
-        <div class="form-group">
-          <label>الشركة / الجهة</label>
-          <input type="text" id="e-org" placeholder="شركة أرامكو">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>من</label>
-          <input type="text" id="e-from" placeholder="يناير 2022">
-        </div>
-        <div class="form-group">
-          <label>إلى</label>
-          <input type="text" id="e-to" placeholder="حتى الآن">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>وصف المهام</label>
-        <textarea id="e-desc" placeholder="اكتب وصفاً مختصراً لمهامك وإنجازاتك..."></textarea>
-      </div>
-      <button class="save-btn" onclick="addExp()">إضافة الخبرة</button>
-    </div>
-
-    <!-- CONTACT TAB -->
-    <div class="tab-content" id="tab-contact">
-      <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;">أضف وسائل التواصل التي تريد إظهارها</p>
-      <div class="item-list" id="contact-list"></div>
-      <hr class="divider">
-      <h3 style="margin-bottom:1rem;font-size:1rem;">إضافة وسيلة تواصل</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>النوع</label>
-          <select id="ct-type">
-            <option value="email">📧 البريد الإلكتروني</option>
-            <option value="phone">📱 الجوال</option>
-            <option value="linkedin">💼 LinkedIn</option>
-            <option value="github">💻 GitHub</option>
-            <option value="twitter">🐦 X (تويتر)</option>
-            <option value="other">🔗 أخرى</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>أيقونة (إيموجي)</label>
-          <input type="text" id="ct-icon" placeholder="📧">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>التسمية</label>
-          <input type="text" id="ct-label" placeholder="البريد الإلكتروني">
-        </div>
-        <div class="form-group">
-          <label>القيمة / الرابط</label>
-          <input type="text" id="ct-val" placeholder="name@email.com">
-        </div>
-      </div>
-      <button class="save-btn" onclick="addContact()">إضافة</button>
-    </div>
-
+ <div class="admin-inner">
+  <div class="admin-header">
+    <h2>⚙ لوحة التحكم</h2>
+    <button class="admin-close" onclick="closeAdmin()">✕</button>
   </div>
+  <div class="admin-tabs">
+    <button class="tab-btn active" onclick="switchTab('profile',this)">الملف الشخصي</button>
+    <button class="tab-btn"        onclick="switchTab('certs',this)">الشهادات</button>
+    <button class="tab-btn"        onclick="switchTab('skills',this)">المهارات</button>
+    <button class="tab-btn"        onclick="switchTab('experience',this)">الخبرات</button>
+    <button class="tab-btn"        onclick="switchTab('contact',this)">التواصل</button>
+    <button class="tab-btn"        onclick="switchTab('settings',this)">⚙ إعدادات</button>
+  </div>
+
+  <div class="tab-content active" id="tab-profile">
+    <div class="form-row">
+      <div class="form-group"><label>الاسم بالعربي</label><input id="f-name-ar" placeholder="عبدالإله محمد مقبل"></div>
+      <div class="form-group"><label>Name in English</label><input id="f-name-en" placeholder="Abdullelah Mohammed Moqbail"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>المسمى بالعربي</label><input id="f-title-ar" placeholder="طالب تقنية معلومات"></div>
+      <div class="form-group"><label>Title in English</label><input id="f-title-en" placeholder="IT Student | KAU"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>الجامعة</label><input id="f-uni" placeholder="جامعة الملك عبدالعزيز"></div>
+      <div class="form-group"><label>التخصص</label><input id="f-major" placeholder="بكالوريوس تقنية المعلومات"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>المعدل التراكمي GPA</label><input type="number" id="f-gpa" step="0.01" min="0" max="5" placeholder="4.75"></div>
+      <div class="form-group"><label>سنة التخرج</label><input id="f-grad" placeholder="2026"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>سنوات الخبرة</label><input type="number" id="f-exp" min="0" placeholder="3"></div>
+      <div class="form-group"><label>الوسم عربي / English tag</label><input id="f-tag-ar" placeholder="متاح للعمل"><input id="f-tag-en" placeholder="Open to Work" style="margin-top:.4rem"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>نبذة مختصرة (عربي)</label><textarea id="f-bio-ar"></textarea></div>
+      <div class="form-group"><label>Short Bio (English)</label><textarea id="f-bio-en"></textarea></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>عني - تفصيلي (عربي)</label><textarea id="f-about-ar"></textarea></div>
+      <div class="form-group"><label>About - Detail (English)</label><textarea id="f-about-en"></textarea></div>
+    </div>
+    <button class="save-btn" onclick="saveProfile()">حفظ الملف الشخصي</button>
+  </div>
+
+  <div class="tab-content" id="tab-certs">
+    <div class="item-list" id="cert-list"></div>
+    <hr class="divider">
+    <h3 style="margin-bottom:.9rem;font-size:.9rem;">➕ إضافة شهادة</h3>
+    <div class="form-row">
+      <div class="form-group"><label>اسم الشهادة</label><input id="c-name" placeholder="AWS Solutions Architect"></div>
+      <div class="form-group"><label>الجهة المانحة</label><input id="c-org" placeholder="Amazon Web Services"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>التاريخ</label><input id="c-date" placeholder="2024"></div>
+      <div class="form-group"><label>أيقونة</label><input id="c-icon" placeholder="☁️"></div>
+    </div>
+    <div class="form-group"><label>رابط الشهادة (اختياري)</label><input id="c-link" placeholder="https://..."></div>
+    <button class="save-btn" onclick="addCert()">إضافة الشهادة</button>
+  </div>
+
+  <div class="tab-content" id="tab-skills">
+    <div class="item-list" id="skill-list"></div>
+    <hr class="divider">
+    <h3 style="margin-bottom:.9rem;font-size:.9rem;">➕ إضافة مهارة</h3>
+    <div class="form-row">
+      <div class="form-group"><label>اسم المهارة</label><input id="s-name" placeholder="Python"></div>
+      <div class="form-group"><label>المستوى: <span id="s-pct-label">80</span>%</label>
+        <input type="range" id="s-pct" min="10" max="100" value="80" oninput="document.getElementById('s-pct-label').textContent=this.value">
+      </div>
+    </div>
+    <button class="save-btn" onclick="addSkill()">إضافة المهارة</button>
+  </div>
+
+  <div class="tab-content" id="tab-experience">
+    <div class="item-list" id="exp-list"></div>
+    <hr class="divider">
+    <h3 style="margin-bottom:.9rem;font-size:.9rem;">➕ إضافة خبرة</h3>
+    <div class="form-row">
+      <div class="form-group"><label>المسمى الوظيفي</label><input id="e-title" placeholder="مهندس برمجيات"></div>
+      <div class="form-group"><label>الشركة / الجهة</label><input id="e-org" placeholder="أرامكو"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>من</label><input id="e-from" placeholder="يناير 2022"></div>
+      <div class="form-group"><label>إلى</label><input id="e-to" placeholder="حتى الآن"></div>
+    </div>
+    <div class="form-group"><label>وصف المهام</label><textarea id="e-desc"></textarea></div>
+    <button class="save-btn" onclick="addExp()">إضافة الخبرة</button>
+  </div>
+
+  <div class="tab-content" id="tab-contact">
+    <div class="item-list" id="contact-list"></div>
+    <hr class="divider">
+    <h3 style="margin-bottom:.9rem;font-size:.9rem;">➕ إضافة وسيلة تواصل</h3>
+    <div class="form-row">
+      <div class="form-group"><label>النوع</label>
+        <select id="ct-type">
+          <option value="email">📧 البريد الإلكتروني</option>
+          <option value="phone">📱 الجوال</option>
+          <option value="linkedin">💼 LinkedIn</option>
+          <option value="github">💻 GitHub</option>
+          <option value="twitter">🐦 X / Twitter</option>
+          <option value="other">🔗 أخرى</option>
+        </select>
+      </div>
+      <div class="form-group"><label>أيقونة</label><input id="ct-icon" placeholder="📧"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>التسمية</label><input id="ct-label" placeholder="البريد الإلكتروني"></div>
+      <div class="form-group"><label>القيمة / الرابط</label><input id="ct-val" placeholder="name@email.com"></div>
+    </div>
+    <button class="save-btn" onclick="addContact()">إضافة</button>
+  </div>
+
+  <div class="tab-content" id="tab-settings">
+    <h3 style="margin-bottom:1.1rem;font-size:.9rem;color:var(--gold);">⚙ إعدادات الموقع</h3>
+    <div style="display:flex;flex-direction:column;gap:.85rem;margin-bottom:1.4rem;">
+      <div class="info-row">
+        <div><strong style="font-size:.86rem;">الوضع الافتراضي</strong><p style="font-size:.74rem;color:var(--muted)">عند فتح الموقع</p></div>
+        <select id="set-theme" style="width:auto;padding:.3rem .65rem;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;font-family:inherit;font-size:.82rem;">
+          <option value="dark">🌙 داكن</option><option value="light">☀️ فاتح</option>
+        </select>
+      </div>
+      <div class="info-row">
+        <div><strong style="font-size:.86rem;">اللغة الافتراضية</strong><p style="font-size:.74rem;color:var(--muted)">عند فتح الموقع</p></div>
+        <select id="set-lang" style="width:auto;padding:.3rem .65rem;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;font-family:inherit;font-size:.82rem;">
+          <option value="ar">🇸🇦 العربية</option><option value="en">🇬🇧 English</option>
+        </select>
+      </div>
+    </div>
+    <button class="save-btn" onclick="saveSettings()">حفظ الإعدادات</button>
+    <hr class="divider">
+    <div class="reset-row">
+      <div><strong style="font-size:.84rem;">إعادة تعيين جميع البيانات</strong><p>يعيد البيانات لبيانات السيرة الذاتية الأصلية</p></div>
+      <button class="reset-btn" onclick="resetAll()">إعادة تعيين</button>
+    </div>
+  </div>
+
+ </div>
 </div>
 
 <script>
-// ─── DATA STORE ───
-const ICONS = { email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:'🐦', other:'🔗' };
-const ICON_LABELS = { email:'البريد الإلكتروني', phone:'الجوال', linkedin:'LinkedIn', github:'GitHub', twitter:'X (تويتر)', other:'أخرى' };
+const SEED={
+  profile:{
+    nameAr:'عبدالإله محمد مقبل',nameEn:'Abdullelah Mohammed Moqbail',
+    titleAr:'طالب تقنية معلومات | جامعة الملك عبدالعزيز',
+    titleEn:'Information Technology Student | King Abdulaziz University',
+    uni:'جامعة الملك عبدالعزيز (KAU) — جدة، المملكة العربية السعودية',
+    major:'بكالوريوس تقنية المعلومات',
+    gpa:'',grad:'2026',exp:'3',
+    tagAr:'متاح للعمل',tagEn:'Open to Work',
+    bioAr:'طالب متخصص في تقنية المعلومات بجامعة الملك عبدالعزيز، أمتلك أساساً متيناً في هندسة البرمجيات وتصميم قواعد البيانات. لديّ خبرة عملية في تطوير حلول تقنية وأبحث عن فرصة للمساهمة في بيئة احترافية.',
+    bioEn:'Dedicated Information Technology student at KAU with a strong foundation in software engineering and database design. Hands-on experience developing practical tech solutions. Eager to contribute in a collaborative environment.',
+    aboutAr:'طالب مخلص في تقنية المعلومات بجامعة الملك عبدالعزيز بجدة. أمتلك أساساً متيناً في هندسة البرمجيات وتصميم قواعد البيانات وحل مشكلات تقنية المعلومات. خبرة عملية في تطوير حلول تقنية عملية ونماذج أولية. أسعى للانضمام إلى بيئة تعاونية لتوظيف معرفتي الأكاديمية.',
+    aboutEn:'Dedicated Information Technology student at King Abdulaziz University, Jeddah. Strong foundation in software engineering, database design, and IT troubleshooting. Hands-on experience developing practical tech solutions. Eager to contribute to organizational goals in a collaborative professional environment.'
+  },
+  certs:[
+    {name:'Data Analysis',org:'King Abdulaziz University',date:'2024',icon:'📊',link:''},
+    {name:'Blockchain Technology and Vision 2030',org:'King Abdulaziz University',date:'2024',icon:'⛓️',link:''},
+    {name:'Building Your Personal Brand',org:'King Abdulaziz University',date:'2024',icon:'🌟',link:''},
+    {name:'How Does a Student Innovate?',org:'King Abdulaziz University',date:'2024',icon:'💡',link:''},
+    {name:'Certificate of Excellence',org:'MARN Platform (Amazon Operations)',date:'2026',icon:'🏆',link:''},
+  ],
+  skills:[
+    {name:'Java',pct:80},{name:'Python',pct:75},
+    {name:'MySQL & Database Design',pct:78},{name:'OOP',pct:76},
+    {name:'UI/UX Prototyping',pct:70},{name:'PC Hardware Optimization',pct:72},
+    {name:'Data Analysis',pct:72},{name:'Blockchain',pct:65},
+    {name:'Time Management',pct:90},{name:'Problem Solving',pct:85},
+    {name:'Client Communication',pct:82},{name:'Teamwork',pct:92},
+  ],
+  exps:[
+    {title:'Logistics & Operations Associate',org:'MARN Platform (Amazon Operations) — جدة',from:'مايو 2025',to:'مارس 2026',
+     desc:'استخدام الأجهزة الذكية وتطبيقات المسح وتقنية الباركود لفرز المنتجات وتتبعها. تطبيق منهجيات "5S". إدارة تعبئة الشحنات وتحميلها وتفريغها. حصل على شهادة تميز لأداء العمل المتميز.'},
+    {title:'Event Organizer & Security Guard',org:'SELLA Security Guards Company — موسم رمضان',from:'مارس 2024',to:'مارس 2024',
+     desc:'تنسيق التحكم في الحشود وضمان تجربة آمنة وسلسة لعدد كبير من الحضور والسياح. إظهار مهارات تواصل قوية في بيئة سريعة الوتيرة.'},
+    {title:'Event Organizer & Sales Marketer',org:'Over Dose Coffee — Aljawhara Event',from:'أكتوبر 2023',to:'أكتوبر 2023',
+     desc:'إدارة تسويق المنتجات وتنظيم البضائع وعلاقات العملاء. التعاون مع الفريق لتقديم خدمة عملاء ممتازة تحت الضغط.'},
+  ],
+  contacts:[
+    {type:'email',icon:'📧',label:'البريد الإلكتروني',val:'amoqbil0833@gmail.com'},
+    {type:'phone',icon:'📱',label:'الجوال',val:'+966546850833'},
+  ],
+  settings:{theme:'dark',lang:'ar'}
+};
 
-function load(key, def) {
-  try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
-}
-function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+const LS={
+  get:(k,d)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch{return d;}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+};
 
-let profile = load('cv_profile', {
-  name:'', title:'', bio:'', about:'', uni:'', major:'', gpa:'', grad:'', exp:'', tag:'متاح للعمل'
-});
-let certs    = load('cv_certs', []);
-let skills   = load('cv_skills', []);
-let exps     = load('cv_exps', []);
-let contacts = load('cv_contacts', []);
-
-// ─── RENDER PUBLIC ───
-function renderAll() {
-  renderProfile();
-  renderCerts();
-  renderSkills();
-  renderExps();
-  renderContacts();
-}
-
-function renderProfile() {
-  const p = profile;
-  document.getElementById('hero-name').textContent    = p.name  || 'اسمك الكامل';
-  document.getElementById('hero-title').textContent   = p.title || 'المسمى الوظيفي | التخصص';
-  document.getElementById('hero-bio').textContent     = p.bio   || 'أضف سيرتك الذاتية من لوحة التحكم.';
-  document.getElementById('hero-tag').textContent     = p.tag   || 'متاح للعمل';
-  document.getElementById('nav-name-label').textContent = p.name || 'Portfolio';
-  document.getElementById('footer-name').textContent  = p.name  || '';
-  document.getElementById('stat-gpa').textContent     = p.gpa   || '0.00';
-  document.getElementById('stat-grad').textContent    = p.grad  || '----';
-  document.getElementById('stat-certs').textContent   = certs.length;
-  document.getElementById('stat-exp').textContent     = p.exp   || '0';
-  document.getElementById('about-text').textContent   = p.about || '';
-  document.getElementById('info-major').textContent   = p.major || '—';
-  document.getElementById('info-uni').textContent     = p.uni   || '—';
-  document.getElementById('info-grad2').textContent   = p.grad  || '—';
-  document.getElementById('info-gpa2').textContent    = p.gpa   || '—';
-}
-
-function renderCerts() {
-  const g = document.getElementById('certs-grid');
-  if (!certs.length) {
-    g.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:3rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف شهادات بعد — افتح لوحة التحكم لإضافتها</div>`;
-    return;
+function initData(){
+  if(!localStorage.getItem('cv_v2_seeded')){
+    LS.set('cv_profile',SEED.profile); LS.set('cv_certs',SEED.certs);
+    LS.set('cv_skills',SEED.skills);   LS.set('cv_exps',SEED.exps);
+    LS.set('cv_contacts',SEED.contacts); LS.set('cv_settings',SEED.settings);
+    localStorage.setItem('cv_v2_seeded','1');
   }
-  g.innerHTML = certs.map((c,i) => `
-    <div class="cert-card" ${c.link ? `onclick="window.open('${c.link}','_blank')" style="cursor:pointer"` : ''}>
-      <div class="cert-icon">${c.icon || '🏆'}</div>
+}
+initData();
+
+let profile  = LS.get('cv_profile',SEED.profile);
+let certs    = LS.get('cv_certs',SEED.certs);
+let skills   = LS.get('cv_skills',SEED.skills);
+let exps     = LS.get('cv_exps',SEED.exps);
+let contacts = LS.get('cv_contacts',SEED.contacts);
+let settings = LS.get('cv_settings',SEED.settings);
+
+let curTheme=settings.theme||'dark', curLang=settings.lang||'ar';
+
+function applyTheme(t){
+  curTheme=t;
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('theme-btn').textContent=t==='dark'?'☀️':'🌙';
+}
+function applyLang(l){
+  curLang=l;
+  const h=document.documentElement;
+  h.setAttribute('data-lang',l); h.setAttribute('lang',l); h.setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.getElementById('lang-btn').textContent=l==='ar'?'EN':'ع';
+  document.querySelectorAll('.i18n[data-ar][data-en]').forEach(el=>{el.textContent=el.getAttribute('data-'+l);});
+  document.querySelectorAll('.nav-lnk[data-ar][data-en]').forEach(el=>{el.textContent=el.getAttribute('data-'+l);});
+  renderAll();
+}
+function toggleTheme(){applyTheme(curTheme==='dark'?'light':'dark');}
+function toggleLang(){applyLang(curLang==='ar'?'en':'ar');}
+
+function T(ar,en){return curLang==='ar'?ar:en;}
+
+function renderAll(){renderProfile();renderCerts();renderSkills();renderExps();renderContacts();}
+
+function renderProfile(){
+  const p=profile;
+  document.getElementById('hero-name').textContent  = T(p.nameAr,p.nameEn)||'';
+  document.getElementById('hero-title').textContent = T(p.titleAr,p.titleEn)||'';
+  document.getElementById('hero-bio').textContent   = T(p.bioAr,p.bioEn)||'';
+  document.getElementById('hero-tag').textContent   = T(p.tagAr,p.tagEn)||'';
+  document.getElementById('footer-name').textContent= T(p.nameAr,p.nameEn)||'';
+  document.getElementById('stat-gpa').textContent   = p.gpa||'—';
+  document.getElementById('stat-grad').textContent  = p.grad||'—';
+  document.getElementById('stat-exp').textContent   = p.exp||'—';
+  document.getElementById('stat-certs').textContent = certs.length;
+  document.getElementById('about-text').textContent = T(p.aboutAr,p.aboutEn)||'';
+  document.getElementById('info-major').textContent = p.major||'—';
+  document.getElementById('info-uni').textContent   = p.uni||'—';
+  document.getElementById('info-grad2').textContent = p.grad||'—';
+  document.getElementById('info-gpa2').textContent  = p.gpa||'—';
+}
+
+function renderCerts(){
+  const g=document.getElementById('certs-grid');
+  if(!certs.length){g.innerHTML='<div class="empty-state">لم تُضَف شهادات بعد</div>';return;}
+  g.innerHTML=certs.map(c=>`
+    <div class="cert-card" ${c.link?`onclick="window.open('${c.link}','_blank')" style="cursor:pointer"`:''}>
+      <div class="cert-icon">${c.icon||'🏆'}</div>
       <div class="cert-name">${c.name}</div>
       <div class="cert-org">${c.org}</div>
       <div class="cert-meta">
         <span class="cert-badge gold">${c.date}</span>
-        ${c.link ? '<span class="cert-badge">🔗 رابط</span>' : ''}
+        ${c.link?'<span class="cert-badge">🔗</span>':''}
       </div>
     </div>`).join('');
-  document.getElementById('stat-certs').textContent = certs.length;
+  document.getElementById('stat-certs').textContent=certs.length;
 }
 
-function renderSkills() {
-  const g = document.getElementById('skills-grid');
-  if (!skills.length) {
-    g.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف مهارات بعد</div>`;
-    return;
-  }
-  g.innerHTML = skills.map(s => `
+function renderSkills(){
+  const g=document.getElementById('skills-grid');
+  if(!skills.length){g.innerHTML='<div class="empty-state">لم تُضَف مهارات بعد</div>';return;}
+  g.innerHTML=skills.map(s=>`
     <div class="skill-item">
-      <div class="skill-header">
-        <span class="skill-name">${s.name}</span>
-        <span class="skill-pct">${s.pct}%</span>
-      </div>
+      <div class="skill-header"><span class="skill-name">${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
       <div class="skill-bar"><div class="skill-fill" style="width:${s.pct}%"></div></div>
     </div>`).join('');
 }
 
-function renderExps() {
-  const t = document.getElementById('timeline');
-  if (!exps.length) {
-    t.innerHTML = `<div style="text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف خبرات بعد</div>`;
-    return;
-  }
-  t.innerHTML = exps.map(e => `
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+function renderExps(){
+  const tl=document.getElementById('timeline');
+  if(!exps.length){tl.innerHTML='<div class="empty-state">لم تُضَف خبرات بعد</div>';return;}
+  tl.innerHTML=exps.map(e=>`
+    <div class="tl-item"><div class="tl-dot"></div>
       <div class="tl-card">
         <div class="tl-title">${e.title}</div>
         <div class="tl-org">${e.org}</div>
@@ -747,87 +530,58 @@ function renderExps() {
     </div>`).join('');
 }
 
-function renderContacts() {
-  const g = document.getElementById('contact-grid');
-  if (!contacts.length) {
-    g.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:2rem;border:1px dashed var(--border);border-radius:16px;">لم تُضَف معلومات تواصل بعد</div>`;
-    return;
-  }
-  g.innerHTML = contacts.map(c => {
-    const href = c.type === 'email' ? `mailto:${c.val}` :
-                 c.type === 'phone' ? `tel:${c.val}` : c.val;
-    return `<a class="contact-card" href="${href}" target="_blank" rel="noopener">
-      <span class="contact-icon">${c.icon || ICONS[c.type] || '🔗'}</span>
-      <div>
-        <div class="contact-label">${c.label || ICON_LABELS[c.type]}</div>
-        <div class="contact-val">${c.val}</div>
-      </div>
+const CI={email:'📧',phone:'📱',linkedin:'💼',github:'💻',twitter:'🐦',other:'🔗'};
+const CL={email:'البريد الإلكتروني',phone:'الجوال',linkedin:'LinkedIn',github:'GitHub',twitter:'X / Twitter',other:'تواصل'};
+
+function renderContacts(){
+  const g=document.getElementById('contact-grid');
+  if(!contacts.length){g.innerHTML='<div class="empty-state">لم تُضَف معلومات تواصل بعد</div>';return;}
+  g.innerHTML=contacts.map(c=>{
+    const hr=c.type==='email'?`mailto:${c.val}`:c.type==='phone'?`tel:${c.val}`:c.val;
+    return `<a class="contact-card" href="${hr}" target="_blank" rel="noopener">
+      <span class="contact-icon">${c.icon||CI[c.type]||'🔗'}</span>
+      <div><div class="contact-label">${c.label||CL[c.type]}</div><div class="contact-val">${c.val}</div></div>
     </a>`;
   }).join('');
 }
 
-// ─── ADMIN LISTS ───
-function renderAdminLists() {
-  // Certs
-  const cl = document.getElementById('cert-list');
-  cl.innerHTML = certs.length ? certs.map((c,i) => `
-    <div class="item-row">
-      <div class="item-row-info">
-        <strong>${c.icon || '🏆'} ${c.name}</strong>
-        <small>${c.org} · ${c.date}</small>
-      </div>
-      <button class="del-btn" onclick="delCert(${i})">حذف</button>
-    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد شهادات</p>';
-
-  // Skills
-  const sl = document.getElementById('skill-list');
-  sl.innerHTML = skills.length ? skills.map((s,i) => `
-    <div class="item-row">
-      <div class="item-row-info">
-        <strong>${s.name}</strong><small>${s.pct}%</small>
-      </div>
-      <button class="del-btn" onclick="delSkill(${i})">حذف</button>
-    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد مهارات</p>';
-
-  // Exp
-  const el = document.getElementById('exp-list');
-  el.innerHTML = exps.length ? exps.map((e,i) => `
-    <div class="item-row">
-      <div class="item-row-info">
-        <strong>${e.title}</strong><small>${e.org} · ${e.from} — ${e.to}</small>
-      </div>
-      <button class="del-btn" onclick="delExp(${i})">حذف</button>
-    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد خبرات</p>';
-
-  // Contact
-  const ctl = document.getElementById('contact-list');
-  ctl.innerHTML = contacts.length ? contacts.map((c,i) => `
-    <div class="item-row">
-      <div class="item-row-info">
-        <strong>${c.icon || ICONS[c.type]} ${c.label || ICON_LABELS[c.type]}</strong>
-        <small>${c.val}</small>
-      </div>
-      <button class="del-btn" onclick="delContact(${i})">حذف</button>
-    </div>`).join('') : '<p style="color:var(--muted);font-size:.85rem;">لا توجد معلومات</p>';
+function renderAdminLists(){
+  document.getElementById('cert-list').innerHTML=certs.length
+    ?certs.map((c,i)=>`<div class="item-row"><div class="item-row-info"><strong>${c.icon} ${c.name}</strong><small>${c.org} · ${c.date}</small></div><button class="del-btn" onclick="delI('certs',${i})">حذف</button></div>`).join('')
+    :'<p style="color:var(--muted);font-size:.8rem">لا توجد شهادات</p>';
+  document.getElementById('skill-list').innerHTML=skills.length
+    ?skills.map((s,i)=>`<div class="item-row"><div class="item-row-info"><strong>${s.name}</strong><small>${s.pct}%</small></div><button class="del-btn" onclick="delI('skills',${i})">حذف</button></div>`).join('')
+    :'<p style="color:var(--muted);font-size:.8rem">لا توجد مهارات</p>';
+  document.getElementById('exp-list').innerHTML=exps.length
+    ?exps.map((e,i)=>`<div class="item-row"><div class="item-row-info"><strong>${e.title}</strong><small>${e.org} · ${e.from}—${e.to}</small></div><button class="del-btn" onclick="delI('exps',${i})">حذف</button></div>`).join('')
+    :'<p style="color:var(--muted);font-size:.8rem">لا توجد خبرات</p>';
+  document.getElementById('contact-list').innerHTML=contacts.length
+    ?contacts.map((c,i)=>`<div class="item-row"><div class="item-row-info"><strong>${c.icon||CI[c.type]} ${c.label}</strong><small>${c.val}</small></div><button class="del-btn" onclick="delI('contacts',${i})">حذف</button></div>`).join('')
+    :'<p style="color:var(--muted);font-size:.8rem">لا يوجد</p>';
 }
 
-// ─── PROFILE FORM FILL ───
-function fillProfileForm() {
-  document.getElementById('f-name').value  = profile.name  || '';
-  document.getElementById('f-title').value = profile.title || '';
-  document.getElementById('f-bio').value   = profile.bio   || '';
-  document.getElementById('f-about').value = profile.about || '';
-  document.getElementById('f-uni').value   = profile.uni   || '';
-  document.getElementById('f-major').value = profile.major || '';
-  document.getElementById('f-gpa').value   = profile.gpa   || '';
-  document.getElementById('f-grad').value  = profile.grad  || '';
-  document.getElementById('f-exp').value   = profile.exp   || '';
-  document.getElementById('f-tag').value   = profile.tag   || '';
+const MAP={certs:[certs,'cv_certs'],skills:[skills,'cv_skills'],exps:[exps,'cv_exps'],contacts:[contacts,'cv_contacts']};
+function delI(arr,i){
+  const ref={certs,skills,exps,contacts};
+  const key={certs:'cv_certs',skills:'cv_skills',exps:'cv_exps',contacts:'cv_contacts'};
+  ref[arr].splice(i,1); LS.set(key[arr],ref[arr]);
+  renderAll();renderAdminLists();showToast('تم الحذف ✓');
 }
 
-// ─── SAVE ACTIONS ───
+function fillProfileForm(){
+  const p=profile;
+  const F=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};
+  F('f-name-ar',p.nameAr);F('f-name-en',p.nameEn);
+  F('f-title-ar',p.titleAr);F('f-title-en',p.titleEn);
+  F('f-uni',p.uni);F('f-major',p.major);F('f-gpa',p.gpa);F('f-grad',p.grad);F('f-exp',p.exp);
+  F('f-tag-ar',p.tagAr);F('f-tag-en',p.tagEn);
+  F('f-bio-ar',p.bioAr);F('f-bio-en',p.bioEn);
+  F('f-about-ar',p.aboutAr);F('f-about-en',p.aboutEn);
+}
+
 async function saveProfile(){
-  const bioAr = document.getElementById('f-bio-ar').value.trim();
+const G=id=>document.getElementById(id).value.trim();
+const bioAr = document.getElementById('f-bio-ar').value.trim();
 const bioEn = document.getElementById('f-bio-en').value.trim();
 
 const aboutAr = document.getElementById('f-about-ar').value.trim();
@@ -854,120 +608,114 @@ if(aboutAr && !aboutEn){
 if(aboutEn && !aboutAr){
    finalAboutAr = await translateText(aboutEn,"ar");
 }
-  profile = {
-    name:  document.getElementById('f-name').value.trim(),
-    title: document.getElementById('f-title').value.trim(),
-    bio:   document.getElementById('f-bio').value.trim(),
-    about: document.getElementById('f-about').value.trim(),
-    uni:   document.getElementById('f-uni').value.trim(),
-    major: document.getElementById('f-major').value.trim(),
-    gpa:   document.getElementById('f-gpa').value.trim(),
-    grad:  document.getElementById('f-grad').value.trim(),
-    exp:   document.getElementById('f-exp').value.trim(),
-    tag:   document.getElementById('f-tag').value.trim(),
-  };
-  save('cv_profile', profile);
-  renderProfile();
-  toast();
+  profile={
+    nameAr:G('f-name-ar'),
+    nameEn:G('f-name-en'),
+    titleAr:G('f-title-ar'),
+    titleEn:G('f-title-en'),
+    uni:G('f-uni'),
+    major:G('f-major'),
+    gpa:G('f-gpa'),
+    grad:G('f-grad'),
+    exp:G('f-exp'),
+    tagAr:G('f-tag-ar'),
+    tagEn:G('f-tag-en'),
+    bioAr:finalBioAr,
+    bioEn:finalBioEn,
+    aboutAr:finalAboutAr,
+    aboutEn:finalAboutEn,
+  LS.set('cv_profile',profile);renderAll();showToast('✓ تم حفظ الملف الشخصي');
 }
 
-function addCert() {
-  const name = document.getElementById('c-name').value.trim();
-  const org  = document.getElementById('c-org').value.trim();
-  if (!name || !org) return alert('يرجى إدخال اسم الشهادة والجهة المانحة');
-  certs.push({
-    name, org,
-    date: document.getElementById('c-date').value.trim() || '—',
-    icon: document.getElementById('c-icon').value.trim() || '🏆',
-    link: document.getElementById('c-link').value.trim(),
-  });
-  save('cv_certs', certs);
-  ['c-name','c-org','c-date','c-icon','c-link'].forEach(id => document.getElementById(id).value='');
-  renderCerts(); renderAdminLists(); toast();
+function addCert(){
+  const name=document.getElementById('c-name').value.trim();
+  const org=document.getElementById('c-org').value.trim();
+  if(!name||!org){alert('أدخل اسم الشهادة والجهة');return;}
+  certs.push({name,org,date:document.getElementById('c-date').value.trim()||'—',
+    icon:document.getElementById('c-icon').value.trim()||'🏆',
+    link:document.getElementById('c-link').value.trim()});
+  LS.set('cv_certs',certs);
+  ['c-name','c-org','c-date','c-icon','c-link'].forEach(id=>document.getElementById(id).value='');
+  renderCerts();renderAdminLists();showToast('✓ تمت إضافة الشهادة');
 }
 
-function addSkill() {
-  const name = document.getElementById('s-name').value.trim();
-  if (!name) return alert('أدخل اسم المهارة');
-  skills.push({ name, pct: document.getElementById('s-pct').value });
-  save('cv_skills', skills);
-  document.getElementById('s-name').value = '';
-  document.getElementById('s-pct').value = 80;
-  document.getElementById('s-pct-label').textContent = '80';
-  renderSkills(); renderAdminLists(); toast();
+function addSkill(){
+  const name=document.getElementById('s-name').value.trim();
+  if(!name){alert('أدخل اسم المهارة');return;}
+  skills.push({name,pct:+document.getElementById('s-pct').value});
+  LS.set('cv_skills',skills);
+  document.getElementById('s-name').value='';
+  document.getElementById('s-pct').value=80;
+  document.getElementById('s-pct-label').textContent='80';
+  renderSkills();renderAdminLists();showToast('✓ تمت إضافة المهارة');
 }
 
-function addExp() {
-  const title = document.getElementById('e-title').value.trim();
-  const org   = document.getElementById('e-org').value.trim();
-  if (!title || !org) return alert('أدخل المسمى والجهة');
-  exps.unshift({
-    title, org,
-    from: document.getElementById('e-from').value.trim() || '—',
-    to:   document.getElementById('e-to').value.trim()   || '—',
-    desc: document.getElementById('e-desc').value.trim(),
-  });
-  save('cv_exps', exps);
-  ['e-title','e-org','e-from','e-to','e-desc'].forEach(id => document.getElementById(id).value='');
-  renderExps(); renderAdminLists(); toast();
+function addExp(){
+  const title=document.getElementById('e-title').value.trim();
+  const org=document.getElementById('e-org').value.trim();
+  if(!title||!org){alert('أدخل المسمى والجهة');return;}
+  exps.unshift({title,org,from:document.getElementById('e-from').value.trim()||'—',
+    to:document.getElementById('e-to').value.trim()||'—',
+    desc:document.getElementById('e-desc').value.trim()});
+  LS.set('cv_exps',exps);
+  ['e-title','e-org','e-from','e-to','e-desc'].forEach(id=>document.getElementById(id).value='');
+  renderExps();renderAdminLists();showToast('✓ تمت إضافة الخبرة');
 }
 
-function addContact() {
-  const type  = document.getElementById('ct-type').value;
-  const val   = document.getElementById('ct-val').value.trim();
-  if (!val) return alert('أدخل القيمة');
-  contacts.push({
-    type,
-    icon:  document.getElementById('ct-icon').value.trim()  || ICONS[type],
-    label: document.getElementById('ct-label').value.trim() || ICON_LABELS[type],
-    val,
-  });
-  save('cv_contacts', contacts);
-  ['ct-icon','ct-label','ct-val'].forEach(id => document.getElementById(id).value='');
-  renderContacts(); renderAdminLists(); toast();
+function addContact(){
+  const val=document.getElementById('ct-val').value.trim();
+  if(!val){alert('أدخل القيمة');return;}
+  const type=document.getElementById('ct-type').value;
+  contacts.push({type,icon:document.getElementById('ct-icon').value.trim()||CI[type],
+    label:document.getElementById('ct-label').value.trim()||CL[type],val});
+  LS.set('cv_contacts',contacts);
+  ['ct-icon','ct-label','ct-val'].forEach(id=>document.getElementById(id).value='');
+  renderContacts();renderAdminLists();showToast('✓ تمت الإضافة');
 }
 
-function delCert(i)    { certs.splice(i,1);    save('cv_certs',certs);    renderCerts();    renderAdminLists(); toast('تم الحذف'); }
-function delSkill(i)   { skills.splice(i,1);   save('cv_skills',skills);  renderSkills();   renderAdminLists(); toast('تم الحذف'); }
-function delExp(i)     { exps.splice(i,1);     save('cv_exps',exps);      renderExps();     renderAdminLists(); toast('تم الحذف'); }
-function delContact(i) { contacts.splice(i,1); save('cv_contacts',contacts); renderContacts(); renderAdminLists(); toast('تم الحذف'); }
+function saveSettings(){
+  const th=document.getElementById('set-theme').value;
+  const lg=document.getElementById('set-lang').value;
+  settings={theme:th,lang:lg};
+  LS.set('cv_settings',settings);
+  applyTheme(th);applyLang(lg);
+  showToast('✓ تم حفظ الإعدادات');
+}
 
-// ─── UI ───
-function openAdmin() {
-  fillProfileForm();
-  renderAdminLists();
-  document.getElementById('admin-panel').style.display = 'block';
-  document.body.style.overflow = 'hidden';
+function resetAll(){
+  if(!confirm('سيتم حذف جميع التعديلات واستعادة البيانات الأصلية. متأكد؟'))return;
+  localStorage.clear();initData();
+  profile=LS.get('cv_profile',SEED.profile); certs=LS.get('cv_certs',SEED.certs);
+  skills=LS.get('cv_skills',SEED.skills);    exps=LS.get('cv_exps',SEED.exps);
+  contacts=LS.get('cv_contacts',SEED.contacts); settings=LS.get('cv_settings',SEED.settings);
+  applyTheme(settings.theme);applyLang(settings.lang);
+  fillProfileForm();renderAll();renderAdminLists();
+  showToast('✓ تمت إعادة التعيين');
 }
-function closeAdmin() {
-  document.getElementById('admin-panel').style.display = 'none';
-  document.body.style.overflow = '';
+
+function openAdmin(){
+  fillProfileForm();renderAdminLists();
+  document.getElementById('set-theme').value=settings.theme||'dark';
+  document.getElementById('set-lang').value=settings.lang||'ar';
+  document.getElementById('admin-panel').style.display='block';
+  document.body.style.overflow='hidden';
 }
-function switchTab(name) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+function closeAdmin(){
+  document.getElementById('admin-panel').style.display='none';
+  document.body.style.overflow='';
+}
+function switchTab(name,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
-function toast(msg='✓ تم الحفظ بنجاح') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2400);
 }
-
-// close admin on backdrop click
-document.getElementById('admin-panel').addEventListener('click', function(e){
-  if(e.target === this) closeAdmin();
-});
-
-// ESC key
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeAdmin(); });
-
-  const SECRET_PATH = "#am-admin-7x93k2";
-  if(location.hash === SECRET_PATH){
-    document.getElementById("adminBtn").style.display = "inline-block";
-
+  
 async function translateText(text,target){
 
   try{
@@ -985,8 +733,19 @@ async function translateText(text,target){
   }
 }
 
-// init
-renderAll();
+  
+
+document.getElementById('admin-panel').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin();});
+
+applyTheme(curTheme);
+applyLang(curLang);
+
+const SECRET_PATH = "#am-admin-7x93k2";
+
+if(location.hash === SECRET_PATH){
+    document.getElementById("adminBtn").style.display = "inline-block";
+}
 </script>
 </body>
 </html>
