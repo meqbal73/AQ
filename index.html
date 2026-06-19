@@ -348,7 +348,7 @@ let isEditMode = false;
 function checkSecretAccess() {
   if (location.hash === "#admin") {
     const pass = prompt("Enter Admin Password:");
-    if (pass === "1234") { 
+    if (pass === "008833") { 
       document.getElementById("edit-mode-btn").style.display = "inline-block";
       showToast("Admin access granted");
     } else {
@@ -362,7 +362,7 @@ function applyTheme(t) {
   settings.theme = t;
   LS.set('cv_settings', settings);
   document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('theme-btn').textContent = t === 'dark' ? 'L' : 'D';
+  document.getElementById('theme-btn').textContent = t === 'dark' ? 'light' : 'dark';
 }
 function toggleTheme() { applyTheme(settings.theme === 'dark' ? 'light' : 'dark'); }
 
