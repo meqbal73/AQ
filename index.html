@@ -178,8 +178,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
   <div class="nav-controls">
     <button class="ctrl-btn" id="lang-btn"  onclick="toggleLang()">EN</button>
     <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
-    <button class="ctrl-btn gold" id="adminBtn" onclick="openAdmin()" style="display:none">⚙ <span class="i18n" data-ar="تعديل" data-en="Edit">تعديل</span></button>
-  </div>
+    <button class="ctrl-btn gold" id="adminBtn" onclick="openAdmin()" style="display:none">⚙ <span class="i18n" data-ar="تعديل" data-en="Edit">تعديل</span></button>  </div>
 </nav>
 
 <div class="hero">
@@ -717,6 +716,24 @@ function switchTab(name,btn){
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
 }
+
+ async function translateText(text,target){
+
+  try{
+
+    const res = await fetch(
+      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${target}&dt=t&q=${encodeURIComponent(text)}`
+    );
+
+    const data = await res.json();
+
+    return data[0].map(x=>x[0]).join('');
+
+  }catch{
+    return text;
+  }
+
+}
 function showToast(msg){
   const el=document.getElementById('toast');
   el.textContent=msg;el.classList.add('show');
@@ -748,6 +765,11 @@ if(location.hash === SECRET_PATH){
 
 document.getElementById('admin-panel').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAdmin();});
+
+const SECRET_PATH = "#am-admin-7x93k2";
+if(location.hash === SECRET_PATH){
+  document.getElementById("adminBtn").style.display = "inline-block";
+}
 
 applyTheme(curTheme);
 applyLang(curLang);
