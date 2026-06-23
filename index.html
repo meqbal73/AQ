@@ -194,7 +194,6 @@ body.edit-mode .edit-only { display: inline-flex !important; }
   </ul>
   <div class="nav-controls">
     <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
-    <button class="ctrl-btn" id="edit-mode-btn" onclick="toggleEditMode()" style="display:none">✏️ Edit Mode</button>
   </div>
 </nav>
 
@@ -209,7 +208,7 @@ body.edit-mode .edit-only { display: inline-flex !important; }
       <div class="stat-box"><div class="stat-num" id="stat-gpa">—</div><div class="stat-label">GPA</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-grad">—</div><div class="stat-label">Grad Year</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-certs">0</div><div class="stat-label">Certs</div></div>
-      <div class="stat-box"><div class="stat-num" id="stat-exp">—</div><div class="stat-label">Yrs Exp</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-exp">0</div><div class="stat-label">Yrs Exp</div></div>
     </div>
     <div class="hero-actions">
       <!-- UPDATE THIS FILE NAME TO MATCH YOUR ACTUAL PDF -->
@@ -343,8 +342,7 @@ function initData() {
     LS.set('cv_skills', SEED.skills);   LS.set('cv_langs', SEED.langs);
     LS.set('cv_exps', SEED.exps);       LS.set('cv_contacts', SEED.contacts); 
     LS.set('cv_settings', SEED.settings);
-    localStorage.setItem('cv_v7_seeded', '1');
-  }
+    localStorage.setItem('cv_v8_seeded', '1');  }
 }
 initData();
 
