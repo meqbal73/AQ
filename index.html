@@ -52,7 +52,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
 .btn-primary{background:linear-gradient(135deg,var(--accent),#1a4fa0);color:#fff;padding:.68rem 1.7rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(45,108,223,0.4);border:none;cursor:pointer;}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,108,223,0.5);}
-.btn-outline{background:transparent;color:var(--text);padding:.68rem 1.7rem;border:1px solid var(--border);border-radius:10px;text-decoration:none;font-weight:600;font-size:.88rem;transition:all .2s;cursor:pointer;}
+.btn-outline{background:transparent;color:var(--text);padding:.68rem 1.7rem;border:1px solid var(--border);border-radius:10px;text-decoration:none;font-weight:600;font-size:.88rem;transition:all .2s;cursor:pointer;display:flex;align-items:center;gap:0.5rem;}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
 
 section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
@@ -84,13 +84,24 @@ section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
 .cert-badge{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:.16rem .6rem;border-radius:20px;font-size:.7rem;font-weight:600;}
 .cert-badge.gold{border-color:rgba(201,168,76,0.3);color:var(--gold);background:rgba(201,168,76,0.08);}
 
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:.95rem;}
-.skill-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.15rem;transition:var(--transition-theme);}
-.skill-header{display:flex;justify-content:space-between;margin-bottom:.5rem;}
-.skill-name{font-weight:600;font-size:.85rem;}
-.skill-pct{color:var(--gold);font-size:.8rem;font-weight:700;}
-.skill-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
-.skill-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width 1.2s ease;}
+/* New Skills Grid Styles */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;}
+.skill-cat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:var(--transition-theme);}
+.skill-cat-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,108,223,0.1);}
+.skill-cat-title{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.skill-cat-title::before{content:'';display:block;width:8px;height:8px;background:var(--accent);border-radius:50%;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.6rem;}
+.skill-tag{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:0.45rem 0.9rem;border-radius:30px;font-size:0.82rem;font-weight:600;transition:all 0.2s;}
+.skill-tag:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* Languages (Keep old bar style just for languages) */
+.langs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:.95rem;}
+.lang-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.15rem;transition:var(--transition-theme);}
+.lang-header{display:flex;justify-content:space-between;margin-bottom:.5rem;}
+.lang-name{font-weight:600;font-size:.85rem;}
+.lang-pct{color:var(--text);font-size:.75rem;}
+.lang-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.lang-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width 1.2s ease;}
 
 .timeline{position:relative;padding-left:2rem;}
 .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),transparent);}
@@ -190,7 +201,7 @@ body.edit-mode .edit-only { display: inline-flex !important; }
 <div class="hero">
   <div class="hero-bg"></div><div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-tag" id="hero-tag">Open to Work</div>
+    <div class="hero-tag" id="hero-tag">Seeking Summer Training 2026</div>
     <h1 id="hero-name">Abdullelah Mohammed Moqbail</h1>
     <p id="hero-title">Information Technology Student | King Abdulaziz University</p>
     <p id="hero-bio"></p>
@@ -198,11 +209,14 @@ body.edit-mode .edit-only { display: inline-flex !important; }
       <div class="stat-box"><div class="stat-num" id="stat-gpa">—</div><div class="stat-label">GPA</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-grad">—</div><div class="stat-label">Grad Year</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-certs">0</div><div class="stat-label">Certs</div></div>
-      <div class="stat-box"><div class="stat-num" id="stat-exp">2</div><div class="stat-label">Yrs Exp</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-exp">—</div><div class="stat-label">Yrs Exp</div></div>
     </div>
     <div class="hero-actions">
-      <a href="#certs" class="btn-primary">View Certificates</a>
-      <button class="btn-outline edit-only" onclick="editProfile()">✏️ Edit Profile Info</button>
+      <!-- UPDATE THIS FILE NAME TO MATCH YOUR ACTUAL PDF -->
+      <a href="Abdullelah_Moqbail_CV.pdf" download="Abdullelah_Moqbail_CV.pdf" class="btn-primary" style="background:linear-gradient(135deg, #1a4fa0, #113a77)">📥 Download CV</a>
+      <a href="https://github.com/meqbal73" target="_blank" class="btn-outline">💻 GitHub</a>
+      <a href="#certs" class="btn-outline">View Certificates</a>
+      <button class="btn-outline edit-only" onclick="editProfile()">✏️ Edit Profile</button>
     </div>
   </div>
 </div>
@@ -235,7 +249,7 @@ body.edit-mode .edit-only { display: inline-flex !important; }
 <section id="skills">
   <div class="section-header">
     <div class="section-label"><h2>Skills <span class="dot">•</span></h2></div>
-    <button class="btn-add edit-only" onclick="addSkill()">+ Add Skill</button>
+    <button class="btn-add edit-only" onclick="addSkill()">+ Add Skill Category</button>
   </div>
   <div class="skills-grid" id="skills-grid"></div>
 </section>
@@ -245,7 +259,7 @@ body.edit-mode .edit-only { display: inline-flex !important; }
     <div class="section-label"><h2>Languages <span class="dot">•</span></h2></div>
     <button class="btn-add edit-only" onclick="addLang()">+ Add Language</button>
   </div>
-  <div class="skills-grid" id="langs-grid"></div>
+  <div class="langs-grid" id="langs-grid"></div>
 </section>
 
 <section id="experience">
@@ -276,10 +290,10 @@ const SEED = {
     title: 'Information Technology Student | King Abdulaziz University',
     uni: 'King Abdulaziz University',
     major: 'Information Technology',
-    gpa: '4.54', grad: '2027', exp: '2',
-    tag: 'Open to Work',
-    bio: 'Dedicated Information Technology student at KAU with a strong foundation in software engineering and database design. Hands-on experience developing practical tech solutions. Eager to contribute in a collaborative environment.',
-    about: 'Dedicated Information Technology student at KAU with a strong foundation in software engineering and database design. Hands-on experience developing practical tech solutions. Eager to contribute in a collaborative environment.'
+    gpa: '4.54', grad: '2027', exp: '0',
+    tag: 'Seeking Summer Training 2026',
+    bio: 'Senior Information Technology student at King Abdulaziz University with experience in software development, databases, and IT solutions. Currently seeking a Summer Training to apply my skills and gain industry experience.',
+    about: 'Senior Information Technology student at King Abdulaziz University with experience in software development, databases, and IT solutions. Currently seeking a Summer Training to apply my skills and gain industry experience.'
   },
   certs: [
     {name: 'Data Analysis', org: 'King Abdulaziz University', date: '2024', icon: '📊', link: 'https://drive.google.com/file/d/1I4tr59AUyH1mvGu3gUytHi6ohCMR_0LJ/view?usp=drive_link'},
@@ -290,30 +304,30 @@ const SEED = {
     {name: 'Introduction to Software Testing', org: 'Simplilearn', date: '2025', icon: '💻', link: 'https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiI0NDcwIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvOTA2NDIxOV85NDM0MTA3MTc1OTA4NzQ3MjYzMi5wbmciLCJ1c2VybmFtZSI6IkFiZHVsZWxhaCBtb2hhbW1lZCBtb3FiaWwifQ&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F9064219_94341071759087472632.png&_branch_match_id=1596481323907490317&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1i9wzzFOKgwoNApPsq8rSk1LLSrKzEuPTyrKLy9OLbL1AapJTfHMAwB6cw6%2FPwAAAA%3D%3D'}
   ],
   skills: [
-    {name: 'Java', pct: 40}, {name: 'Python', pct: 55},
-    {name: 'MySQL & Database Design', pct: 35}, {name: 'OOP', pct: 86},
-    {name: 'UI/UX Prototyping', pct: 80}, {name: 'PC Hardware Optimization', pct: 72},
-    {name: 'Data Analysis', pct: 72}, {name: 'Blockchain', pct: 30},
-    {name: 'Time Management', pct: 90}, {name: 'Problem Solving', pct: 90},
-    {name: 'Client Communication', pct: 95}, {name: 'Teamwork', pct: 100}
+    {category: 'Programming', items: ['Java', 'Python', 'JavaScript']},
+    {category: 'Database', items: ['MySQL', 'Database Design']},
+    {category: 'Development', items: ['React', 'HTML', 'CSS']},
+    {category: 'Networking', items: ['Computer Networks', 'Network Fundamentals']},
+    {category: 'Concepts', items: ['OOP', 'Data Structures']},
+    {category: 'Other', items: ['UI/UX Prototyping', 'Data Analysis']}
   ],
   langs: [
     {name: 'Arabic', val: 4, level: 'Native / Mother Tongue'},
     {name: 'English', val: 1, level: 'Beginner'}
   ],
   exps: [
+    {title: 'Crowd Management & Rapid Intervention Organizer', org: 'SAR (Saudi Railway Company)', from: 'Jun 2026', to: 'Jun 2026',
+     desc: 'Managed crowd control and rapid intervention operations, ensuring safety and organization for large volumes of attendees.'},
     {title: 'Logistics & Operations Associate', org: 'MARN Platform (Amazon) — Jeddah', from: 'May 2025', to: 'Jun 2026',
      desc: 'Utilized smart devices, scanning apps, and barcode technology to sort and track products. Applied "5S" methodologies. Managed shipment packing, loading, and unloading. Received a certificate of excellence for outstanding work performance.'},
     {title: 'Event Organizer & Security Guard', org: 'SELLA Security Guards Company — Ramadan Season', from: 'Mar 2024', to: 'Apr 2024',
-     desc: 'Coordinated crowd control and ensured a safe and smooth experience for a large volume of attendees and tourists. Demonstrated strong communication skills in a fast-paced environment.'},
-    {title: 'Event Organizer & Sales Marketer', org: 'Over Dose Coffee — Aljawhara Event', from: 'Oct 2023', to: 'Oct 2023',
-     desc: 'Managed product marketing, merchandise organization, and customer relations. Collaborated with the team to provide excellent customer service under pressure.'}
+     desc: 'Coordinated crowd control and ensured a safe and smooth experience for a large volume of attendees and tourists. Demonstrated strong communication skills in a fast-paced environment.'}
   ],
   contacts: [
     {type: 'email', icon: '📧', label: 'Email', val: 'amoqbil0833@gmail.com'},
     {type: 'phone', icon: '📱', label: 'Phone', val: '+966546850833'},
     {type: 'other', icon: '🔗', label: 'WhatsApp', val: 'https://wa.me/966546850833'},
-    {type: 'other', icon: '🔗', label: 'linkedIn', val: 'https://www.linkedin.com/in/abdullelah-moqbil-18992b324'}
+    {type: 'linkedin', icon: '💼', label: 'LinkedIn', val: 'https://www.linkedin.com/in/abdullelah-moqbil-18992b324'}
   ],
   settings: {theme: 'dark'}
 };
@@ -324,12 +338,12 @@ const LS = {
 };
 
 function initData() {
-  if(!localStorage.getItem('cv_v6_seeded')) {
+  if(!localStorage.getItem('cv_v7_seeded')) {
     LS.set('cv_profile', SEED.profile); LS.set('cv_certs', SEED.certs);
     LS.set('cv_skills', SEED.skills);   LS.set('cv_langs', SEED.langs);
     LS.set('cv_exps', SEED.exps);       LS.set('cv_contacts', SEED.contacts); 
     LS.set('cv_settings', SEED.settings);
-    localStorage.setItem('cv_v6_seeded', '1');
+    localStorage.setItem('cv_v7_seeded', '1');
   }
 }
 initData();
@@ -348,7 +362,7 @@ let isEditMode = false;
 function checkSecretAccess() {
   if (location.hash === "#admin") {
     const pass = prompt("Enter Admin Password:");
-    if (pass === "008833") { 
+    if (pass === "1234") { 
       document.getElementById("edit-mode-btn").style.display = "inline-block";
       showToast("Admin access granted");
     } else {
@@ -362,7 +376,7 @@ function applyTheme(t) {
   settings.theme = t;
   LS.set('cv_settings', settings);
   document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('theme-btn').textContent = t === 'dark' ? 'light' : 'dark';
+  document.getElementById('theme-btn').textContent = t === 'dark' ? 'L' : 'D';
 }
 function toggleTheme() { applyTheme(settings.theme === 'dark' ? 'light' : 'dark'); }
 
@@ -427,10 +441,12 @@ function renderSkills() {
   const g = document.getElementById('skills-grid');
   if(!skills.length) { g.innerHTML = '<div class="empty-state">No skills added yet</div>'; return; }
   g.innerHTML = skills.map((s, i) => `
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:${s.pct}%"></div></div>
-      <div class="action-btns edit-only" style="margin-top: 0.8rem">
+    <div class="skill-cat-card">
+      <div class="skill-cat-title">${s.category}</div>
+      <div class="skill-tags">
+        ${s.items.map(item => `<span class="skill-tag">${item}</span>`).join('')}
+      </div>
+      <div class="action-btns edit-only" style="margin-top: 1.2rem">
         <button class="btn-sm btn-edit" onclick="editSkill(${i})">Edit</button>
         <button class="btn-sm btn-del" onclick="delSkill(${i})">Delete</button>
       </div>
@@ -441,9 +457,9 @@ function renderLangs() {
   const g = document.getElementById('langs-grid');
   if(!langs.length) { g.innerHTML = '<div class="empty-state">No languages added yet</div>'; return; }
   g.innerHTML = langs.map((l, i) => `
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">${l.name}</span><span class="skill-pct" style="color:var(--text); font-size:0.75rem">${l.level}</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:${(l.val / 4) * 100}%"></div></div>
+    <div class="lang-item">
+      <div class="lang-header"><span class="lang-name">${l.name}</span><span class="lang-pct">${l.level}</span></div>
+      <div class="lang-bar"><div class="lang-fill" style="width:${(l.val / 4) * 100}%"></div></div>
       <div class="action-btns edit-only" style="margin-top: 0.8rem">
         <button class="btn-sm btn-edit" onclick="editLang(${i})">Edit</button>
         <button class="btn-sm btn-del" onclick="delLang(${i})">Delete</button>
@@ -583,22 +599,28 @@ function delCert(i) {
   if(confirm('Delete this certificate?')) { certs.splice(i, 1); LS.set('cv_certs', certs); renderCerts(); showToast('Deleted'); }
 }
 
-// Skills
+// Skills (Updated to comma-separated tags)
 function editSkill(i) {
   const s = skills[i];
-  openModal('Edit Skill', [
-    {key: 'name', label: 'Skill Name', value: s.name},
-    {key: 'pct', label: 'Proficiency (10-100)', type: 'number', value: s.pct}
-  ], (data) => { skills[i] = data; LS.set('cv_skills', skills); renderSkills(); });
+  openModal('Edit Skill Category', [
+    {key: 'category', label: 'Category Name', value: s.category},
+    {key: 'items', label: 'Skills (Comma Separated)', type: 'textarea', value: s.items.join(', ')}
+  ], (data) => { 
+    skills[i] = {category: data.category, items: data.items.split(',').map(x => x.trim()).filter(x => x)}; 
+    LS.set('cv_skills', skills); renderSkills(); 
+  });
 }
 function addSkill() {
-  openModal('Add Skill', [
-    {key: 'name', label: 'Skill Name'},
-    {key: 'pct', label: 'Proficiency (10-100)', type: 'number', value: '80'}
-  ], (data) => { skills.push(data); LS.set('cv_skills', skills); renderSkills(); });
+  openModal('Add Skill Category', [
+    {key: 'category', label: 'Category Name'},
+    {key: 'items', label: 'Skills (Comma Separated)', type: 'textarea'}
+  ], (data) => { 
+    skills.push({category: data.category, items: data.items.split(',').map(x => x.trim()).filter(x => x)}); 
+    LS.set('cv_skills', skills); renderSkills(); 
+  });
 }
 function delSkill(i) {
-  if(confirm('Delete this skill?')) { skills.splice(i, 1); LS.set('cv_skills', skills); renderSkills(); showToast('Deleted'); }
+  if(confirm('Delete this skill category?')) { skills.splice(i, 1); LS.set('cv_skills', skills); renderSkills(); showToast('Deleted'); }
 }
 
 // Languages
