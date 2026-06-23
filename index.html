@@ -208,7 +208,7 @@ body.edit-mode .edit-only { display: inline-flex !important; }
       <div class="stat-box"><div class="stat-num" id="stat-gpa">—</div><div class="stat-label">GPA</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-grad">—</div><div class="stat-label">Grad Year</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-certs">0</div><div class="stat-label">Certs</div></div>
-      <div class="stat-box"><div class="stat-num" id="stat-exp">0</div><div class="stat-label">Yrs Exp</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-exp">2</div><div class="stat-label">Yrs Exp</div></div>
     </div>
     <div class="hero-actions">
       <!-- UPDATE THIS FILE NAME TO MATCH YOUR ACTUAL PDF -->
@@ -337,7 +337,7 @@ const LS = {
 };
 
 function initData() {
-  if(!localStorage.getItem('cv_v7_seeded')) {
+  if(!localStorage.getItem('cv_v8_seeded')) {
     LS.set('cv_profile', SEED.profile); LS.set('cv_certs', SEED.certs);
     LS.set('cv_skills', SEED.skills);   LS.set('cv_langs', SEED.langs);
     LS.set('cv_exps', SEED.exps);       LS.set('cv_contacts', SEED.contacts); 
