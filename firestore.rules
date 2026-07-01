@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /portfolio/{docId} {
+      allow read: if true;                 // anyone can view the portfolio
+      allow write: if request.auth != null; // only a signed-in admin can edit
+    }
+  }
+}

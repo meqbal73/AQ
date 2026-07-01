@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Edit Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="edit-mode">
+
+<div class="toast" id="toast"></div>
+
+<!-- ───────── LOGIN GATE ───────── -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-card">
+    <h1>🔒 Admin Sign In</h1>
+    <p>Sign in with the account you created in Firebase Authentication to edit this portfolio.</p>
+    <div class="form-group"><label>Email</label><input type="email" id="login-email" autocomplete="username"></div>
+    <div class="form-group"><label>Password</label><input type="password" id="login-pass" autocomplete="current-password"></div>
+    <button class="btn-save" style="width:100%" onclick="doLogin()">Sign In</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- ───────── MODAL ───────── -->
+<div class="modal-overlay" id="dynamic-modal">
+  <div class="modal-content">
+    <div class="modal-title" id="modal-title">Edit</div>
+    <div id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" id="modal-save">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── APP (hidden until signed in) ───────── -->
+<div id="app" style="display:none">
+
+<nav>
+  <span class="nav-logo"><span class="ring">AM</span> Admin</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#certs">Certificates</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#languages">Languages</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-controls">
+    <a class="ctrl-btn" href="index.html" target="_blank">👁 View Live Site</a>
+    <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag" id="hero-tag">—</div>
+    <h1 id="hero-name">&nbsp;</h1>
+    <p id="hero-title"></p>
+    <p id="hero-bio"></p>
+    <div class="hero-stats">
+      <div class="stat-box"><div class="stat-num" id="stat-gpa">—</div><div class="stat-label">GPA</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-grad">—</div><div class="stat-label">Grad Year</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-certs">0</div><div class="stat-label">Certs</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-exp">—</div><div class="stat-label">Yrs Exp</div></div>
+    </div>
+    <div class="hero-actions">
+      <button class="btn-outline" onclick="editProfile()">✏️ Edit Hero</button>
+      <button class="btn-outline" onclick="importSeed()">⬇️ Import Starter Data</button>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-header">
+    <div class="section-label"><h2>About Me <span class="dot">•</span></h2></div>
+    <button class="btn-add" onclick="editAbout()">✏️ Edit Section</button>
+  </div>
+  <div class="about-grid">
+    <div><p id="about-text" style="color:var(--muted);line-height:2;font-size:.91rem;"></p></div>
+    <div class="about-card">
+      <h3>ACADEMIC INFO</h3>
+      <div class="info-row"><span class="info-lbl">Major</span><span class="info-val" id="info-major">—</span></div>
+      <div class="info-row"><span class="info-lbl">University</span><span class="info-val" id="info-uni">—</span></div>
+      <div class="info-row"><span class="info-lbl">Grad Year</span><span class="info-val" id="info-grad2">—</span></div>
+      <div class="info-row"><span class="info-lbl">GPA</span><span class="info-val gold" id="info-gpa2">—</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="section-header">
+    <div class="section-label"><h2>Certificates <span class="dot">•</span></h2></div>
+    <button class="btn-add" onclick="addCert()">+ Add Certificate</button>
+  </div>
+  <div class="certs-grid" id="certs-grid"></div>
+</section>
+
+<section id="skills">
+  <div class="section-header">
+    <div class="section-label"><h2>Skills <span class="dot">•</span></h2></div>
+    <button class="btn-add" onclick="addSkill()">+ Add Skill Category</button>
+  </div>
+  <div class="skills-grid" id="skills-grid"></div>
+</section>
+
+<section id="languages">
+  <div class="section-header">
+    <div class="section-label"><h2>Languages <span class="dot">•</span></h2></div>
+    <button class="btn-add" onclick="addLang()">+ Add Language</button>
+  </div>
+  <div class="langs-grid" id="langs-grid"></div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <div class="section-label"><h2>Experience <span class="dot">•</span></h2></div>
+    <button class="btn-add" onclick="addExp()">+ Add Experience</button>
+  </div>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<section id="contact">
+  <div class="section-header">
+    <div class="section-label"><h2>Contact <span class="dot">•</span></h2></div>
+    <button class="btn-add" onclick="addContact()">+ Add Contact</button>
+  </div>
+  <div class="contact-grid" id="contact-grid"></div>
+</section>
+
+<footer><p>Admin panel &nbsp;·&nbsp; changes save live to Firestore and appear on the public site instantly.</p></footer>
+
+<div class="admin-bar">
+  <span class="sync-dot" id="sync-dot"></span>
+  <span class="who" id="who-email"></span>
+  <button class="btn-sm btn-edit" onclick="doLogout()">Sign Out</button>
+</div>
+
+</div><!-- /#app -->
+
+<!-- Firebase (compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="portfolio-data.js"></script>
+<script>
+// ================= AUTH =================
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  const errEl = document.getElementById('login-err');
+  errEl.textContent = '';
+  auth.signInWithEmailAndPassword(email, pass).catch(err => {
+    errEl.textContent = err.message.replace(/^Firebase:\s*/, '');
+  });
+}
+function doLogout() { auth.signOut(); }
+
+let unsubscribeData = null;
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('who-email').textContent = user.email;
+    if (!unsubscribeData) {
+      unsubscribeData = subscribeToPortfolio(
+        (d) => { data = d || emptyData(); renderAll(); },
+        () => showToast('Live sync error — check your connection', true)
+      );
+    }
+  } else {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    if (unsubscribeData) { unsubscribeData(); unsubscribeData = null; }
+  }
+});
+
+// ================= STATE =================
+function emptyData() {
+  return { profile: {}, certs: [], skills: [], langs: [], exps: [], contacts: [] };
+}
+let data = emptyData();
+
+async function persist() {
+  const dot = document.getElementById('sync-dot');
+  dot.classList.add('saving');
+  try {
+    await savePortfolio(data);
+    showToast('Saved — live on the public site');
+  } catch (err) {
+    console.error(err);
+    showToast('Save failed: ' + err.message, true);
+  } finally {
+    dot.classList.remove('saving');
+  }
+}
+
+async function importSeed() {
+  if (!confirm('This will fill empty sections with starter content. Existing content is kept. Continue?')) return;
+  const merged = { ...emptyData(), ...data };
+  Object.keys(SEED_DATA).forEach(k => {
+    const cur = merged[k];
+    const isEmptyArr = Array.isArray(cur) && cur.length === 0;
+    const isEmptyObj = !Array.isArray(cur) && (!cur || Object.keys(cur).length === 0);
+    if (isEmptyArr || isEmptyObj) merged[k] = SEED_DATA[k];
+  });
+  data = merged;
+  renderAll();
+  await persist();
+}
+
+// ================= THEME =================
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('theme-btn').textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('cv_theme', t); } catch {}
+}
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+applyTheme((() => { try { return localStorage.getItem('cv_theme') || 'dark'; } catch { return 'dark'; } })());
+
+function showToast(msg, isError) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.toggle('error', !!isError); el.classList.add('show');
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+// ================= RENDER =================
+function renderAll() {
+  renderProfile(); renderCerts(); renderSkills(); renderLangs(); renderExps(); renderContacts();
+}
+
+function renderProfile() {
+  const p = data.profile || {};
+  document.getElementById('hero-name').textContent  = p.name || '(no name set)';
+  document.getElementById('hero-title').textContent = p.title || '';
+  document.getElementById('hero-bio').textContent   = p.bio || '';
+  document.getElementById('hero-tag').textContent   = p.tag || '';
+  document.getElementById('stat-gpa').textContent   = p.gpa || '—';
+  document.getElementById('stat-grad').textContent  = p.grad || '—';
+  document.getElementById('stat-exp').textContent   = p.exp || '—';
+  document.getElementById('stat-certs').textContent = (data.certs||[]).length;
+  document.getElementById('about-text').textContent = p.about || '';
+  document.getElementById('info-major').textContent = p.major || '—';
+  document.getElementById('info-uni').textContent   = p.uni || '—';
+  document.getElementById('info-grad2').textContent = p.grad || '—';
+  document.getElementById('info-gpa2').textContent  = p.gpa || '—';
+}
+
+function renderCerts() {
+  const certs = data.certs || [];
+  const g = document.getElementById('certs-grid');
+  if (!certs.length) { g.innerHTML = '<div class="empty-state">No certificates yet — click "Add Certificate"</div>'; return; }
+  g.innerHTML = certs.map((c, i) => `
+    <div class="cert-card">
+      <div class="cert-icon">${c.icon || '🏆'}</div>
+      <div class="cert-name">${c.name}</div>
+      <div class="cert-org">${c.org}</div>
+      <div class="cert-meta">
+        <span class="cert-badge gold">${c.date}</span>
+        ${c.link ? '<span class="cert-badge">🔗</span>' : ''}
+      </div>
+      <div class="action-btns">
+        <button class="btn-sm btn-edit" onclick="editCert(${i})">Edit</button>
+        <button class="btn-sm btn-del" onclick="delCert(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderSkills() {
+  const skills = data.skills || [];
+  const g = document.getElementById('skills-grid');
+  if (!skills.length) { g.innerHTML = '<div class="empty-state">No skills yet — click "Add Skill Category"</div>'; return; }
+  g.innerHTML = skills.map((s, i) => `
+    <div class="skill-cat-card">
+      <div class="skill-cat-title">${s.category}</div>
+      <div class="skill-tags">${(s.items||[]).map(item => `<span class="skill-tag">${item}</span>`).join('')}</div>
+      <div class="action-btns" style="margin-top:1.2rem">
+        <button class="btn-sm btn-edit" onclick="editSkill(${i})">Edit</button>
+        <button class="btn-sm btn-del" onclick="delSkill(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderLangs() {
+  const langs = data.langs || [];
+  const g = document.getElementById('langs-grid');
+  if (!langs.length) { g.innerHTML = '<div class="empty-state">No languages yet — click "Add Language"</div>'; return; }
+  g.innerHTML = langs.map((l, i) => `
+    <div class="lang-item">
+      <div class="lang-header"><span class="lang-name">${l.name}</span><span class="lang-pct">${l.level}</span></div>
+      <div class="lang-bar"><div class="lang-fill" style="width:${(l.val/4)*100}%"></div></div>
+      <div class="action-btns" style="margin-top:.8rem">
+        <button class="btn-sm btn-edit" onclick="editLang(${i})">Edit</button>
+        <button class="btn-sm btn-del" onclick="delLang(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderExps() {
+  const exps = data.exps || [];
+  const tl = document.getElementById('timeline');
+  if (!exps.length) { tl.innerHTML = '<div class="empty-state">No experience yet — click "Add Experience"</div>'; return; }
+  tl.innerHTML = exps.map((e, i) => `
+    <div class="tl-item"><div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-title">${e.title}</div>
+        <div class="tl-org">${e.org}</div>
+        <div class="tl-date">📅 ${e.from} — ${e.to}</div>
+        <div class="tl-desc">${e.desc}</div>
+        <div class="action-btns">
+          <button class="btn-sm btn-edit" onclick="editExp(${i})">Edit</button>
+          <button class="btn-sm btn-del" onclick="delExp(${i})">Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+const CI = {email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:'🐦', other:'🔗'};
+function renderContacts() {
+  const contacts = data.contacts || [];
+  const g = document.getElementById('contact-grid');
+  if (!contacts.length) { g.innerHTML = '<div class="empty-state">No contact details yet — click "Add Contact"</div>'; return; }
+  g.innerHTML = contacts.map((c, i) => `
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+      <div class="contact-card" style="pointer-events:none">
+        <span class="contact-icon">${c.icon || CI[c.type] || '🔗'}</span>
+        <div><div class="contact-label">${c.label || c.type}</div><div class="contact-val">${c.val}</div></div>
+      </div>
+      <div class="action-btns" style="margin-top:0">
+        <button class="btn-sm btn-edit" style="flex:1" onclick="editContact(${i})">Edit</button>
+        <button class="btn-sm btn-del" style="flex:1" onclick="delContact(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+// ================= MODAL ENGINE =================
+function openModal(title, fields, onSave) {
+  document.getElementById('modal-title').textContent = title;
+  const body = document.getElementById('modal-body');
+  let html = '';
+  fields.forEach(f => {
+    if (f.type === 'textarea') {
+      html += `<div class="form-group"><label>${f.label}</label><textarea id="m_${f.key}">${f.value || ''}</textarea></div>`;
+    } else if (f.type === 'select') {
+      const opts = f.options.map(o => `<option value="${o.val}" ${o.val == (f.value||1) ? 'selected' : ''}>${o.label}</option>`).join('');
+      html += `<div class="form-group"><label>${f.label}</label><select id="m_${f.key}">${opts}</select></div>`;
+    } else {
+      html += `<div class="form-group"><label>${f.label}</label><input type="${f.type || 'text'}" id="m_${f.key}" value="${(f.value||'').toString().replace(/"/g,'&quot;')}"></div>`;
+    }
+  });
+  body.innerHTML = html;
+  document.getElementById('modal-save').onclick = () => {
+    const result = {};
+    fields.forEach(f => { result[f.key] = document.getElementById('m_'+f.key).value.trim(); });
+    onSave(result);
+    closeModal();
+  };
+  document.getElementById('dynamic-modal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('dynamic-modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ================= CRUD =================
+function editProfile() {
+  const p = data.profile || {};
+  openModal('Edit Hero Information', [
+    {key:'name', label:'Full Name', value:p.name},
+    {key:'title', label:'Professional Title', value:p.title},
+    {key:'tag', label:'Availability Tag', value:p.tag},
+    {key:'bio', label:'Short Bio', type:'textarea', value:p.bio}
+  ], (v) => { data.profile = {...p, ...v}; renderProfile(); persist(); });
+}
+function editAbout() {
+  const p = data.profile || {};
+  openModal('Edit About Section', [
+    {key:'major', label:'Major', value:p.major},
+    {key:'uni', label:'University', value:p.uni},
+    {key:'gpa', label:'GPA', value:p.gpa},
+    {key:'grad', label:'Graduation Year', value:p.grad},
+    {key:'exp', label:'Years of Experience', value:p.exp},
+    {key:'about', label:'Detailed About Text', type:'textarea', value:p.about}
+  ], (v) => { data.profile = {...p, ...v}; renderProfile(); persist(); });
+}
+
+function editCert(i) {
+  const c = data.certs[i];
+  openModal('Edit Certificate', [
+    {key:'name', label:'Certificate Name', value:c.name},
+    {key:'org', label:'Organization', value:c.org},
+    {key:'date', label:'Year / Date', value:c.date},
+    {key:'icon', label:'Icon (Emoji)', value:c.icon},
+    {key:'link', label:'URL (Optional)', value:c.link}
+  ], (v) => { data.certs[i] = v; renderCerts(); renderProfile(); persist(); });
+}
+function addCert() {
+  openModal('Add Certificate', [
+    {key:'name', label:'Certificate Name'}, {key:'org', label:'Organization'},
+    {key:'date', label:'Year / Date'}, {key:'icon', label:'Icon (Emoji)', value:'🏆'},
+    {key:'link', label:'URL (Optional)'}
+  ], (v) => { (data.certs = data.certs||[]).push(v); renderCerts(); renderProfile(); persist(); });
+}
+function delCert(i) { if (confirm('Delete this certificate?')) { data.certs.splice(i,1); renderCerts(); renderProfile(); persist(); } }
+
+function editSkill(i) {
+  const s = data.skills[i];
+  openModal('Edit Skill Category', [
+    {key:'category', label:'Category Name', value:s.category},
+    {key:'items', label:'Skills (Comma Separated)', type:'textarea', value:(s.items||[]).join(', ')}
+  ], (v) => { data.skills[i] = {category:v.category, items:v.items.split(',').map(x=>x.trim()).filter(Boolean)}; renderSkills(); persist(); });
+}
+function addSkill() {
+  openModal('Add Skill Category', [
+    {key:'category', label:'Category Name'}, {key:'items', label:'Skills (Comma Separated)', type:'textarea'}
+  ], (v) => { (data.skills = data.skills||[]).push({category:v.category, items:v.items.split(',').map(x=>x.trim()).filter(Boolean)}); renderSkills(); persist(); });
+}
+function delSkill(i) { if (confirm('Delete this skill category?')) { data.skills.splice(i,1); renderSkills(); persist(); } }
+
+const LANG_LEVELS = [
+  {val:1, label:'Beginner'}, {val:2, label:'Intermediate'},
+  {val:3, label:'Advanced'}, {val:4, label:'Native / Mother Tongue'}
+];
+function editLang(i) {
+  const l = data.langs[i];
+  openModal('Edit Language', [
+    {key:'name', label:'Language Name', value:l.name},
+    {key:'val', label:'Proficiency Level', type:'select', options:LANG_LEVELS, value:l.val}
+  ], (v) => { const lvl = LANG_LEVELS.find(x=>x.val==v.val); data.langs[i] = {name:v.name, val:parseInt(v.val), level:lvl.label}; renderLangs(); persist(); });
+}
+function addLang() {
+  openModal('Add Language', [
+    {key:'name', label:'Language Name'},
+    {key:'val', label:'Proficiency Level', type:'select', options:LANG_LEVELS, value:1}
+  ], (v) => { const lvl = LANG_LEVELS.find(x=>x.val==v.val); (data.langs = data.langs||[]).push({name:v.name, val:parseInt(v.val), level:lvl.label}); renderLangs(); persist(); });
+}
+function delLang(i) { if (confirm('Delete this language?')) { data.langs.splice(i,1); renderLangs(); persist(); } }
+
+function editExp(i) {
+  const e = data.exps[i];
+  openModal('Edit Experience', [
+    {key:'title', label:'Job Title', value:e.title}, {key:'org', label:'Company / Organization', value:e.org},
+    {key:'from', label:'Start Date', value:e.from}, {key:'to', label:'End Date', value:e.to},
+    {key:'desc', label:'Description', type:'textarea', value:e.desc}
+  ], (v) => { data.exps[i] = v; renderExps(); persist(); });
+}
+function addExp() {
+  openModal('Add Experience', [
+    {key:'title', label:'Job Title'}, {key:'org', label:'Company / Organization'},
+    {key:'from', label:'Start Date'}, {key:'to', label:'End Date'},
+    {key:'desc', label:'Description', type:'textarea'}
+  ], (v) => { (data.exps = data.exps||[]).unshift(v); renderExps(); persist(); });
+}
+function delExp(i) { if (confirm('Delete this experience?')) { data.exps.splice(i,1); renderExps(); persist(); } }
+
+function editContact(i) {
+  const c = data.contacts[i];
+  openModal('Edit Contact', [
+    {key:'type', label:'Type (email, phone, linkedin, other)', value:c.type},
+    {key:'label', label:'Label', value:c.label}, {key:'val', label:'Value / URL', value:c.val},
+    {key:'icon', label:'Icon (Emoji)', value:c.icon}
+  ], (v) => { data.contacts[i] = v; renderContacts(); persist(); });
+}
+function addContact() {
+  openModal('Add Contact', [
+    {key:'type', label:'Type (email, phone, linkedin, other)', value:'other'},
+    {key:'label', label:'Label', value:'Website'}, {key:'val', label:'Value / URL'},
+    {key:'icon', label:'Icon (Emoji)', value:'🔗'}
+  ], (v) => { (data.contacts = data.contacts||[]).push(v); renderContacts(); persist(); });
+}
+function delContact(i) { if (confirm('Delete this contact?')) { data.contacts.splice(i,1); renderContacts(); persist(); } }
+</script>
+</body>
+</html>
