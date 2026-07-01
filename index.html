@@ -4,186 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abdullelah Moqbail — Portfolio</title>
+<meta name="description" content="Information Technology student portfolio — certificates, skills, experience and contact.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-<style>
-:root { --transition-theme: background .3s, color .3s, border-color .3s; }
-[data-theme="dark"] {
-  --bg:#070C18; --surface:#0D1526; --surface2:#131D35;
-  --accent:#2D6CDF; --gold:#C9A84C; --gold-lt:#E8C96A;
-  --text:#E8EDF8; --muted:#7A8BAD;
-  --border:rgba(45,108,223,0.18); --glow:rgba(45,108,223,0.35);
-  --nav-bg:rgba(7,12,24,0.88);
-}
-[data-theme="light"] {
-  --bg:#F2F5FC; --surface:#FFFFFF; --surface2:#E8EDF8;
-  --accent:#1A56C4; --gold:#A07820; --gold-lt:#C49A30;
-  --text:#0F1828; --muted:#5A6A85;
-  --border:rgba(26,86,196,0.15); --glow:rgba(26,86,196,0.2);
-  --nav-bg:rgba(242,245,252,0.92);
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:var(--transition-theme);}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2rem;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);gap:.8rem;transition:var(--transition-theme);}
-.nav-logo{font-weight:900;font-size:1.2rem;color:var(--gold);white-space:nowrap;}
-.nav-links{display:flex;gap:1.2rem;list-style:none;flex-wrap:wrap;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s;font-weight:600;}
-.nav-links a:hover{color:var(--text);}
-.nav-controls{display:flex;gap:.45rem;align-items:center;flex-shrink:0;}
-.ctrl-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.38rem .8rem;border-radius:8px;font-size:.82rem;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;font-weight:600;}
-.ctrl-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
-.ctrl-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
-
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 2rem 4rem;}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(45,108,223,0.12) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(201,168,76,0.07) 0%,transparent 60%);}
-[data-theme="light"] .hero-bg{background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(26,86,196,0.06) 0%,transparent 70%);}
-.hero-grid{position:absolute;inset:0;opacity:.04;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;}
-.hero-content{position:relative;text-align:center;max-width:780px;}
-.hero-tag{display:inline-block;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:.32rem 1rem;border-radius:50px;font-size:.78rem;margin-bottom:1.4rem;letter-spacing:1px;font-weight:600;}
-#hero-name{font-size:clamp(2rem,6vw,4rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--text) 30%,var(--gold-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem;}
-#hero-title{font-size:clamp(.9rem,2.5vw,1.25rem);color:var(--accent);font-weight:600;margin-bottom:1rem;}
-#hero-bio{color:var(--muted);line-height:1.9;font-size:.93rem;max-width:580px;margin:0 auto 2rem;}
-.hero-stats{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.2rem;}
-.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1.4rem;text-align:center;min-width:105px;transition:var(--transition-theme);}
-.stat-num{font-size:1.65rem;font-weight:900;color:var(--gold);}
-.stat-label{font-size:.7rem;color:var(--muted);margin-top:.18rem;font-weight:600;text-transform:uppercase;}
-.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-.btn-primary{background:linear-gradient(135deg,var(--accent),#1a4fa0);color:#fff;padding:.68rem 1.7rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:.88rem;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(45,108,223,0.4);border:none;cursor:pointer;}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,108,223,0.5);}
-.btn-outline{background:transparent;color:var(--text);padding:.68rem 1.7rem;border:1px solid var(--border);border-radius:10px;text-decoration:none;font-weight:600;font-size:.88rem;transition:all .2s;cursor:pointer;display:flex;align-items:center;gap:0.5rem;}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
-
-section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.6rem;}
-.section-label{display:flex;align-items:center;gap:.75rem;}
-.section-label::before{content:'';display:block;width:3px;height:2rem;background:linear-gradient(to bottom,var(--accent),var(--gold));border-radius:2px;}
-.section-label h2{font-size:1.65rem;font-weight:900;}
-.section-label span.dot{color:var(--gold);}
-
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
-@media(max-width:640px){.about-grid{grid-template-columns:1fr;}}
-.about-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem;transition:var(--transition-theme);}
-.about-card h3{font-size:.9rem;margin-bottom:.9rem;color:var(--gold);font-weight:700;}
-.info-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem .65rem;background:var(--surface2);border-radius:8px;margin-bottom:.55rem;transition:var(--transition-theme);}
-.info-row:last-child{margin-bottom:0;}
-.info-lbl{color:var(--muted);font-size:.8rem;font-weight:600;}
-.info-val{font-weight:600;font-size:.85rem;}
-.info-val.gold{color:var(--gold);font-size:.95rem;}
-
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.1rem;}
-.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.3rem;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s,background .3s;}
-.cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
-.cert-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 32px var(--glow);}
-.cert-card:hover::before{transform:scaleX(1);}
-.cert-icon{width:42px;height:42px;border-radius:10px;background:rgba(45,108,223,0.15);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:.85rem;}
-.cert-name{font-weight:700;font-size:.93rem;margin-bottom:.28rem;}
-.cert-org{color:var(--accent);font-size:.8rem;margin-bottom:.55rem;font-weight:600;}
-.cert-meta{display:flex;gap:.55rem;flex-wrap:wrap;}
-.cert-badge{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:.16rem .6rem;border-radius:20px;font-size:.7rem;font-weight:600;}
-.cert-badge.gold{border-color:rgba(201,168,76,0.3);color:var(--gold);background:rgba(201,168,76,0.08);}
-
-/* New Skills Grid Styles */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;}
-.skill-cat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:var(--transition-theme);}
-.skill-cat-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,108,223,0.1);}
-.skill-cat-title{font-size:1.05rem;font-weight:800;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
-.skill-cat-title::before{content:'';display:block;width:8px;height:8px;background:var(--accent);border-radius:50%;}
-.skill-tags{display:flex;flex-wrap:wrap;gap:0.6rem;}
-.skill-tag{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:0.45rem 0.9rem;border-radius:30px;font-size:0.82rem;font-weight:600;transition:all 0.2s;}
-.skill-tag:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
-
-/* Languages (Keep old bar style just for languages) */
-.langs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:.95rem;}
-.lang-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.15rem;transition:var(--transition-theme);}
-.lang-header{display:flex;justify-content:space-between;margin-bottom:.5rem;}
-.lang-name{font-weight:600;font-size:.85rem;}
-.lang-pct{color:var(--text);font-size:.75rem;}
-.lang-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
-.lang-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width 1.2s ease;}
-
-.timeline{position:relative;padding-left:2rem;}
-.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),transparent);}
-.tl-item{position:relative;margin-bottom:2.4rem;}
-.tl-dot{position:absolute;left:-2.45rem;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(45,108,223,0.25);}
-.tl-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem;transition:var(--transition-theme);}
-.tl-title{font-weight:700;font-size:.96rem;}
-.tl-org{color:var(--accent);font-size:.81rem;margin:.28rem 0 .45rem;font-weight:600;}
-.tl-date{color:var(--muted);font-size:.74rem;margin-bottom:.5rem;font-weight:600;}
-.tl-desc{color:var(--muted);font-size:.84rem;line-height:1.78;}
-
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:.95rem;}
-.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.05rem 1.25rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;color:var(--text);transition:all .2s;}
-.contact-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-.contact-icon{font-size:1.35rem;}
-.contact-label{font-size:.7rem;color:var(--muted);font-weight:600;}
-.contact-val{font-weight:600;font-size:.85rem;word-break:break-all;}
-
-footer{text-align:center;padding:2rem;color:var(--muted);font-size:.76rem;border-top:1px solid var(--border);}
-.empty-state{text-align:center;color:var(--muted);padding:2.5rem;border:1px dashed var(--border);border-radius:16px;grid-column:1/-1;}
-
-/* Edit Mode Styles */
-.edit-only { display: none !important; }
-body.edit-mode .edit-only { display: inline-flex !important; }
-
-.action-btns { display: flex; gap: 0.5rem; margin-top: 1rem; }
-.btn-sm { padding: 0.35rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; }
-.btn-edit { background: var(--surface2); color: var(--text); border-color: var(--border); }
-.btn-edit:hover { background: var(--surface); border-color: var(--accent); color: var(--accent); }
-.btn-del { background: rgba(220,50,50,.1); color: #e57373; border-color: rgba(220,50,50,.2); }
-.btn-del:hover { background: rgba(220,50,50,.2); }
-.btn-add { background: var(--surface2); color: var(--accent); border-color: var(--accent); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-.btn-add:hover { background: var(--accent); color: #fff; }
-
-/* Modal Styles */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; visibility: hidden; transition: all 0.3s; }
-.modal-overlay.show { opacity: 1; visibility: visible; }
-.modal-content { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; padding: 2rem; transform: translateY(20px); transition: all 0.3s; }
-.modal-overlay.show .modal-content { transform: translateY(0); }
-.modal-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text); }
-.form-group { margin-bottom: 1rem; }
-.form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; }
-.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.7rem; background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s; }
-.form-group select { cursor: pointer; }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
-.form-group textarea { min-height: 100px; resize: vertical; }
-.modal-actions { display: flex; gap: 1rem; margin-top: 2rem; }
-.btn-cancel { flex: 1; background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.7rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.btn-cancel:hover { background: var(--surface2); }
-.btn-save { flex: 2; background: var(--accent); border: none; color: #fff; padding: 0.7rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-.btn-save:hover { opacity: 0.9; transform: translateY(-1px); }
-
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:.62rem 1.35rem;border-radius:10px;font-size:.84rem;z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;font-weight:600;}
-.toast.show{opacity:1;}
-
-@media(max-width:600px){
-  nav{padding:.75rem .9rem;}
-  .nav-links{display:none;}
-  .hero-stats{gap:.7rem;}
-  .stat-box{min-width:80px;padding:.65rem .85rem;}
-  .stat-num{font-size:1.35rem;}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="toast" id="toast"></div>
 
-<!-- Dynamic Modal Container -->
-<div class="modal-overlay" id="dynamic-modal">
-  <div class="modal-content">
-    <div class="modal-title" id="modal-title">Edit</div>
-    <div id="modal-body"></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-save" id="modal-save">Save Changes</button>
-    </div>
-  </div>
-</div>
-
 <nav>
-  <span class="nav-logo">AM</span>
+  <span class="nav-logo"><span class="ring">AM</span></span>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#certs">Certificates</a></li>
@@ -193,42 +24,37 @@ body.edit-mode .edit-only { display: inline-flex !important; }
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-controls">
-    <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle light/dark theme">☀️</button>
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-bg"></div><div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-tag" id="hero-tag">Seeking Summer Training 2026</div>
-    <h1 id="hero-name">Abdullelah Mohammed Moqbail</h1>
-    <p id="hero-title">Information Technology Student | King Abdulaziz University</p>
+    <div class="hero-tag" id="hero-tag">Loading…</div>
+    <h1 id="hero-name">&nbsp;</h1>
+    <p id="hero-title"></p>
     <p id="hero-bio"></p>
     <div class="hero-stats">
       <div class="stat-box"><div class="stat-num" id="stat-gpa">—</div><div class="stat-label">GPA</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-grad">—</div><div class="stat-label">Grad Year</div></div>
       <div class="stat-box"><div class="stat-num" id="stat-certs">0</div><div class="stat-label">Certs</div></div>
-      <div class="stat-box"><div class="stat-num" id="stat-exp">2</div><div class="stat-label">Yrs Exp</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-exp">—</div><div class="stat-label">Yrs Exp</div></div>
     </div>
     <div class="hero-actions">
-      <!-- UPDATE THIS FILE NAME TO MATCH YOUR ACTUAL PDF -->
-      <a href="Abdullelah_Moqbil_CV.pdf" download="Abdullelah_Moqbil_CV.pdf" class="btn-primary" style="background:linear-gradient(135deg, #1a4fa0, #113a77)">📥 Download CV</a>
-      <a href="https://github.com/abmoqbil" target="_blank" class="btn-outline">💻 GitHub</a>
+      <a href="Abdullelah_Moqbil_CV.pdf" download class="btn-primary">📥 Download CV</a>
+      <a href="https://github.com/abmoqbil" target="_blank" rel="noopener" class="btn-outline">💻 GitHub</a>
       <a href="#certs" class="btn-outline">View Certificates</a>
-      <button class="btn-outline edit-only" onclick="editProfile()">✏️ Edit Profile</button>
     </div>
   </div>
 </div>
 
 <section id="about">
-  <div class="section-header">
-    <div class="section-label"><h2>About Me <span class="dot">•</span></h2></div>
-    <button class="btn-add edit-only" onclick="editAbout()">✏️ Edit Section</button>
-  </div>
+  <div class="section-header"><div class="section-label"><h2>About Me <span class="dot">•</span></h2></div></div>
   <div class="about-grid">
-    <div><p id="about-text" style="color:var(--muted);line-height:2;font-size:.91rem;"></p></div>
+    <div><p id="about-text" style="color:var(--muted);line-height:2;font-size:.93rem;"></p></div>
     <div class="about-card">
-      <h3>Academic Info</h3>
+      <h3>ACADEMIC INFO</h3>
       <div class="info-row"><span class="info-lbl">Major</span><span class="info-val" id="info-major">—</span></div>
       <div class="info-row"><span class="info-lbl">University</span><span class="info-val" id="info-uni">—</span></div>
       <div class="info-row"><span class="info-lbl">Grad Year</span><span class="info-val" id="info-grad2">—</span></div>
@@ -238,167 +64,61 @@ body.edit-mode .edit-only { display: inline-flex !important; }
 </section>
 
 <section id="certs">
-  <div class="section-header">
-    <div class="section-label"><h2>Certificates <span class="dot">•</span></h2></div>
-    <button class="btn-add edit-only" onclick="addCert()">+ Add Certificate</button>
-  </div>
+  <div class="section-header"><div class="section-label"><h2>Certificates <span class="dot">•</span></h2></div></div>
   <div class="certs-grid" id="certs-grid"></div>
 </section>
 
 <section id="skills">
-  <div class="section-header">
-    <div class="section-label"><h2>Skills <span class="dot">•</span></h2></div>
-    <button class="btn-add edit-only" onclick="addSkill()">+ Add Skill Category</button>
-  </div>
+  <div class="section-header"><div class="section-label"><h2>Skills <span class="dot">•</span></h2></div></div>
   <div class="skills-grid" id="skills-grid"></div>
 </section>
 
 <section id="languages">
-  <div class="section-header">
-    <div class="section-label"><h2>Languages <span class="dot">•</span></h2></div>
-    <button class="btn-add edit-only" onclick="addLang()">+ Add Language</button>
-  </div>
+  <div class="section-header"><div class="section-label"><h2>Languages <span class="dot">•</span></h2></div></div>
   <div class="langs-grid" id="langs-grid"></div>
 </section>
 
 <section id="experience">
-  <div class="section-header">
-    <div class="section-label"><h2>Experience <span class="dot">•</span></h2></div>
-    <button class="btn-add edit-only" onclick="addExp()">+ Add Experience</button>
-  </div>
+  <div class="section-header"><div class="section-label"><h2>Experience <span class="dot">•</span></h2></div></div>
   <div class="timeline" id="timeline"></div>
 </section>
 
 <section id="contact">
-  <div class="section-header">
-    <div class="section-label"><h2>Contact <span class="dot">•</span></h2></div>
-    <button class="btn-add edit-only" onclick="addContact()">+ Add Contact</button>
-  </div>
+  <div class="section-header"><div class="section-label"><h2>Contact <span class="dot">•</span></h2></div></div>
   <div class="contact-grid" id="contact-grid"></div>
 </section>
 
 <footer>
   <p>Made with ❤ &nbsp;·&nbsp; <span id="footer-name">Abdullelah Moqbail</span></p>
-  <button class="btn-sm btn-del edit-only" style="margin-top:1rem" onclick="resetAll()">Reset All Data</button>
 </footer>
 
+<!-- Firebase (compat SDK — no build step needed) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="portfolio-data.js"></script>
 <script>
-const SEED = {
-  profile: {
-    name: 'Abdullelah Mohammed Moqbail',
-    title: 'Information Technology Student | King Abdulaziz University',
-    uni: 'King Abdulaziz University',
-    major: 'Information Technology',
-    gpa: '4.54', grad: '2027', exp: '2',
-    tag: 'Seeking Summer Training 2026',
-    bio: 'Senior Information Technology student at King Abdulaziz University with experience in software development, databases, and IT solutions. Currently seeking a Summer Training to apply my skills and gain industry experience.',
-    about: 'Senior Information Technology student at King Abdulaziz University with experience in software development, databases, and IT solutions. Currently seeking a Summer Training to apply my skills and gain industry experience.'
-  },
-  certs: [
-    {name: 'Data Analysis', org: 'King Abdulaziz University', date: '2024', icon: '📊', link: 'https://drive.google.com/file/d/1I4tr59AUyH1mvGu3gUytHi6ohCMR_0LJ/view?usp=drive_link'},
-    {name: 'How Does a Student Innovate?', org: 'King Abdulaziz University', date: '2024', icon: '💡', link: 'https://drive.google.com/file/d/1XgCGp9xEm_YJPGmX0cE3I7CZewvno9JC/view?usp=drive_link'},
-    {name: 'Certificate of Excellence', org: 'King Abdulaziz University', date: '2026', icon: '🏆', link: 'https://drive.google.com/file/d/1-_hzS92nD033O3JYv8f7g-OP1F5KVh8b/view?usp=drive_link'},
-    {name: 'Certificate of Excellence', org: 'King Abdulaziz University', date: '2024', icon: '🏆', link: 'https://drive.google.com/file/d/1fxKFUSudIv38knG6RSOS4_4qFiySyhQH/view?usp=drive_link'},
-    {name: 'A successful coach in the age of AI', org: 'Empowerment and Vision for Training and Consulting', date: '2025', icon: '🏆', link: 'https://drive.google.com/file/d/1eWhRPvIy1dt9wSOzZRMUKLwmFMQtvIWu/view?usp=drive_link'},
-    {name: 'Introduction to Software Testing', org: 'Simplilearn', date: '2025', icon: '💻', link: 'https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiI0NDcwIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvOTA2NDIxOV85NDM0MTA3MTc1OTA4NzQ3MjYzMi5wbmciLCJ1c2VybmFtZSI6IkFiZHVsZWxhaCBtb2hhbW1lZCBtb3FiaWwifQ&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F9064219_94341071759087472632.png&_branch_match_id=1596481323907490317&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1i9wzzFOKgwoNApPsq8rSk1LLSrKzEuPTyrKLy9OLbL1AapJTfHMAwB6cw6%2FPwAAAA%3D%3D'}
-  ],
-  skills: [
-    {category: 'Programming', items: ['Java', 'Python', 'JavaScript']},
-    {category: 'Database', items: ['MySQL', 'Database Design']},
-    {category: 'Development', items: ['React', 'HTML', 'CSS']},
-    {category: 'Networking', items: ['Computer Networks', 'Network Fundamentals']},
-    {category: 'Concepts', items: ['OOP', 'Data Structures']},
-    {category: 'Other', items: ['UI/UX Prototyping', 'Data Analysis']}
-  ],
-  langs: [
-    {name: 'Arabic', val: 4, level: 'Native / Mother Tongue'},
-    {name: 'English', val: 1, level: 'Beginner'}
-  ],
-  exps: [
-    {title: 'Crowd Management & Rapid Intervention Organizer', org: 'SAR (Saudi Railway Company)', from: 'Jun 2026', to: 'Jun 2026',
-     desc: 'Managed crowd control and rapid intervention operations, ensuring safety and organization for large volumes of attendees.'},
-    {title: 'Logistics & Operations Associate', org: 'MARN Platform (Amazon) — Jeddah', from: 'May 2025', to: 'Jun 2026',
-     desc: 'Utilized smart devices, scanning apps, and barcode technology to sort and track products. Applied "5S" methodologies. Managed shipment packing, loading, and unloading. Received a certificate of excellence for outstanding work performance.'},
-    {title: 'Event Organizer & Security Guard', org: 'SELLA Security Guards Company — Ramadan Season', from: 'Mar 2024', to: 'Apr 2024',
-     desc: 'Coordinated crowd control and ensured a safe and smooth experience for a large volume of attendees and tourists. Demonstrated strong communication skills in a fast-paced environment.'}
-  ],
-  contacts: [
-    {type: 'email', icon: '📧', label: 'Email', val: 'amoqbil0833@gmail.com'},
-    {type: 'phone', icon: '📱', label: 'Phone', val: '+966546850833'},
-    {type: 'other', icon: '🔗', label: 'WhatsApp', val: 'https://wa.me/966546850833'},
-    {type: 'linkedin', icon: '💼', label: 'LinkedIn', val: 'https://www.linkedin.com/in/abdullelah-moqbil-18992b324'}
-  ],
-  settings: {theme: 'dark'}
-};
-
-const LS = {
-  get: (k, d) => { try { const v = localStorage.getItem(k); return v !== null ? JSON.parse(v) : d; } catch { return d; } },
-  set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
-};
-
-function initData() {
-  if(!localStorage.getItem('cv_v8_seeded')) {
-    LS.set('cv_profile', SEED.profile); LS.set('cv_certs', SEED.certs);
-    LS.set('cv_skills', SEED.skills);   LS.set('cv_langs', SEED.langs);
-    LS.set('cv_exps', SEED.exps);       LS.set('cv_contacts', SEED.contacts); 
-    LS.set('cv_settings', SEED.settings);
-    localStorage.setItem('cv_v8_seeded', '1');  }
-}
-initData();
-
-let profile  = LS.get('cv_profile', SEED.profile);
-let certs    = LS.get('cv_certs', SEED.certs);
-let skills   = LS.get('cv_skills', SEED.skills);
-let langs    = LS.get('cv_langs', SEED.langs);
-let exps     = LS.get('cv_exps', SEED.exps);
-let contacts = LS.get('cv_contacts', SEED.contacts);
-let settings = LS.get('cv_settings', SEED.settings);
-
-let isEditMode = false;
-
-// --- SECRET ADMIN ACCESS ---
-function checkSecretAccess() {
-  if (location.hash === "#admin") {
-    const pass = prompt("Enter Admin Password:");
-    if (pass === "1234") { 
-      document.getElementById("edit-mode-btn").style.display = "inline-block";
-      showToast("Admin access granted");
-    } else {
-      alert("Access Denied");
-      history.replaceState(null, null, ' '); 
-    }
-  }
-}
-
+// ---- theme (per-visitor preference only, stored locally) ----
 function applyTheme(t) {
-  settings.theme = t;
-  LS.set('cv_settings', settings);
   document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('theme-btn').textContent = t === 'dark' ? 'L' : 'D';
+  document.getElementById('theme-btn').textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('cv_theme', t); } catch {}
 }
-function toggleTheme() { applyTheme(settings.theme === 'dark' ? 'light' : 'dark'); }
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+applyTheme((() => { try { return localStorage.getItem('cv_theme') || 'dark'; } catch { return 'dark'; } })());
 
-function toggleEditMode() {
-  isEditMode = !isEditMode;
-  document.body.classList.toggle('edit-mode', isEditMode);
-  const btn = document.getElementById('edit-mode-btn');
-  if(isEditMode) {
-    btn.classList.add('active');
-    btn.textContent = '💾 Exit Edit Mode';
-    showToast('Edit Mode Enabled');
-  } else {
-    btn.classList.remove('active');
-    btn.textContent = '✏️ Edit Mode';
-    showToast('Edit Mode Disabled');
-  }
+function showToast(msg, isError) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.toggle('error', !!isError); el.classList.add('show');
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2600);
 }
 
-function renderAll() {
-  renderProfile(); renderCerts(); renderSkills(); renderLangs(); renderExps(); renderContacts();
-}
-
-function renderProfile() {
-  const p = profile;
+// ---- render ----
+function renderProfile(p, certCount) {
   document.getElementById('hero-name').textContent  = p.name || '';
   document.getElementById('hero-title').textContent = p.title || '';
   document.getElementById('hero-bio').textContent   = p.bio || '';
@@ -407,19 +127,20 @@ function renderProfile() {
   document.getElementById('stat-gpa').textContent   = p.gpa || '—';
   document.getElementById('stat-grad').textContent  = p.grad || '—';
   document.getElementById('stat-exp').textContent   = p.exp || '—';
-  document.getElementById('stat-certs').textContent = certs.length;
+  document.getElementById('stat-certs').textContent = certCount;
   document.getElementById('about-text').textContent = p.about || '';
   document.getElementById('info-major').textContent = p.major || '—';
   document.getElementById('info-uni').textContent   = p.uni || '—';
   document.getElementById('info-grad2').textContent = p.grad || '—';
   document.getElementById('info-gpa2').textContent  = p.gpa || '—';
+  document.title = (p.name || 'Portfolio') + ' — Portfolio';
 }
 
-function renderCerts() {
+function renderCerts(certs) {
   const g = document.getElementById('certs-grid');
-  if(!certs.length) { g.innerHTML = '<div class="empty-state">No certificates added yet</div>'; return; }
-  g.innerHTML = certs.map((c, i) => `
-    <div class="cert-card" ${c.link ? `onclick="if(!isEditMode) window.open('${c.link}','_blank')" style="cursor:pointer"` : ''}>
+  if (!certs || !certs.length) { g.innerHTML = '<div class="empty-state">No certificates added yet</div>'; return; }
+  g.innerHTML = certs.map(c => `
+    <div class="cert-card" ${c.link ? `onclick="window.open('${c.link}','_blank')" style="cursor:pointer"` : ''}>
       <div class="cert-icon">${c.icon || '🏆'}</div>
       <div class="cert-name">${c.name}</div>
       <div class="cert-org">${c.org}</div>
@@ -427,301 +148,69 @@ function renderCerts() {
         <span class="cert-badge gold">${c.date}</span>
         ${c.link ? '<span class="cert-badge">🔗</span>' : ''}
       </div>
-      <div class="action-btns edit-only">
-        <button class="btn-sm btn-edit" onclick="event.stopPropagation(); editCert(${i})">Edit</button>
-        <button class="btn-sm btn-del" onclick="event.stopPropagation(); delCert(${i})">Delete</button>
-      </div>
     </div>`).join('');
-  document.getElementById('stat-certs').textContent = certs.length;
 }
 
-function renderSkills() {
+function renderSkills(skills) {
   const g = document.getElementById('skills-grid');
-  if(!skills.length) { g.innerHTML = '<div class="empty-state">No skills added yet</div>'; return; }
-  g.innerHTML = skills.map((s, i) => `
+  if (!skills || !skills.length) { g.innerHTML = '<div class="empty-state">No skills added yet</div>'; return; }
+  g.innerHTML = skills.map(s => `
     <div class="skill-cat-card">
       <div class="skill-cat-title">${s.category}</div>
-      <div class="skill-tags">
-        ${s.items.map(item => `<span class="skill-tag">${item}</span>`).join('')}
-      </div>
-      <div class="action-btns edit-only" style="margin-top: 1.2rem">
-        <button class="btn-sm btn-edit" onclick="editSkill(${i})">Edit</button>
-        <button class="btn-sm btn-del" onclick="delSkill(${i})">Delete</button>
-      </div>
+      <div class="skill-tags">${(s.items||[]).map(i => `<span class="skill-tag">${i}</span>`).join('')}</div>
     </div>`).join('');
 }
 
-function renderLangs() {
+function renderLangs(langs) {
   const g = document.getElementById('langs-grid');
-  if(!langs.length) { g.innerHTML = '<div class="empty-state">No languages added yet</div>'; return; }
-  g.innerHTML = langs.map((l, i) => `
+  if (!langs || !langs.length) { g.innerHTML = '<div class="empty-state">No languages added yet</div>'; return; }
+  g.innerHTML = langs.map(l => `
     <div class="lang-item">
       <div class="lang-header"><span class="lang-name">${l.name}</span><span class="lang-pct">${l.level}</span></div>
-      <div class="lang-bar"><div class="lang-fill" style="width:${(l.val / 4) * 100}%"></div></div>
-      <div class="action-btns edit-only" style="margin-top: 0.8rem">
-        <button class="btn-sm btn-edit" onclick="editLang(${i})">Edit</button>
-        <button class="btn-sm btn-del" onclick="delLang(${i})">Delete</button>
-      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:${(l.val/4)*100}%"></div></div>
     </div>`).join('');
 }
 
-function renderExps() {
+function renderExps(exps) {
   const tl = document.getElementById('timeline');
-  if(!exps.length) { tl.innerHTML = '<div class="empty-state">No experience added yet</div>'; return; }
-  tl.innerHTML = exps.map((e, i) => `
+  if (!exps || !exps.length) { tl.innerHTML = '<div class="empty-state">No experience added yet</div>'; return; }
+  tl.innerHTML = exps.map(e => `
     <div class="tl-item"><div class="tl-dot"></div>
       <div class="tl-card">
         <div class="tl-title">${e.title}</div>
         <div class="tl-org">${e.org}</div>
         <div class="tl-date">📅 ${e.from} — ${e.to}</div>
         <div class="tl-desc">${e.desc}</div>
-        <div class="action-btns edit-only">
-          <button class="btn-sm btn-edit" onclick="editExp(${i})">Edit</button>
-          <button class="btn-sm btn-del" onclick="delExp(${i})">Delete</button>
-        </div>
       </div>
     </div>`).join('');
 }
 
-const CI = {email: '📧', phone: '📱', linkedin: '💼', github: '💻', twitter: '🐦', other: '🔗'};
-function renderContacts() {
+const CI = {email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:'🐦', other:'🔗'};
+function renderContacts(contacts) {
   const g = document.getElementById('contact-grid');
-  if(!contacts.length) { g.innerHTML = '<div class="empty-state">No contact details added yet</div>'; return; }
-  g.innerHTML = contacts.map((c, i) => {
+  if (!contacts || !contacts.length) { g.innerHTML = '<div class="empty-state">No contact details added yet</div>'; return; }
+  g.innerHTML = contacts.map(c => {
     const hr = c.type === 'email' ? `mailto:${c.val}` : c.type === 'phone' ? `tel:${c.val}` : c.val;
-    return `
-    <div style="display:flex; flex-direction:column; gap:0.5rem;">
-      <a class="contact-card" href="${hr}" target="_blank" rel="noopener" style="flex:1" onclick="if(isEditMode) event.preventDefault()">
-        <span class="contact-icon">${c.icon || CI[c.type] || '🔗'}</span>
-        <div><div class="contact-label">${c.label || c.type}</div><div class="contact-val">${c.val}</div></div>
-      </a>
-      <div class="action-btns edit-only" style="margin-top:0">
-        <button class="btn-sm btn-edit" style="flex:1" onclick="editContact(${i})">Edit</button>
-        <button class="btn-sm btn-del" style="flex:1" onclick="delContact(${i})">Delete</button>
-      </div>
-    </div>`;
+    return `<a class="contact-card" href="${hr}" target="_blank" rel="noopener">
+      <span class="contact-icon">${c.icon || CI[c.type] || '🔗'}</span>
+      <div><div class="contact-label">${c.label || c.type}</div><div class="contact-val">${c.val}</div></div>
+    </a>`;
   }).join('');
 }
 
-// --- MODAL ENGINE ---
-let activeSaveCallback = null;
-
-function openModal(title, fields, onSave) {
-  document.getElementById('modal-title').textContent = title;
-  const body = document.getElementById('modal-body');
-  
-  let html = '';
-  fields.forEach(f => {
-    if (f.type === 'textarea') {
-      html += `<div class="form-group"><label>${f.label}</label><textarea id="m_${f.key}">${f.value || ''}</textarea></div>`;
-    } else if (f.type === 'select') {
-      let opts = f.options.map(o => `<option value="${o.val}" ${o.val == (f.value||1) ? 'selected' : ''}>${o.label}</option>`).join('');
-      html += `<div class="form-group"><label>${f.label}</label><select id="m_${f.key}">${opts}</select></div>`;
-    } else {
-      html += `<div class="form-group"><label>${f.label}</label><input type="${f.type || 'text'}" id="m_${f.key}" value="${f.value || ''}"></div>`;
-    }
-  });
-  
-  body.innerHTML = html;
-  activeSaveCallback = () => {
-    let result = {};
-    fields.forEach(f => { result[f.key] = document.getElementById('m_'+f.key).value.trim(); });
-    onSave(result);
-    closeModal();
-    showToast('Saved Successfully');
-  };
-  
-  document.getElementById('modal-save').onclick = activeSaveCallback;
-  document.getElementById('dynamic-modal').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  document.getElementById('dynamic-modal').classList.remove('show');
-  document.body.style.overflow = '';
-  activeSaveCallback = null;
-}
-
-// --- CRUD OPERATIONS ---
-
-// Profile
-function editProfile() {
-  openModal('Edit Hero Information', [
-    {key: 'name', label: 'Full Name', value: profile.name},
-    {key: 'title', label: 'Professional Title', value: profile.title},
-    {key: 'tag', label: 'Availability Tag', value: profile.tag},
-    {key: 'bio', label: 'Short Bio', type: 'textarea', value: profile.bio}
-  ], (data) => {
-    profile = {...profile, ...data};
-    LS.set('cv_profile', profile);
-    renderProfile();
-  });
-}
-
-function editAbout() {
-  openModal('Edit About Section', [
-    {key: 'major', label: 'Major', value: profile.major},
-    {key: 'uni', label: 'University', value: profile.uni},
-    {key: 'gpa', label: 'GPA', value: profile.gpa},
-    {key: 'grad', label: 'Graduation Year', value: profile.grad},
-    {key: 'exp', label: 'Years of Experience', value: profile.exp},
-    {key: 'about', label: 'Detailed About Text', type: 'textarea', value: profile.about}
-  ], (data) => {
-    profile = {...profile, ...data};
-    LS.set('cv_profile', profile);
-    renderProfile();
-  });
-}
-
-// Certs
-function editCert(i) {
-  const c = certs[i];
-  openModal('Edit Certificate', [
-    {key: 'name', label: 'Certificate Name', value: c.name},
-    {key: 'org', label: 'Organization', value: c.org},
-    {key: 'date', label: 'Year / Date', value: c.date},
-    {key: 'icon', label: 'Icon (Emoji)', value: c.icon},
-    {key: 'link', label: 'URL (Optional)', value: c.link}
-  ], (data) => { certs[i] = data; LS.set('cv_certs', certs); renderCerts(); });
-}
-function addCert() {
-  openModal('Add Certificate', [
-    {key: 'name', label: 'Certificate Name'},
-    {key: 'org', label: 'Organization'},
-    {key: 'date', label: 'Year / Date'},
-    {key: 'icon', label: 'Icon (Emoji)', value: '🏆'},
-    {key: 'link', label: 'URL (Optional)'}
-  ], (data) => { certs.push(data); LS.set('cv_certs', certs); renderCerts(); });
-}
-function delCert(i) {
-  if(confirm('Delete this certificate?')) { certs.splice(i, 1); LS.set('cv_certs', certs); renderCerts(); showToast('Deleted'); }
-}
-
-// Skills (Updated to comma-separated tags)
-function editSkill(i) {
-  const s = skills[i];
-  openModal('Edit Skill Category', [
-    {key: 'category', label: 'Category Name', value: s.category},
-    {key: 'items', label: 'Skills (Comma Separated)', type: 'textarea', value: s.items.join(', ')}
-  ], (data) => { 
-    skills[i] = {category: data.category, items: data.items.split(',').map(x => x.trim()).filter(x => x)}; 
-    LS.set('cv_skills', skills); renderSkills(); 
-  });
-}
-function addSkill() {
-  openModal('Add Skill Category', [
-    {key: 'category', label: 'Category Name'},
-    {key: 'items', label: 'Skills (Comma Separated)', type: 'textarea'}
-  ], (data) => { 
-    skills.push({category: data.category, items: data.items.split(',').map(x => x.trim()).filter(x => x)}); 
-    LS.set('cv_skills', skills); renderSkills(); 
-  });
-}
-function delSkill(i) {
-  if(confirm('Delete this skill category?')) { skills.splice(i, 1); LS.set('cv_skills', skills); renderSkills(); showToast('Deleted'); }
-}
-
-// Languages
-const LANG_LEVELS = [
-  { val: 1, label: 'Beginner' },
-  { val: 2, label: 'Intermediate' },
-  { val: 3, label: 'Advanced' },
-  { val: 4, label: 'Native / Mother Tongue' }
-];
-
-function editLang(i) {
-  const l = langs[i];
-  openModal('Edit Language', [
-    {key: 'name', label: 'Language Name', value: l.name},
-    {key: 'val', label: 'Proficiency Level', type: 'select', options: LANG_LEVELS, value: l.val}
-  ], (data) => { 
-    let lvlObj = LANG_LEVELS.find(x => x.val == data.val);
-    langs[i] = { name: data.name, val: parseInt(data.val), level: lvlObj.label };
-    LS.set('cv_langs', langs); renderLangs(); 
-  });
-}
-function addLang() {
-  openModal('Add Language', [
-    {key: 'name', label: 'Language Name'},
-    {key: 'val', label: 'Proficiency Level', type: 'select', options: LANG_LEVELS, value: 1}
-  ], (data) => { 
-    let lvlObj = LANG_LEVELS.find(x => x.val == data.val);
-    langs.push({ name: data.name, val: parseInt(data.val), level: lvlObj.label });
-    LS.set('cv_langs', langs); renderLangs(); 
-  });
-}
-function delLang(i) {
-  if(confirm('Delete this language?')) { langs.splice(i, 1); LS.set('cv_langs', langs); renderLangs(); showToast('Deleted'); }
-}
-
-// Experience
-function editExp(i) {
-  const e = exps[i];
-  openModal('Edit Experience', [
-    {key: 'title', label: 'Job Title', value: e.title},
-    {key: 'org', label: 'Company / Organization', value: e.org},
-    {key: 'from', label: 'Start Date', value: e.from},
-    {key: 'to', label: 'End Date', value: e.to},
-    {key: 'desc', label: 'Description', type: 'textarea', value: e.desc}
-  ], (data) => { exps[i] = data; LS.set('cv_exps', exps); renderExps(); });
-}
-function addExp() {
-  openModal('Add Experience', [
-    {key: 'title', label: 'Job Title'},
-    {key: 'org', label: 'Company / Organization'},
-    {key: 'from', label: 'Start Date'},
-    {key: 'to', label: 'End Date'},
-    {key: 'desc', label: 'Description', type: 'textarea'}
-  ], (data) => { exps.unshift(data); LS.set('cv_exps', exps); renderExps(); });
-}
-function delExp(i) {
-  if(confirm('Delete this experience?')) { exps.splice(i, 1); LS.set('cv_exps', exps); renderExps(); showToast('Deleted'); }
-}
-
-// Contact
-function editContact(i) {
-  const c = contacts[i];
-  openModal('Edit Contact', [
-    {key: 'type', label: 'Type (email, phone, linkedin, etc)', value: c.type},
-    {key: 'label', label: 'Label', value: c.label},
-    {key: 'val', label: 'Value / URL', value: c.val},
-    {key: 'icon', label: 'Icon (Emoji)', value: c.icon}
-  ], (data) => { contacts[i] = data; LS.set('cv_contacts', contacts); renderContacts(); });
-}
-function addContact() {
-  openModal('Add Contact', [
-    {key: 'type', label: 'Type (email, phone, linkedin, etc)', value: 'other'},
-    {key: 'label', label: 'Label', value: 'Website'},
-    {key: 'val', label: 'Value / URL'},
-    {key: 'icon', label: 'Icon (Emoji)', value: '🔗'}
-  ], (data) => { contacts.push(data); LS.set('cv_contacts', contacts); renderContacts(); });
-}
-function delContact(i) {
-  if(confirm('Delete this contact?')) { contacts.splice(i, 1); LS.set('cv_contacts', contacts); renderContacts(); showToast('Deleted'); }
-}
-
-function showToast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg; el.classList.add('show');
-  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2400);
-}
-
-function resetAll() {
-  if(!confirm('Are you sure you want to reset all data back to default?')) return;
-  localStorage.clear(); initData();
-  profile = LS.get('cv_profile', SEED.profile); certs = LS.get('cv_certs', SEED.certs);
-  skills = LS.get('cv_skills', SEED.skills);    langs = LS.get('cv_langs', SEED.langs);
-  exps = LS.get('cv_exps', SEED.exps);          contacts = LS.get('cv_contacts', SEED.contacts); 
-  settings = LS.get('cv_settings', SEED.settings);
-  applyTheme(settings.theme);
-  renderAll(); showToast('Data Reset Successfully');
-}
-
-// Init Check and Render
-checkSecretAccess();
-window.addEventListener('hashchange', checkSecretAccess);
-applyTheme(settings.theme || 'dark');
-renderAll();
+// ---- live subscription: page updates instantly whenever the admin saves ----
+subscribeToPortfolio((data) => {
+  if (!data) {
+    document.getElementById('hero-tag').textContent = 'No data yet';
+    return;
+  }
+  renderProfile(data.profile || {}, (data.certs || []).length);
+  renderCerts(data.certs);
+  renderSkills(data.skills);
+  renderLangs(data.langs);
+  renderExps(data.exps);
+  renderContacts(data.contacts);
+}, () => showToast('Could not load live data — check your connection', true));
 </script>
 </body>
 </html>
