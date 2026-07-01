@@ -6,54 +6,165 @@
 <title>Abdullelah Moqbail — Portfolio</title>
 <meta name="description" content="Information Technology student portfolio — certificates, skills, experience and contact.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="toast" id="toast"></div>
-
-<nav>
-  <span class="nav-logo"><span class="ring">AM</span></span>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#certs">Certificates</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#languages">Languages</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="nav-controls">
-    <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle light/dark theme">☀️</button>
-  </div>
-</nav>
-
-<div class="hero">
-  <div class="hero-bg"></div><div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-tag" id="hero-tag">Loading…</div>
-    <h1 id="hero-name">&nbsp;</h1>
-    <p id="hero-title"></p>
-    <p id="hero-bio"></p>
-    <div class="hero-stats">
-      <div class="stat-box"><div class="stat-num" id="stat-gpa">—</div><div class="stat-label">GPA</div></div>
-      <div class="stat-box"><div class="stat-num" id="stat-grad">—</div><div class="stat-label">Grad Year</div></div>
-      <div class="stat-box"><div class="stat-num" id="stat-certs">0</div><div class="stat-label">Certs</div></div>
-      <div class="stat-box"><div class="stat-num" id="stat-exp">—</div><div class="stat-label">Yrs Exp</div></div>
+<!-- ════════ PRELOADER ════════ -->
+<div class="preloader" id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-ring">
+      <svg viewBox="0 0 100 100" class="preloader-svg">
+        <circle class="preloader-circle" cx="50" cy="50" r="45"/>
+      </svg>
+      <span class="preloader-am">AM</span>
     </div>
-    <div class="hero-actions">
-      <a href="Abdullelah_Moqbil_CV.pdf" download class="btn-primary">📥 Download CV</a>
-      <a href="https://github.com/abmoqbil" target="_blank" rel="noopener" class="btn-outline">💻 GitHub</a>
-      <a href="#certs" class="btn-outline">View Certificates</a>
+    <div class="preloader-text">
+      <span class="preloader-line">LOADING EXPERIENCE</span>
+      <div class="preloader-bar"><div class="preloader-bar-fill" id="preloader-fill"></div></div>
+      <span class="preloader-pct" id="preloader-pct">0%</span>
     </div>
   </div>
 </div>
 
+<!-- ════════ CUSTOM CURSOR ════════ -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ════════ SCROLL PROGRESS ════════ -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- ════════ PARTICLE CANVAS ════════ -->
+<canvas class="particle-canvas" id="particle-canvas"></canvas>
+
+<!-- ════════ ANIMATED GRADIENT MESH BACKGROUND ════════ -->
+<div class="mesh-bg">
+  <div class="mesh-blob mesh-blob-1"></div>
+  <div class="mesh-blob mesh-blob-2"></div>
+  <div class="mesh-blob mesh-blob-3"></div>
+  <div class="mesh-grid"></div>
+</div>
+
+<!-- ════════ NOISE OVERLAY ════════ -->
+<div class="noise-overlay"></div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ════════ NAV ════════ -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo" data-magnetic>
+    <span class="ring">AM</span>
+    <span class="nav-logo-text">Abdullelah</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about" data-nav-link data-magnetic>About</a></li>
+    <li><a href="#certs" data-nav-link data-magnetic>Certificates</a></li>
+    <li><a href="#skills" data-nav-link data-magnetic>Skills</a></li>
+    <li><a href="#languages" data-nav-link data-magnetic>Languages</a></li>
+    <li><a href="#experience" data-nav-link data-magnetic>Experience</a></li>
+    <li><a href="#contact" data-nav-link data-magnetic>Contact</a></li>
+  </ul>
+  <div class="nav-controls">
+    <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle light/dark theme" data-magnetic>☀️</button>
+  </div>
+  <div class="nav-progress-track"><div class="nav-progress-fill" id="nav-progress"></div></div>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<div class="hero" id="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-rings">
+    <div class="hero-ring hero-ring-1"></div>
+    <div class="hero-ring hero-ring-2"></div>
+    <div class="hero-ring hero-ring-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag" id="hero-tag" data-reveal="fade-down">Loading…</div>
+
+    <h1 id="hero-name" class="hero-name" data-reveal-text>&nbsp;</h1>
+
+    <p id="hero-title" class="hero-title" data-reveal="fade-up" data-delay="200"></p>
+
+    <div class="hero-bio-wrap" data-reveal="fade-up" data-delay="350">
+      <p id="hero-bio"></p>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-box" data-reveal="fade-up" data-delay="500" data-tilt>
+        <div class="stat-num" id="stat-gpa" data-count-up>—</div>
+        <div class="stat-label">GPA</div>
+        <div class="stat-shine"></div>
+      </div>
+      <div class="stat-box" data-reveal="fade-up" data-delay="600" data-tilt>
+        <div class="stat-num" id="stat-grad" data-count-up>—</div>
+        <div class="stat-label">Grad Year</div>
+        <div class="stat-shine"></div>
+      </div>
+      <div class="stat-box" data-reveal="fade-up" data-delay="700" data-tilt>
+        <div class="stat-num" id="stat-certs" data-count-up>0</div>
+        <div class="stat-label">Certs</div>
+        <div class="stat-shine"></div>
+      </div>
+      <div class="stat-box" data-reveal="fade-up" data-delay="800" data-tilt>
+        <div class="stat-num" id="stat-exp" data-count-up>—</div>
+        <div class="stat-label">Yrs Exp</div>
+        <div class="stat-shine"></div>
+      </div>
+    </div>
+
+    <div class="hero-actions" data-reveal="fade-up" data-delay="950">
+      <a href="Abdullelah_Moqbil_CV.pdf" download class="btn-primary magnetic" data-magnetic>
+        <span class="btn-label">Download CV</span>
+        <span class="btn-icon">↓</span>
+        <span class="btn-shine"></span>
+      </a>
+      <a href="https://github.com/abmoqbil" target="_blank" rel="noopener" class="btn-outline magnetic" data-magnetic>
+        <span>GitHub</span>
+        <span class="btn-icon">↗</span>
+      </a>
+      <a href="#certs" class="btn-ghost magnetic" data-magnetic data-nav-link>
+        <span>View Certificates</span>
+        <span class="btn-icon">→</span>
+      </a>
+    </div>
+
+    <div class="hero-scroll-cue" data-reveal="fade-up" data-delay="1100">
+      <span>SCROLL</span>
+      <div class="scroll-cue-line"><div class="scroll-cue-dot"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ ABOUT ════════ -->
 <section id="about">
-  <div class="section-header"><div class="section-label"><h2>About Me <span class="dot">•</span></h2></div></div>
+  <div class="section-header">
+    <div class="section-label" data-reveal="fade-right">
+      <span class="section-num">01</span>
+      <h2>About Me <span class="dot">•</span></h2>
+    </div>
+    <div class="section-line" data-reveal="fade-left"></div>
+  </div>
   <div class="about-grid">
-    <div><p id="about-text" style="color:var(--muted);line-height:2;font-size:.93rem;"></p></div>
-    <div class="about-card">
+    <div data-reveal="fade-right">
+      <p id="about-text" class="about-text"></p>
+      <div class="about-marquee">
+        <div class="marquee-track">
+          <span>IT Student</span><span class="marquee-dot">◆</span>
+          <span>Software Dev</span><span class="marquee-dot">◆</span>
+          <span>Database Designer</span><span class="marquee-dot">◆</span>
+          <span>Problem Solver</span><span class="marquee-dot">◆</span>
+          <span>IT Student</span><span class="marquee-dot">◆</span>
+          <span>Software Dev</span><span class="marquee-dot">◆</span>
+          <span>Database Designer</span><span class="marquee-dot">◆</span>
+          <span>Problem Solver</span><span class="marquee-dot">◆</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-card" data-reveal="fade-left" data-tilt>
+      <div class="about-card-glow"></div>
       <h3>ACADEMIC INFO</h3>
       <div class="info-row"><span class="info-lbl">Major</span><span class="info-val" id="info-major">—</span></div>
       <div class="info-row"><span class="info-lbl">University</span><span class="info-val" id="info-uni">—</span></div>
@@ -63,41 +174,81 @@
   </div>
 </section>
 
+<!-- ════════ CERTIFICATES ════════ -->
 <section id="certs">
-  <div class="section-header"><div class="section-label"><h2>Certificates <span class="dot">•</span></h2></div></div>
+  <div class="section-header">
+    <div class="section-label" data-reveal="fade-right">
+      <span class="section-num">02</span>
+      <h2>Certificates <span class="dot">•</span></h2>
+    </div>
+    <div class="section-line" data-reveal="fade-left"></div>
+  </div>
   <div class="certs-grid" id="certs-grid"></div>
 </section>
 
+<!-- ════════ SKILLS ════════ -->
 <section id="skills">
-  <div class="section-header"><div class="section-label"><h2>Skills <span class="dot">•</span></h2></div></div>
+  <div class="section-header">
+    <div class="section-label" data-reveal="fade-right">
+      <span class="section-num">03</span>
+      <h2>Skills <span class="dot">•</span></h2>
+    </div>
+    <div class="section-line" data-reveal="fade-left"></div>
+  </div>
   <div class="skills-grid" id="skills-grid"></div>
 </section>
 
+<!-- ════════ LANGUAGES ════════ -->
 <section id="languages">
-  <div class="section-header"><div class="section-label"><h2>Languages <span class="dot">•</span></h2></div></div>
+  <div class="section-header">
+    <div class="section-label" data-reveal="fade-right">
+      <span class="section-num">04</span>
+      <h2>Languages <span class="dot">•</span></h2>
+    </div>
+    <div class="section-line" data-reveal="fade-left"></div>
+  </div>
   <div class="langs-grid" id="langs-grid"></div>
 </section>
 
+<!-- ════════ EXPERIENCE ════════ -->
 <section id="experience">
-  <div class="section-header"><div class="section-label"><h2>Experience <span class="dot">•</span></h2></div></div>
+  <div class="section-header">
+    <div class="section-label" data-reveal="fade-right">
+      <span class="section-num">05</span>
+      <h2>Experience <span class="dot">•</span></h2>
+    </div>
+    <div class="section-line" data-reveal="fade-left"></div>
+  </div>
   <div class="timeline" id="timeline"></div>
 </section>
 
+<!-- ════════ CONTACT ════════ -->
 <section id="contact">
-  <div class="section-header"><div class="section-label"><h2>Contact <span class="dot">•</span></h2></div></div>
+  <div class="section-header">
+    <div class="section-label" data-reveal="fade-right">
+      <span class="section-num">06</span>
+      <h2>Contact <span class="dot">•</span></h2>
+    </div>
+    <div class="section-line" data-reveal="fade-left"></div>
+  </div>
   <div class="contact-grid" id="contact-grid"></div>
 </section>
 
 <footer>
-  <p>Made with ❤ &nbsp;·&nbsp; <span id="footer-name">Abdullelah Moqbail</span></p>
+  <div class="footer-inner">
+    <div class="footer-mark">AM</div>
+    <p>Made with <span class="heart">♥</span> · <span id="footer-name">Abdullelah Moqbail</span></p>
+    <p class="footer-year" id="footer-year"></p>
+  </div>
 </footer>
 
-<!-- Firebase (compat SDK — no build step needed) -->
+<!-- Firebase (compat SDK — no build step needed). Optional: works without it via SEED_DATA fallback -->
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="portfolio-data.js"></script>
+<script src="animations.js"></script>
 <script>
 // ---- theme (per-visitor preference only, stored locally) ----
 function applyTheme(t) {
@@ -108,8 +259,12 @@ function applyTheme(t) {
 function toggleTheme() {
   const cur = document.documentElement.getAttribute('data-theme');
   applyTheme(cur === 'dark' ? 'light' : 'dark');
+  // Theme-switch ripple
+  document.body.classList.add('theme-rippling');
+  setTimeout(() => document.body.classList.remove('theme-rippling'), 600);
 }
 applyTheme((() => { try { return localStorage.getItem('cv_theme') || 'dark'; } catch { return 'dark'; } })());
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 
 function showToast(msg, isError) {
   const el = document.getElementById('toast');
@@ -124,78 +279,110 @@ function renderProfile(p, certCount) {
   document.getElementById('hero-bio').textContent   = p.bio || '';
   document.getElementById('hero-tag').textContent   = p.tag || '';
   document.getElementById('footer-name').textContent= p.name || '';
-  document.getElementById('stat-gpa').textContent   = p.gpa || '—';
-  document.getElementById('stat-grad').textContent  = p.grad || '—';
-  document.getElementById('stat-exp').textContent   = p.exp || '—';
-  document.getElementById('stat-certs').textContent = certCount;
+
+  // Stats — for count-up, store target in data-count attribute
+  const gpa = p.gpa || '—';
+  const grad = p.grad || '—';
+  const exp = p.exp || '—';
+  setStat('stat-gpa', gpa);
+  setStat('stat-grad', grad);
+  setStat('stat-exp', exp);
+  setStat('stat-certs', certCount);
+
   document.getElementById('about-text').textContent = p.about || '';
   document.getElementById('info-major').textContent = p.major || '—';
   document.getElementById('info-uni').textContent   = p.uni || '—';
   document.getElementById('info-grad2').textContent = p.grad || '—';
   document.getElementById('info-gpa2').textContent  = p.gpa || '—';
   document.title = (p.name || 'Portfolio') + ' — Portfolio';
+
+  // Trigger hero text reveal animation after data loads
+  if (window.CvAnimations && window.CvAnimations.revealHero) window.CvAnimations.revealHero();
+}
+
+function setStat(id, val) {
+  const el = document.getElementById(id);
+  if (typeof val === 'number' || /^\d+(\.\d+)?$/.test(String(val))) {
+    el.setAttribute('data-count', val);
+    el.textContent = '0';
+  } else {
+    el.textContent = val;
+  }
 }
 
 function renderCerts(certs) {
   const g = document.getElementById('certs-grid');
   if (!certs || !certs.length) { g.innerHTML = '<div class="empty-state">No certificates added yet</div>'; return; }
-  g.innerHTML = certs.map(c => `
-    <div class="cert-card" ${c.link ? `onclick="window.open('${c.link}','_blank')" style="cursor:pointer"` : ''}>
+  g.innerHTML = certs.map((c, i) => `
+    <div class="cert-card" data-reveal="fade-up" data-delay="${i * 80}" data-tilt ${c.link ? `onclick="window.open('${c.link}','_blank')" style="cursor:pointer"` : ''}>
+      <div class="cert-shine"></div>
+      <div class="cert-num">${String(i+1).padStart(2,'0')}</div>
       <div class="cert-icon">${c.icon || '🏆'}</div>
       <div class="cert-name">${c.name}</div>
       <div class="cert-org">${c.org}</div>
       <div class="cert-meta">
         <span class="cert-badge gold">${c.date}</span>
-        ${c.link ? '<span class="cert-badge">🔗</span>' : ''}
+        ${c.link ? '<span class="cert-badge">🔗 Link</span>' : ''}
       </div>
+      <div class="cert-arrow">→</div>
     </div>`).join('');
+  if (window.CvAnimations) window.CvAnimations.observeReveals();
 }
 
 function renderSkills(skills) {
   const g = document.getElementById('skills-grid');
   if (!skills || !skills.length) { g.innerHTML = '<div class="empty-state">No skills added yet</div>'; return; }
-  g.innerHTML = skills.map(s => `
-    <div class="skill-cat-card">
+  g.innerHTML = skills.map((s, i) => `
+    <div class="skill-cat-card" data-reveal="fade-up" data-delay="${i * 80}" data-tilt>
+      <div class="skill-cat-glow"></div>
       <div class="skill-cat-title">${s.category}</div>
-      <div class="skill-tags">${(s.items||[]).map(i => `<span class="skill-tag">${i}</span>`).join('')}</div>
+      <div class="skill-tags">${(s.items||[]).map(i => `<span class="skill-tag" data-magnetic>${i}</span>`).join('')}</div>
     </div>`).join('');
+  if (window.CvAnimations) window.CvAnimations.observeReveals();
 }
 
 function renderLangs(langs) {
   const g = document.getElementById('langs-grid');
   if (!langs || !langs.length) { g.innerHTML = '<div class="empty-state">No languages added yet</div>'; return; }
-  g.innerHTML = langs.map(l => `
-    <div class="lang-item">
+  g.innerHTML = langs.map((l, i) => `
+    <div class="lang-item" data-reveal="fade-up" data-delay="${i * 100}">
       <div class="lang-header"><span class="lang-name">${l.name}</span><span class="lang-pct">${l.level}</span></div>
-      <div class="lang-bar"><div class="lang-fill" style="width:${(l.val/4)*100}%"></div></div>
+      <div class="lang-bar"><div class="lang-fill" data-width="${(l.val/4)*100}%"></div></div>
+      <div class="lang-dots">${[1,2,3,4].map(n => `<span class="lang-dot ${n<=l.val?'on':''}"></span>`).join('')}</div>
     </div>`).join('');
+  if (window.CvAnimations) window.CvAnimations.observeReveals();
 }
 
 function renderExps(exps) {
   const tl = document.getElementById('timeline');
   if (!exps || !exps.length) { tl.innerHTML = '<div class="empty-state">No experience added yet</div>'; return; }
-  tl.innerHTML = exps.map(e => `
-    <div class="tl-item"><div class="tl-dot"></div>
-      <div class="tl-card">
+  tl.innerHTML = exps.map((e, i) => `
+    <div class="tl-item" data-reveal="fade-left" data-delay="${i * 120}">
+      <div class="tl-dot"><div class="tl-dot-pulse"></div></div>
+      <div class="tl-card" data-tilt>
+        <div class="tl-card-glow"></div>
         <div class="tl-title">${e.title}</div>
         <div class="tl-org">${e.org}</div>
         <div class="tl-date">📅 ${e.from} — ${e.to}</div>
         <div class="tl-desc">${e.desc}</div>
       </div>
     </div>`).join('');
+  if (window.CvAnimations) window.CvAnimations.observeReveals();
 }
 
 const CI = {email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:'🐦', other:'🔗'};
 function renderContacts(contacts) {
   const g = document.getElementById('contact-grid');
   if (!contacts || !contacts.length) { g.innerHTML = '<div class="empty-state">No contact details added yet</div>'; return; }
-  g.innerHTML = contacts.map(c => {
+  g.innerHTML = contacts.map((c, i) => {
     const hr = c.type === 'email' ? `mailto:${c.val}` : c.type === 'phone' ? `tel:${c.val}` : c.val;
-    return `<a class="contact-card" href="${hr}" target="_blank" rel="noopener">
+    return `<a class="contact-card" href="${hr}" target="_blank" rel="noopener" data-reveal="fade-up" data-delay="${i * 80}" data-tilt data-magnetic>
       <span class="contact-icon">${c.icon || CI[c.type] || '🔗'}</span>
       <div><div class="contact-label">${c.label || c.type}</div><div class="contact-val">${c.val}</div></div>
+      <span class="contact-arrow">↗</span>
     </a>`;
   }).join('');
+  if (window.CvAnimations) window.CvAnimations.observeReveals();
 }
 
 // ---- live subscription: page updates instantly whenever the admin saves ----
