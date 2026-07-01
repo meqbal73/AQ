@@ -4,10 +4,11 @@
 // → "Your apps" → Web app → SDK setup and configuration
 // ─────────────────────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDb8DKwUExSIOgLjMhC-k7LtC-53vWc4FU",
+  authDomain: "abdulelahcv-ce8ef.firebaseapp.com",
+  projectId: "abdulelahcv-ce8ef",
+  storageBucket: "abdulelahcv-ce8ef.firebasestorage.app",
+  messagingSenderId: "1076530973530",
+  appId: "1:1076530973530:web:0ef449737d1bb4ab094163",
+  measurementId: "G-DSRYXKJQ75"
 };
