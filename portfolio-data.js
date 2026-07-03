@@ -1,15 +1,9 @@
 // ─────────────────────────────────────────────────────────────
-// Shared Firestore data layer.
-// Loaded after firebase-config.js and the Firebase compat SDK scripts.
+// Shared Firestore data layer with STANDALONE FALLBACK.
+// If firebaseConfig is not configured, we just use SEED_DATA
+// directly so the public page renders without any setup.
 // ─────────────────────────────────────────────────────────────
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const PORTFOLIO_DOC = db.collection('portfolio').doc('main');
-
-// Default content used only the very first time the Firestore document
-// is created (via "Import Starter Data" in the admin page).
 const SEED_DATA = {
   profile: {
     name: 'Abdullelah Mohammed Moqbail',
@@ -57,12 +51,36 @@ const SEED_DATA = {
   ]
 };
 
+// Detect whether firebaseConfig has been filled in by the user.
+function firebaseConfigured() {
+  try {
+    if (typeof firebaseConfig === 'undefined') return false;
+    if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith('YOUR_')) return false;
+    if (!firebaseConfig.projectId || firebaseConfig.projectId.startsWith('YOUR_')) return false;
+    return true;
+  } catch { return false; }
+}
+
+let db = null, auth = null, PORTFOLIO_DOC = null;
+
+if (typeof firebase !== 'undefined' && firebaseConfigured()) {
+  // ── Live Firebase mode ──
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  auth = firebase.auth();
+  PORTFOLIO_DOC = db.collection('portfolio').doc('main');
+}
+
 /**
- * Live-subscribe to the single portfolio document. Fires immediately with
- * current data, then again on every future change (from any tab / device).
- * Returns the unsubscribe function.
+ * Live-subscribe to the single portfolio document.
+ * If Firebase isn't configured, immediately returns SEED_DATA and never fires again.
  */
 function subscribeToPortfolio(onData, onError) {
+  if (!PORTFOLIO_DOC) {
+    // Standalone mode — just emit the seed data once.
+    setTimeout(() => onData(SEED_DATA), 50);
+    return () => {};
+  }
   return PORTFOLIO_DOC.onSnapshot(
     (snap) => onData(snap.exists ? snap.data() : null),
     (err) => { console.error('Firestore read error:', err); if (onError) onError(err); }
@@ -71,11 +89,19 @@ function subscribeToPortfolio(onData, onError) {
 
 /** Overwrite the whole document (used for section-level saves). */
 function savePortfolio(partialData) {
+  if (!PORTFOLIO_DOC) {
+    console.warn('savePortfolio: Firebase not configured — running in standalone mode.');
+    return Promise.reject(new Error('Firebase not configured'));
+  }
   return PORTFOLIO_DOC.set(partialData, { merge: true });
 }
 
 /** Create the document with starter content, but only if it doesn't exist yet. */
 async function seedIfEmpty() {
+  if (!PORTFOLIO_DOC) {
+    console.warn('seedIfEmpty: Firebase not configured.');
+    return false;
+  }
   const snap = await PORTFOLIO_DOC.get();
   if (!snap.exists) {
     await PORTFOLIO_DOC.set(SEED_DATA);
