@@ -39,9 +39,22 @@
   </ul>
   <div class="nav-controls">
     <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle light/dark theme">☀️</button>
+    <button class="ctrl-btn hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
   <div class="nav-progress-track"><div class="nav-progress-fill" id="nav-progress"></div></div>
 </nav>
+
+<!-- Mobile slide-down menu -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a href="#about" data-mobile-link>About</a>
+  <a href="#certs" data-mobile-link>Certificates</a>
+  <a href="#skills" data-mobile-link>Skills</a>
+  <a href="#languages" data-mobile-link>Languages</a>
+  <a href="#experience" data-mobile-link>Experience</a>
+  <a href="#contact" data-mobile-link>Contact</a>
+</div>
 
 <!-- ════════ HERO ════════ -->
 <div class="hero" id="hero">
