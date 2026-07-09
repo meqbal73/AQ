@@ -231,7 +231,7 @@
 // ---- theme (per-visitor preference only, stored locally) ----
 function applyTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('theme-btn').textContent = t === 'dark' ? '☀️' : '🌙';
+  document.getElementById('theme-btn').textContent = t === 'dark' ? 'Light' : 'Dark';
   try { localStorage.setItem('cv_theme', t); } catch {}
 }
 function toggleTheme() {
@@ -315,7 +315,7 @@ function renderLangs(langs) {
     <div class="lang-item" data-reveal="fade-up" data-delay="${i * 80}">
       <div class="lang-header"><span class="lang-name">${l.name}</span><span class="lang-pct">${l.level}</span></div>
       <div class="lang-bar"><div class="lang-fill" data-width="${(l.val/4)*100}%"></div></div>
-      <div class="lang-dots">${[1,2,3,4].map(n => `<span class="lang-dot ${n<=l.val?'on':''}"></span>`).join('')}</div>
+      <div class="lang-dots">${[1,2,3,4,5].map(n => `<span class="lang-dot ${n<=l.val?'on':''}"></span>`).join('')}</div>
     </div>`).join('');
   if (window.CvAnimations) {
     window.CvAnimations.observeReveals();
