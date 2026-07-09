@@ -32,13 +32,13 @@ const SEED_DATA = {
     {category: 'Other', items: ['UI/UX Prototyping', 'Data Analysis']}
   ],
   langs: [
-    {name: 'Arabic', val: 4, level: 'Native / Mother Tongue'},
-    {name: 'English', val: 1, level: 'Beginner'}
+    {name: 'Arabic', val: 5, level: 'Native / Mother Tongue'},
+    {name: 'English', val: 4, level: 'Native'}
   ],
   exps: [
     {title: 'Crowd Management & Rapid Intervention Organizer', org: 'SAR (Saudi Railway Company)', from: 'Jun 2026', to: 'Jun 2026',
      desc: 'Managed crowd control and rapid intervention operations, ensuring safety and organization for large volumes of attendees.'},
-    {title: 'Logistics & Operations Associate', org: 'MARN Platform (Amazon) — Jeddah', from: 'May 2025', to: 'Jun 2026',
+    {title: 'Logistics & Operations Associate', org: 'MARN Platform (Amazon) — Jeddah', from: 'May 2025', to: 'Present',
      desc: 'Utilized smart devices, scanning apps, and barcode technology to sort and track products. Applied "5S" methodologies. Managed shipment packing, loading, and unloading. Received a certificate of excellence for outstanding work performance.'},
     {title: 'Event Organizer & Security Guard', org: 'SELLA Security Guards Company — Ramadan Season', from: 'Mar 2024', to: 'Apr 2024',
      desc: 'Coordinated crowd control and ensured a safe and smooth experience for a large volume of attendees and tourists. Demonstrated strong communication skills in a fast-paced environment.'}
