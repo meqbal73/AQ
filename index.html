@@ -376,14 +376,21 @@ const CI = {email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:
 function renderContacts(contacts) {
   const g = document.getElementById('contact-grid');
   if (!contacts || !contacts.length) { g.innerHTML = '<div class="empty-state">No contact details added yet</div>'; return; }
+
   g.innerHTML = contacts.map((c, i) => {
     const hr = c.type === 'email' ? `mailto:${c.val}` : c.type === 'phone' ? `tel:${c.val}` : c.val;
+    const showValue = c.type === 'email' || c.type === 'phone';
+
     return `<a class="contact-card" href="${hr}" target="_blank" rel="noopener" data-reveal="fade-up" data-delay="${i * 60}">
       <span class="contact-icon">${c.icon || CI[c.type] || '🔗'}</span>
-      <div><div class="contact-label">${c.label || c.type}</div><div class="contact-val">${c.val}</div></div>
+      <div>
+        <div class="contact-label">${c.label || c.type}</div>
+        ${showValue ? `<div class="contact-val">${c.val}</div>` : ''}
+      </div>
       <span class="contact-arrow">↗</span>
     </a>`;
   }).join('');
+
   if (window.CvAnimations) window.CvAnimations.observeReveals();
 }
 
