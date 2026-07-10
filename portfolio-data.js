@@ -36,13 +36,28 @@ const SEED_DATA = {
     {name: 'English', val: 4, level: 'Native'}
   ],
   exps: [
-    {title: 'Crowd Management & Rapid Intervention Organizer', org: 'SAR (Saudi Railway Company)', from: 'Jun 2026', to: 'Jun 2026',
-     desc: 'Managed crowd control and rapid intervention operations, ensuring safety and organization for large volumes of attendees.'},
-    {title: 'Logistics & Operations Associate', org: 'MARN Platform (Amazon) — Jeddah', from: 'May 2025', to: 'Present',
-     desc: 'Utilized smart devices, scanning apps, and barcode technology to sort and track products. Applied "5S" methodologies. Managed shipment packing, loading, and unloading. Received a certificate of excellence for outstanding work performance.'},
-    {title: 'Event Organizer & Security Guard', org: 'SELLA Security Guards Company — Ramadan Season', from: 'Mar 2024', to: 'Apr 2024',
-     desc: 'Coordinated crowd control and ensured a safe and smooth experience for a large volume of attendees and tourists. Demonstrated strong communication skills in a fast-paced environment.'}
-  ],
+  {
+    title: 'Logistics & Operations Associate',
+    org: 'MARN Platform (Amazon Operations) — Jeddah',
+    from: 'May 2025',
+    to: 'Present',
+    desc: 'Utilized smart devices, scanning applications, and barcode technology to sort, track, and process products efficiently. Applied "5S" workplace organization methodologies to maintain a structured, safe, and highly productive work environment. Managed the packaging, loading, and unloading of shipments while adhering to strict quality and safety standards. Recognized with a Certificate of Excellence for outstanding work performance and effective customer communication.'
+  },
+  {
+    title: 'Event Organizer & Security Guard',
+    org: 'SELLA Security Guards Company — Ramadan Season',
+    from: 'Mar 2024',
+    to: 'Mar 2024',
+    desc: 'Coordinated crowd control and ensured a smooth, secure experience for high-volume attendees and tourists. Demonstrated strong communication and problem-solving skills in a fast-paced environment.'
+  },
+  {
+    title: 'Event Organizer & Sales Marketer',
+    org: 'Over Dose Coffee — Aljawhara Event',
+    from: 'Oct 2023',
+    to: 'Oct 2023',
+    desc: 'Managed product marketing, merchandise organization, and customer relations effectively. Collaborated with a team to deliver excellent customer service under pressure.'
+  }
+],
   contacts: [
     {type: 'email', icon: '📧', label: 'Email', val: 'amoqbil0833@gmail.com'},
     {type: 'phone', icon: '📱', label: 'Phone', val: '+966546850833'},
