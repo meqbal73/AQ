@@ -7,62 +7,49 @@
 const SEED_DATA = {
   profile: {
     name: 'Abdullelah Mohammed Moqbail',
-    title: 'Information Technology Student | King Abdulaziz University',
-    uni: 'King Abdulaziz University',
-    major: 'Information Technology',
-    gpa: '4.54', grad: '2027', exp: '2',
-    tag: 'Seeking Summer Training 2026',
-    bio: 'Senior Information Technology student at King Abdulaziz University with experience in software development, databases, and IT solutions. Currently seeking a Summer Training to apply my skills and gain industry experience.',
-    about: 'Senior Information Technology student at King Abdulaziz University with experience in software development, databases, and IT solutions. Currently seeking a Summer Training to apply my skills and gain industry experience.'
+    title: 'Information Technology Student',
+    uni: 'King Abdulaziz University — Jeddah, Saudi Arabia',
+    major: 'Bachelor of Information Technology (IT)',
+    gpa: '4.54', grad: '2026', exp: '3',
+    tag: 'Open to Internship & Work',
+    bio: 'Motivated Information Technology student with a GPA of 4.54/5.00 and a strong foundation in software engineering, web development, database management, and problem solving.',
+    about: 'Motivated Information Technology student with a GPA of 4.54/5.00 and a strong foundation in software engineering, web development, database management, and problem solving. Experienced in developing software projects using Java, Spring Boot, React.js, and MySQL, with practical experience in logistics operations and enterprise training. Passionate about learning modern technologies and building reliable software solutions while contributing effectively within collaborative development teams.'
   },
   certs: [
-    {name: 'Data Analysis', org: 'King Abdulaziz University', date: '2024', icon: '📊', link: 'https://drive.google.com/file/d/1I4tr59AUyH1mvGu3gUytHi6ohCMR_0LJ/view?usp=drive_link'},
-    {name: 'How Does a Student Innovate?', org: 'King Abdulaziz University', date: '2024', icon: '💡', link: 'https://drive.google.com/file/d/1XgCGp9xEm_YJPGmX0cE3I7CZewvno9JC/view?usp=drive_link'},
-    {name: 'Certificate of Excellence', org: 'King Abdulaziz University', date: '2026', icon: '🏆', link: 'https://drive.google.com/file/d/1-_hzS92nD033O3JYv8f7g-OP1F5KVh8b/view?usp=drive_link'},
-    {name: 'Certificate of Excellence', org: 'King Abdulaziz University', date: '2024', icon: '🏆', link: 'https://drive.google.com/file/d/1fxKFUSudIv38knG6RSOS4_4qFiySyhQH/view?usp=drive_link'},
-    {name: 'A successful coach in the age of AI', org: 'Empowerment and Vision for Training and Consulting', date: '2025', icon: '🏆', link: 'https://drive.google.com/file/d/1eWhRPvIy1dt9wSOzZRMUKLwmFMQtvIWu/view?usp=drive_link'},
-    {name: 'Introduction to Software Testing', org: 'Simplilearn', date: '2025', icon: '💻', link: 'https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiI0NDcwIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvOTA2NDIxOV85NDM0MTA3MTc1OTA4NzQ3MjYzMi5wbmciLCJ1c2VybmFtZSI6IkFiZHVsZWxhaCBtb2hhbW1lZCBtb3FiaWwifQ&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion'}
+    {name: 'Data Analysis', org: 'King Abdulaziz University', date: '2024', icon: '📊', link: ''},
+    {name: 'Blockchain Technology and Vision 2030', org: 'King Abdulaziz University', date: '2024', icon: '⛓️', link: ''},
+    {name: 'Building Your Personal Brand', org: 'King Abdulaziz University', date: '2024', icon: '🌟', link: ''},
+    {name: 'How Does a Student Innovate?', org: 'King Abdulaziz University', date: '2024', icon: '💡', link: ''}
   ],
   skills: [
-    {category: 'Programming', items: ['Java', 'Python', 'JavaScript']},
-    {category: 'Database', items: ['MySQL', 'Database Design']},
-    {category: 'Development', items: ['React', 'HTML', 'CSS']},
-    {category: 'Networking', items: ['Computer Networks', 'Network Fundamentals']},
-    {category: 'Concepts', items: ['OOP', 'Data Structures']},
-    {category: 'Other', items: ['UI/UX Prototyping', 'Data Analysis']}
+    {category: 'Programming Languages', items: ['Java', 'Python', 'SQL', 'JavaScript']},
+    {category: 'Frontend', items: ['React.js', 'HTML5', 'CSS3']},
+    {category: 'Backend', items: ['Spring Boot', 'REST APIs']},
+    {category: 'Databases', items: ['MySQL']},
+    {category: 'Tools & Technologies', items: ['Git', 'GitHub', 'JUnit', 'Firebase', 'Figma', 'UI/UX Prototyping']},
+    {category: 'Soft Skills', items: ['Problem Solving', 'Teamwork', 'Communication', 'Time Management', 'Adaptability', 'Working Under Pressure']}
   ],
   langs: [
-    {name: 'Arabic', val: 5, level: 'Native / Mother Tongue'},
-    {name: 'English', val: 4, level: 'Native'}
+    {name: 'Arabic', val: 5, level: 'Native'},
+    {name: 'English', val: 3, level: 'Intermediate (B2)'}
   ],
   exps: [
-  {
-    title: 'Logistics & Operations Associate',
-    org: 'MARN Platform (Amazon Operations) — Jeddah',
-    from: 'May 2025',
-    to: 'Present',
-    desc: 'Utilized smart devices, scanning applications, and barcode technology to sort, track, and process products efficiently. Applied "5S" workplace organization methodologies to maintain a structured, safe, and highly productive work environment. Managed the packaging, loading, and unloading of shipments while adhering to strict quality and safety standards. Recognized with a Certificate of Excellence for outstanding work performance and effective customer communication.'
-  },
-  {
-    title: 'Event Organizer & Security Guard',
-    org: 'SELLA Security Guards Company — Ramadan Season',
-    from: 'Mar 2024',
-    to: 'Mar 2024',
-    desc: 'Coordinated crowd control and ensured a smooth, secure experience for high-volume attendees and tourists. Demonstrated strong communication and problem-solving skills in a fast-paced environment.'
-  },
-  {
-    title: 'Event Organizer & Sales Marketer',
-    org: 'Over Dose Coffee — Aljawhara Event',
-    from: 'Oct 2023',
-    to: 'Oct 2023',
-    desc: 'Managed product marketing, merchandise organization, and customer relations effectively. Collaborated with a team to deliver excellent customer service under pressure.'
-  }
-],
+    {title: 'Cooperative Trainee', org: 'Ultimate Solutions — Jeddah, Saudi Arabia', from: 'Jul 2026', to: 'Aug 2026', desc: 'Participated in ERP and software development training. Collaborated with development teams on real-world business solutions. Gained practical experience in enterprise software development workflows.'},
+    {title: 'Logistics & Operations Associate', org: 'MARN Platform (Amazon Operations) — Jeddah, Saudi Arabia', from: 'May 2025', to: 'Present', desc: 'Processed and tracked shipments using barcode scanners and warehouse management systems. Applied the 5S workplace organization methodology to improve efficiency and maintain a safe working environment. Managed packaging, loading, and shipment processing while meeting quality standards. Recognized with a Certificate of Excellence for outstanding performance and customer communication.'},
+    {title: 'Event Organizer & Security Guard', org: 'SELLA Security Guards Company', from: 'Mar 2024', to: 'Mar 2024', desc: 'Coordinated crowd management during large public events. Ensured visitor safety and maintained smooth event operations. Demonstrated excellent teamwork and communication under pressure.'},
+    {title: 'Event Organizer & Sales Marketer', org: 'Over Dose Coffee', from: 'Oct 2023', to: 'Oct 2023', desc: 'Assisted in product marketing and promotional activities. Organized merchandise and supported customer service operations. Helped deliver a positive customer experience during public events.'}
+  ],
+  projects: [
+    {name: 'CarHelper', icon: '🚗', tech: 'Java, Spring Boot, React.js, MySQL, REST APIs, HTML, CSS, JavaScript, JUnit', link: 'https://github.com/cpit252-spring-26-IT1/CarHelper', desc: 'Developed an AI-powered web application for diagnosing vehicle dashboard warning lights using image recognition. Implemented repair cost estimation and vehicle resale valuation for the Saudi market. Contributed to React frontend development, REST API integration, AI package implementation, and JUnit testing.'},
+    {name: 'Event Management System (EMS)', icon: '🎉', tech: 'Web Development, CRUD, Database, GitHub', link: 'https://github.com/Ahmed-Alsefari/Event-Management-System-EMS-', desc: 'Developed a web-based event management system for organizing and managing events. Implemented CRUD operations, database functionality, responsive interfaces, and software engineering best practices.'},
+    {name: 'Multimedia Studio (CPIT380)', icon: '🎬', tech: 'Object-Oriented Programming, Multimedia, UI Design', link: 'https://github.com/abmoqbil/MultimediaStudio-Cpit380-AbdulelahMoqbil', desc: 'Developed a multimedia application using object-oriented programming principles. Designed an interactive interface with multimedia features and improved quality through testing and debugging.'}
+  ],
   contacts: [
-    {type: 'email', icon: '📧', label: 'Email', val: 'amoqbil0833@gmail.com'},
+    {type: 'email', icon: '📧', label: 'Email', val: 'abdulelah.moqbill@gmail.com'},
     {type: 'phone', icon: '📱', label: 'Phone', val: '+966546850833'},
-    {type: 'other', icon: '🔗', label: 'WhatsApp', val: 'https://wa.me/966546850833'},
-    {type: 'linkedin', icon: '💼', label: 'LinkedIn', val: 'https://www.linkedin.com/in/abdullelah-moqbil-18992b324'}
+    {type: 'linkedin', icon: '💼', label: 'LinkedIn', val: 'https://linkedin.com/in/abdulelah-moqbil'},
+    {type: 'github', icon: '💻', label: 'GitHub', val: 'https://github.com/abmoqbil'},
+    {type: 'other', icon: '🌐', label: 'Portfolio', val: 'https://meqbal73.github.io/AQ'}
   ]
 };
 

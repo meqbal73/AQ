@@ -35,6 +35,7 @@
     <li><a href="#skills" data-nav-link>Skills</a></li>
     <li><a href="#languages" data-nav-link>Languages</a></li>
     <li><a href="#experience" data-nav-link>Experience</a></li>
+    <li><a href="#projects" data-nav-link>Projects</a></li>
     <li><a href="#contact" data-nav-link>Contact</a></li>
   </ul>
   <div class="nav-controls">
@@ -53,6 +54,7 @@
   <a href="#skills" data-mobile-link>Skills</a>
   <a href="#languages" data-mobile-link>Languages</a>
   <a href="#experience" data-mobile-link>Experience</a>
+  <a href="#projects" data-mobile-link>Projects</a>
   <a href="#contact" data-mobile-link>Contact</a>
 </div>
 
@@ -200,11 +202,24 @@
   <div class="timeline" id="timeline"></div>
 </section>
 
+
+<!-- ════════ PROJECTS ════════ -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-label" data-reveal="fade-right">
+      <span class="section-num">06</span>
+      <h2>Projects <span class="dot">•</span></h2>
+    </div>
+    <div class="section-line" data-reveal="fade-left"></div>
+  </div>
+  <div class="certs-grid" id="projects-grid"></div>
+</section>
+
 <!-- ════════ CONTACT ════════ -->
 <section id="contact">
   <div class="section-header">
     <div class="section-label" data-reveal="fade-right">
-      <span class="section-num">06</span>
+      <span class="section-num">07</span>
       <h2>Contact <span class="dot">•</span></h2>
     </div>
     <div class="section-line" data-reveal="fade-left"></div>
@@ -340,6 +355,23 @@ function renderExps(exps) {
   if (window.CvAnimations) window.CvAnimations.observeReveals();
 }
 
+function renderProjects(projects) {
+  const g = document.getElementById('projects-grid');
+  if (!projects || !projects.length) { g.innerHTML = '<div class="empty-state">No projects added yet</div>'; return; }
+  g.innerHTML = projects.map((p, i) => `
+    <div class="cert-card" data-reveal="fade-up" data-delay="${i * 70}" ${p.link ? `onclick="window.open('${p.link}','_blank')" style="cursor:pointer"` : ''}>
+      <div class="cert-shine"></div>
+      <div class="cert-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="cert-icon">${p.icon || '💻'}</div>
+      <div class="cert-name">${p.name}</div>
+      <div class="cert-org">${p.tech || ''}</div>
+      <div class="tl-desc" style="margin-top:.7rem">${p.desc || ''}</div>
+      ${p.link ? '<div class="cert-badge gold" style="display:inline-block;margin-top:.9rem">View on GitHub ↗</div>' : ''}
+      <div class="cert-arrow">→</div>
+    </div>`).join('');
+  if (window.CvAnimations) window.CvAnimations.observeReveals();
+}
+
 const CI = {email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:'🐦', other:'🔗'};
 function renderContacts(contacts) {
   const g = document.getElementById('contact-grid');
@@ -366,6 +398,7 @@ subscribeToPortfolio((data) => {
   renderSkills(data.skills);
   renderLangs(data.langs);
   renderExps(data.exps);
+  renderProjects(data.projects);
   renderContacts(data.contacts);
   // Kick off count-up after stats are populated
   if (window.CvAnimations && window.CvAnimations.startCountUp) {

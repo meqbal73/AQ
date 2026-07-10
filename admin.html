@@ -48,6 +48,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#languages">Languages</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-controls">
@@ -123,6 +124,15 @@
     <button class="btn-add" onclick="addExp()">+ Add Experience</button>
   </div>
   <div class="timeline" id="timeline"></div>
+</section>
+
+
+<section id="projects">
+  <div class="section-header">
+    <div class="section-label"><h2>Projects <span class="dot">•</span></h2></div>
+    <button class="btn-add" onclick="addProject()">＋ Add Project</button>
+  </div>
+  <div class="certs-grid" id="projects-grid"></div>
 </section>
 
 <section id="contact">
@@ -324,6 +334,23 @@ function renderExps() {
     </div>`).join('');
 }
 
+function renderProjects() {
+  const projects = data.projects || [];
+  const g = document.getElementById('projects-grid');
+  if (!projects.length) { g.innerHTML = '<div class="empty-state">No projects yet — click "Add Project"</div>'; return; }
+  g.innerHTML = projects.map((p, i) => `
+    <div class="cert-card">
+      <div class="cert-icon">${p.icon || '💻'}</div>
+      <div class="cert-name">${p.name}</div>
+      <div class="cert-org">${p.tech || ''}</div>
+      <div class="tl-desc" style="margin-top:.7rem">${p.desc || ''}</div>
+      <div class="action-btns" style="margin-top:1rem">
+        <button class="btn-sm btn-edit" onclick="editProject(${i})">Edit</button>
+        <button class="btn-sm btn-del" onclick="delProject(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
 const CI = {email:'📧', phone:'📱', linkedin:'💼', github:'💻', twitter:'🐦', other:'🔗'};
 function renderContacts() {
   const contacts = data.contacts || [];
@@ -463,6 +490,27 @@ function addExp() {
   ], (v) => { (data.exps = data.exps||[]).unshift(v); renderExps(); persist(); });
 }
 function delExp(i) { if (confirm('Delete this experience?')) { data.exps.splice(i,1); renderExps(); persist(); } }
+
+function editProject(i) {
+  const p = data.projects[i];
+  openModal('Edit Project', [
+    {key:'name', label:'Project Name', value:p.name},
+    {key:'icon', label:'Icon (Emoji)', value:p.icon},
+    {key:'tech', label:'Technologies', type:'textarea', value:p.tech},
+    {key:'link', label:'GitHub / Project URL', value:p.link},
+    {key:'desc', label:'Description', type:'textarea', value:p.desc}
+  ], (v) => { data.projects[i] = v; renderProjects(); persist(); });
+}
+function addProject() {
+  openModal('Add Project', [
+    {key:'name', label:'Project Name'},
+    {key:'icon', label:'Icon (Emoji)', value:'💻'},
+    {key:'tech', label:'Technologies', type:'textarea'},
+    {key:'link', label:'GitHub / Project URL'},
+    {key:'desc', label:'Description', type:'textarea'}
+  ], (v) => { (data.projects = data.projects||[]).push(v); renderProjects(); persist(); });
+}
+function delProject(i) { if (confirm('Delete this project?')) { data.projects.splice(i,1); renderProjects(); persist(); } }
 
 function editContact(i) {
   const c = data.contacts[i];
