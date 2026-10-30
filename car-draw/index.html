@@ -7,72 +7,66 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Tajawal',sans-serif;background:radial-gradient(circle at top,#1b2440,#0a0d18 70%);color:#fff;min-height:100vh;padding:24px 16px 40px}
-h1{text-align:center;font-size:30px;font-weight:900;margin-bottom:6px;background:linear-gradient(90deg,#ffd76a,#ff9f43);-webkit-background-clip:text;color:transparent}
-.sub{text-align:center;color:#9aa4c4;margin-bottom:22px;font-size:15px}
-.cars{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+body{font-family:'Tajawal',sans-serif;background:radial-gradient(circle at top,#1b2440,#0a0d18 70%);color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{width:100%;max-width:420px;text-align:center}
+h1{font-size:30px;font-weight:900;margin-bottom:8px;background:linear-gradient(90deg,#ffd76a,#ff9f43);-webkit-background-clip:text;color:transparent}
+.hi{font-size:22px;margin:18px 0 6px}
+.hi b{color:#ffd76a}
+.sub{color:#9aa4c4;font-size:15px}
+.cars{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:22px 0}
 .car{background:#ffffff10;border:1px solid #ffd76a55;padding:7px 12px;border-radius:20px;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;max-width:640px;margin:0 auto}
-.p{background:linear-gradient(145deg,#232d4f,#171e36);border:1px solid #ffffff18;border-radius:16px;padding:18px 10px;text-align:center;font-size:19px;font-weight:700;cursor:pointer;transition:.2s}
-.p:hover{transform:translateY(-3px);border-color:#ffd76a}
-.p.done{cursor:default;opacity:.85;transform:none}
-.p .r{display:block;font-size:13px;font-weight:400;margin-top:6px;color:#9aa4c4}
-.p.win{border-color:#2ecc71;background:linear-gradient(145deg,#1d4a35,#14301f)}
-.p.win .r{color:#7dffb2}
-.ov{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:20px;z-index:9}
-.box{background:#161d33;border:1px solid #ffd76a55;border-radius:22px;padding:28px 22px;max-width:380px;width:100%;text-align:center}
-.box h2{font-size:22px;margin-bottom:14px}
-.slot{height:70px;border-radius:14px;background:#0b1020;border:2px solid #ffd76a;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;margin:18px 0;overflow:hidden}
-.btn{border:0;border-radius:12px;padding:13px 22px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;margin:4px}
-.go{background:linear-gradient(90deg,#ffd76a,#ff9f43);color:#1a1200}
-.no{background:#ffffff18;color:#fff}
-.big{font-size:54px}
-.note{text-align:center;color:#6f7899;font-size:13px;margin-top:26px}
+.slot{height:84px;border-radius:16px;background:#0b1020;border:2px solid #ffd76a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;margin:22px 0;padding:0 10px}
+.slot.win{border-color:#2ecc71;color:#7dffb2;box-shadow:0 0 30px #2ecc7155}
+.btn{border:0;border-radius:14px;padding:16px 30px;font-family:inherit;font-size:20px;font-weight:900;cursor:pointer;background:linear-gradient(90deg,#ffd76a,#ff9f43);color:#1a1200;width:100%}
+.btn:disabled{opacity:.5}
+.big{font-size:64px;margin-top:10px}
+.lock{color:#6f7899;font-size:13px;margin-top:18px}
 </style>
 </head>
 <body>
-<h1>🚗 قرعة السيارات 🚗</h1>
-<p class="sub">كل شخص له محاولة وحدة بس — اضغط على اسمك</p>
-<div class="cars" id="cars"></div>
-<div class="grid" id="grid"></div>
-<p class="note">النتيجة ثابتة ومحسومة مسبقًا بشكل عشوائي، فإعادة المحاولة ما تغيّر شي 🔒</p>
-
-<div class="ov" id="ov"><div class="box" id="box"></div></div>
-
+<div class="card" id="app"><h1>🚗 قرعة السيارات</h1><p class="sub">جاري التحميل...</p></div>
 <script>
-const people=['عبدالاله (١)','عبدالاله (٢)','عبدالملك','فاطمه','عبدالعزيز','عبدالرحمن','هاجر','محمد','الوليد'];
-const cars=['هافال جوليان 2025','جيلي توجيلا 2025','اوميدا سي 5 2026','توسان ان لاين 2026'];
-const B='ClADQxcSEhAaUVACQxcSEuuxqdXq4PWV6bYWqd7q6fS26bju1qu1QR8CAgcUXVIRUw8IEBAUXVIRUg8IEBAUXVIRVQ8IEBAUXVIRVA8IEBAUXVIRVw8IEBDu26u7uZ7ql+uwUaqUuKsS6bbu1qu5uKsSAgIER1AfQQ8FEggWU6qfuKfrtOu8UaqZuKXqnOu8qPbrxg0AAAADU14TQxUQChIUqdXq6fS36bju3qqUQfWB6bgWRFIBUR8EEk8=';
-const R=(()=>{const k=new TextEncoder().encode('qr3a-2026');const b=Uint8Array.from(atob(B),c=>c.charCodeAt(0)).map((v,i)=>v^k[i%k.length]);return JSON.parse(new TextDecoder().decode(b));})();
-const KEY='qr3a-cars-2026';
-let st={};try{st=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
-document.getElementById('cars').innerHTML=cars.map(c=>'<span class="car">🚘 '+c+'</span>').join('');
-const ov=document.getElementById('ov'),box=document.getElementById('box');
-function render(){
-  document.getElementById('grid').innerHTML=people.map((n,i)=>{
-    if(st[i]){const c=R[i];return '<div class="p done '+(c?'win':'')+'">'+n+'<span class="r">'+(c?'🎉 '+c:'حظ أوفر 🙏')+'</span></div>'}
-    return '<div class="p" onclick="ask('+i+')">'+n+'<span class="r">اضغط للسحب</span></div>'
-  }).join('');
+const SB_URL='https://yhgjrdvallnyvqkctspp.supabase.co', SB_KEY='sb_publishable_DIdaUajYtTDQh-hTThAkIg_4Fy7CoG_';
+const token=new URLSearchParams(location.search).get('t')||'';
+const app=document.getElementById('app');
+async function rpc(fn,args){
+  const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(args)});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
 }
-function ask(i){
-  box.innerHTML='<h2>أنت <b style="color:#ffd76a">'+people[i]+'</b>؟</h2><p style="color:#9aa4c4">عندك محاولة وحدة بس وما تتكرر</p><div style="margin-top:18px"><button class="btn go" onclick="spin('+i+')">اسحب الحين 🎲</button><button class="btn no" onclick="ov.style.display=\'none\'">إلغاء</button></div>';
-  ov.style.display='flex';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function result(d){
+  app.innerHTML='<h1>🚗 قرعة السيارات</h1>'+(d.car
+    ?'<div class="big">🎉</div><p class="hi">مبروك يا <b>'+esc(d.name)+'</b>!</p><div class="slot win">'+esc(d.car)+'</div>'
+    :'<div class="big">🙏</div><p class="hi">حظ أوفر يا <b>'+esc(d.name)+'</b></p><div class="slot">ما طلعت لك سيارة</div>')
+    +'<p class="lock">🔒 نتيجتك انحفظت وما تتغير</p>';
 }
-function spin(i){
-  st[i]=1;save();
-  const opts=cars.concat(['حظ أوفر']);
-  box.innerHTML='<h2>'+people[i]+'</h2><div class="slot" id="slot">...</div><p style="color:#9aa4c4">جاري السحب...</p>';
-  const s=document.getElementById('slot');let t=0,d=60;
-  (function tick(){s.textContent=opts[t++%opts.length];d*=1.08;if(d<520)setTimeout(tick,d);else done(i)})();
+async function load(){
+  if(!token){app.innerHTML='<h1>🚗 قرعة السيارات</h1><p class="sub">الرابط ناقص، اطلب رابطك الخاص</p>';return}
+  try{
+    const d=await rpc('qr_me',{p_token:token});
+    if(!d.ok){app.innerHTML='<h1>🚗 قرعة السيارات</h1><p class="sub">الرابط غير صحيح ❌</p>';return}
+    if(d.drawn) return result(d);
+    window._cars=d.cars;
+    app.innerHTML='<h1>🚗 قرعة السيارات</h1><p class="hi">هلا <b>'+esc(d.name)+'</b> 👋</p><p class="sub">عندك محاولة وحدة بس وما تتكرر</p>'
+      +'<div class="cars">'+d.cars.map(c=>'<span class="car">🚘 '+esc(c)+'</span>').join('')+'</div>'
+      +'<div class="slot" id="slot">❓</div><button class="btn" id="go">اسحب الحين 🎲</button>';
+    document.getElementById('go').onclick=draw;
+  }catch(e){app.innerHTML='<h1>🚗 قرعة السيارات</h1><p class="sub">صار خطأ في الاتصال، حدّث الصفحة</p>'}
 }
-function done(i){
-  const c=R[i];
-  box.innerHTML=c?'<div class="big">🎉</div><h2>مبروك يا '+people[i]+'!</h2><div class="slot" style="border-color:#2ecc71;color:#7dffb2">'+c+'</div><button class="btn go" onclick="ov.style.display=\'none\'">تم</button>'
-   :'<div class="big">🙏</div><h2>حظ أوفر يا '+people[i]+'</h2><div class="slot">ما طلعت لك سيارة</div><button class="btn no" onclick="ov.style.display=\'none\'">تم</button>';
-  render();
+async function draw(){
+  const b=document.getElementById('go');b.disabled=true;b.textContent='جاري السحب...';
+  const s=document.getElementById('slot'),opts=(window._cars||[]).concat(['حظ أوفر']);
+  let res=null,err=false,t=0,d=60;
+  rpc('qr_draw',{p_token:token}).then(r=>res=r).catch(()=>err=true);
+  (function tick(){
+    s.textContent=opts[t++%opts.length];d*=1.09;
+    if(d<450||(!res&&!err))setTimeout(tick,Math.min(d,450));
+    else if(err){s.textContent='خطأ، حدّث الصفحة';}
+    else result(res);
+  })();
 }
-render();
+load();
 </script>
 </body>
 </html>
