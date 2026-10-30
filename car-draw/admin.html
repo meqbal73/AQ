@@ -19,7 +19,7 @@ h2{font-size:19px;margin:26px 0 10px;display:flex;justify-content:space-between;
 .nm{flex:1;min-width:120px;font-weight:700;font-size:17px}
 .res{font-size:14px;padding:4px 10px;border-radius:12px;background:#ffffff10;color:#9aa4c4}
 .res.win{background:#1d4a35;color:#7dffb2}
-.res.lose{background:#3a2430;color:#ff9fb0}
+.bar{height:8px;border-radius:6px;background:#ffffff12;width:100%;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd76a,#ff9f43)}.cnt{font-size:22px;font-weight:900;color:#ffd76a;min-width:34px;text-align:center}.who{width:100%;font-size:13px;color:#9aa4c4}
 button{font-family:inherit;border:0;border-radius:10px;padding:8px 11px;font-size:14px;cursor:pointer;background:#ffffff14;color:#fff}
 button:hover{background:#ffffff22}
 .gold{background:linear-gradient(90deg,#ffd76a,#ff9f43);color:#1a1200;font-weight:700}
@@ -53,7 +53,7 @@ input{flex:1;font-family:inherit;font-size:16px;padding:11px 12px;border-radius:
   <div class="panel" id="people"></div>
   <div class="add"><input id="np" placeholder="اسم شخص جديد"><button class="gold" onclick="addP()">إضافة</button></div>
 
-  <h2>🚘 السيارات</h2>
+  <h2>🚘 السيارات — كم مرة طلعت كل وحدة</h2>
   <div class="panel" id="cars"></div>
   <div class="add"><input id="nc" placeholder="سيارة جديدة"><button class="gold" onclick="addC()">إضافة</button></div>
 
@@ -80,18 +80,20 @@ async function login(){KEY=document.getElementById('key').value.trim();try{await
 function show(){document.getElementById('login').style.display='none';document.getElementById('main').style.display='block'}
 function logout(){KEY='';try{localStorage.removeItem('qr_admin_key')}catch(e){};document.getElementById('main').style.display='none';document.getElementById('login').style.display='block'}
 function render(){
-  const drawn=S.people.filter(p=>p.drawn).length, won=S.people.filter(p=>p.car).length;
-  document.getElementById('stats').innerHTML='<div class="st"><b>'+S.people.length+'</b>أشخاص</div><div class="st"><b>'+drawn+'</b>سحبوا</div><div class="st"><b>'+(S.cars.length-won)+'</b>سيارات باقية</div>';
+  const drawn=S.people.filter(p=>p.drawn).length;
+  document.getElementById('stats').innerHTML='<div class="st"><b>'+S.people.length+'</b>أشخاص</div><div class="st"><b>'+drawn+'</b>سحبوا</div><div class="st"><b>'+(S.people.length-drawn)+'</b>باقي</div>';
   document.getElementById('people').innerHTML=S.people.map(p=>{
-    const r=p.drawn?(p.car?'<span class="res win">🎉 '+esc(p.car)+'</span>':'<span class="res lose">حظ أوفر</span>'):'<span class="res">ما سحب</span>';
+    const r=p.drawn?'<span class="res win">🚘 '+esc(p.car||'—')+'</span>':'<span class="res">ما سحب</span>';
     return '<div class="row"><span class="nm">'+esc(p.name)+'</span>'+r+
       '<button onclick="cp('+p.id+')">📋 الرابط</button><button class="wa" onclick="wa('+p.id+')">واتساب</button>'+
       '<button onclick="renP('+p.id+')">✏️</button>'+(p.drawn?'<button onclick="resetP('+p.id+')">↩️</button>':'')+
       '<button class="red" onclick="delP('+p.id+')">🗑</button></div>';
   }).join('')||'<p class="muted">ما فيه أحد</p>';
-  document.getElementById('cars').innerHTML=S.cars.map(c=>'<div class="row"><span class="nm">🚘 '+esc(c.name)+'</span>'+
-    (c.winner?'<span class="res win">'+esc(c.winner)+'</span>':'<span class="res">ما أحد أخذها</span>')+
-    '<button onclick="renC('+c.id+')">✏️</button><button class="red" onclick="delC('+c.id+')">🗑</button></div>').join('')||'<p class="muted">ما فيه سيارات</p>';
+  const mx=Math.max(1,...S.cars.map(c=>c.count));
+  document.getElementById('cars').innerHTML=S.cars.slice().sort((a,b)=>b.count-a.count).map(c=>'<div class="row"><span class="cnt">'+c.count+'</span><span class="nm">🚘 '+esc(c.name)+'<br><span class="muted">طلعت '+c.count+' مرة</span></span>'+
+    '<button onclick="renC('+c.id+')">✏️</button><button class="red" onclick="delC('+c.id+')">🗑</button>'+
+    '<div class="bar"><i style="width:'+(c.count/mx*100)+'%"></i></div>'+
+    (c.names.length?'<div class="who">'+c.names.map(esc).join('، ')+'</div>':'')+'</div>').join('')||'<p class="muted">ما فيه سيارات</p>';
 }
 const P=id=>S.people.find(p=>p.id===id), C=id=>S.cars.find(c=>c.id===id);
 function cp(id){navigator.clipboard.writeText(link(P(id))).then(()=>toast('انتسخ رابط '+P(id).name))}
@@ -102,7 +104,7 @@ function addC(){const i=document.getElementById('nc'),v=i.value.trim();if(v)api(
 function renP(id){const v=prompt('الاسم الجديد',P(id).name);if(v&&v.trim())api('rename_person',{id,name:v.trim()})}
 function renC(id){const v=prompt('اسم السيارة',C(id).name);if(v&&v.trim())api('rename_car',{id,name:v.trim()})}
 function delP(id){if(confirm('تحذف '+P(id).name+'؟ رابطه بيوقف'))api('delete_person',{id})}
-function delC(id){if(confirm('تحذف '+C(id).name+'؟ لو أحد فايز فيها بيرجع له السحب'))api('delete_car',{id})}
+function delC(id){if(confirm('تحذف '+C(id).name+'؟ اللي طلعت لهم بيرجع لهم السحب'))api('delete_car',{id})}
 function resetP(id){if(confirm('ترجع لـ '+P(id).name+' محاولته؟'))api('reset_person',{id})}
 function resetAll(){if(confirm('متأكد؟ كل النتايج بتنمسح والكل يسحب من جديد'))api('reset_all')}
 document.getElementById('key').addEventListener('keydown',e=>{if(e.key==='Enter')login()});

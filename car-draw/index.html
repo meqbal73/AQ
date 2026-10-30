@@ -36,9 +36,7 @@ async function rpc(fn,args){
 }
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function result(d){
-  app.innerHTML='<h1>🚗 قرعة السيارات</h1>'+(d.car
-    ?'<div class="big">🎉</div><p class="hi">مبروك يا <b>'+esc(d.name)+'</b>!</p><div class="slot win">'+esc(d.car)+'</div>'
-    :'<div class="big">🙏</div><p class="hi">حظ أوفر يا <b>'+esc(d.name)+'</b></p><div class="slot">ما طلعت لك سيارة</div>')
+  app.innerHTML='<h1>🚗 قرعة السيارات</h1><div class="big">🎉</div><p class="hi">يا <b>'+esc(d.name)+'</b> طلعت لك:</p><div class="slot win">'+esc(d.car||'—')+'</div>'
     +'<p class="lock">🔒 نتيجتك انحفظت وما تتغير</p>';
 }
 async function load(){
@@ -56,13 +54,13 @@ async function load(){
 }
 async function draw(){
   const b=document.getElementById('go');b.disabled=true;b.textContent='جاري السحب...';
-  const s=document.getElementById('slot'),opts=(window._cars||[]).concat(['حظ أوفر']);
+  const s=document.getElementById('slot'),opts=(window._cars||['🚗']);
   let res=null,err=false,t=0,d=60;
   rpc('qr_draw',{p_token:token}).then(r=>res=r).catch(()=>err=true);
   (function tick(){
     s.textContent=opts[t++%opts.length];d*=1.09;
     if(d<450||(!res&&!err))setTimeout(tick,Math.min(d,450));
-    else if(err){s.textContent='خطأ، حدّث الصفحة';}
+    else if(err||!res.ok){s.textContent='خطأ، حدّث الصفحة';}
     else result(res);
   })();
 }
